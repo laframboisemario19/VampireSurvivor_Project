@@ -32,11 +32,18 @@ public partial class MedCible : Node2D
                 break;
             case EAlgoSelectionCible.eClosestEnemy:
                 {
-                    ret = SpawnerEnemy
-                    .EnsureValid()
-                    .GatherChildren()
-                    .OfType<EnemyTest>()
-                    .FirstOrDefault();
+                    IEnumerable<EnemyTest> allEnemies = SpawnerEnemy.EnsureValid().GatherChildren().OfType<EnemyTest>();
+                    ret = allEnemies.First();
+                    Vector2 currentDistance = InPosition - ret.GlobalPosition;
+                    foreach (EnemyTest enemy in allEnemies)
+                    {
+                        Vector2 distance = InPosition - enemy.GlobalPosition;
+                        if (distance < currentDistance)
+                        {
+                            ret = enemy;
+                            currentDistance = distance;
+                        }
+                    }
                 }
                 break;
         }
