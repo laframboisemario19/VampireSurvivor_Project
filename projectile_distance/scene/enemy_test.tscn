@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://csytfx3dx63mk"]
+
+[ext_resource type="Texture2D" uid="uid://824m47jxghao" path="res://ressource/icon.svg" id="1_7p445"]
+[ext_resource type="Script" uid="uid://c2rtphfgohw8h" path="res://script/EnemyTest.cs" id="2_fmaa2"]
+
+[node name="Enemy1" type="Sprite2D" unique_id=241254659]
+scale = Vector2(0.7514226, 0.7514226)
+texture = ExtResource("1_7p445")
+script = ExtResource("2_fmaa2")
