@@ -1,0 +1,12 @@
+  
+  {
+    "editor.formatOnSave": true,
+
+      "[csharp]": {
+      "editor.defaultFormatter": "ms-dotnettools.csharp"
+    },
+     "[xml]": {
+         "editor.defaultFormatter": "csharpier.csharpier-vscode"
+    }
+  }
+  
