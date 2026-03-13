@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://73yowubvqmol"]
+
+[ext_resource type="Texture2D" uid="uid://cjyceq4gm26lg" path="res://res/Vampires1_Walk_full-Photoroom.png" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://cdyxmkjqm23ak" path="res://scene/DcmAttack.cs" id="3_oh5ij"]
+[ext_resource type="Script" uid="uid://dgg7ntmigtjuy" path="res://util/MouvementPlayer.cs" id="3_s4jxa"]
+[ext_resource type="PackedScene" path="res://scene/axe.tscn" id="4_hp4bs"]
+[ext_resource type="PackedScene" path="res://scene/boxe.tscn" id="5_g2vtq"]
+[ext_resource type="PackedScene" path="res://scene/sword.tscn" id="6_2fvbb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ml7e8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3pqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
+}],
+"loop": true,
+"name": &"marche_bas",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(8, 10.399999)
+
+[node name="player" type="Node2D" unique_id=607470767]
+texture_filter = 1
+position = Vector2(-2, -15)
+
+[node name="Node2D" type="AnimatedSprite2D" parent="." unique_id=433802151]
+sprite_frames = SubResource("SpriteFrames_ml7e8")
+animation = &"marche_bas"
+autoplay = "marche_bas"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1768256024]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=91807387]
+position = Vector2(-1.000001, 9.536743e-07)
+scale = Vector2(2.5, 2.5)
+shape = SubResource("RectangleShape2D_onrkg")
+debug_color = Color(0.7176471, 0.6, 0.69803923, 0.41960785)
+
+[node name="DPM_Mouvement" type="Node2D" parent="." unique_id=928642638 node_paths=PackedStringArray("NodeToControl")]
+script = ExtResource("3_s4jxa")
+NodeToControl = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1985002375]
+scale = Vector2(0.5, 0.5)
+zoom = Vector2(3, 3)
+
+[node name="DCM_Attack" type="Node2D" parent="." unique_id=1284805521]
+script = ExtResource("3_oh5ij")
+
+[node name="Axe" parent="DCM_Attack" unique_id=2079424175 instance=ExtResource("4_hp4bs")]
+visible = false
+scale = Vector2(0.8, 0.8)
+
+[node name="Boxe" parent="DCM_Attack" unique_id=1007668515 instance=ExtResource("5_g2vtq")]
+visible = false
+scale = Vector2(0.05, 0.053)
+
+[node name="Sword" parent="DCM_Attack" unique_id=1650852282 instance=ExtResource("6_2fvbb")]
+scale = Vector2(0.5, 0.5)

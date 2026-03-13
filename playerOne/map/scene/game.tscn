@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://vqutbu7028fy"]
+
+[ext_resource type="Script" uid="uid://bf5ngrlne75ij" path="res://util/CameraMouvement.cs" id="1_33cqm"]
+[ext_resource type="PackedScene" uid="uid://cmeuaimsj8480" path="res://scene/dcm_environnement.tscn" id="2_xwcet"]
+[ext_resource type="PackedScene" uid="uid://73yowubvqmol" path="res://scene/player.tscn" id="3_p1ry8"]
+
+[node name="Game" type="Node2D" unique_id=1438342078]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1134258768 node_paths=PackedStringArray("playerToFollow")]
+script = ExtResource("1_33cqm")
+smoothingSpeed = 2.0
+playerToFollow = NodePath("../player")
+
+[node name="DCM_Environnement" parent="." unique_id=181946096 instance=ExtResource("2_xwcet")]
+
+[node name="player" parent="." unique_id=607470767 instance=ExtResource("3_p1ry8")]
