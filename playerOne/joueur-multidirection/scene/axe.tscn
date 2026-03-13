@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bl2cy04bbjk14"]
+
+[ext_resource type="Texture2D" uid="uid://bc5rpk1ygqd0v" path="res://res/hache.png" id="1_rnsrd"]
+[ext_resource type="Script" uid="uid://beiqiql6a6rue" path="res://src/Axe.cs" id="2_piu5p"]
+[ext_resource type="Script" uid="uid://bt1qtjcgmyl10" path="res://scene/SwingAnimation.cs" id="4_ltajv"]
+[ext_resource type="Texture2D" uid="uid://dk556kq1lyy84" path="res://res/swing_animation_0004.png" id="6_yhenf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnsrd"]
+size = Vector2(50.243477, 38.123917)
+
+[node name="Axe" type="Sprite2D" unique_id=2079424175 node_paths=PackedStringArray("node")]
+scale = Vector2(1.7444445, 1.7444445)
+texture = ExtResource("1_rnsrd")
+offset = Vector2(18.343948, -18.343948)
+script = ExtResource("2_piu5p")
+node = NodePath(".")
+
+[node name="swing_animation" type="Sprite2D" parent="." unique_id=671930514 node_paths=PackedStringArray("swing")]
+position = Vector2(-13.757963, -16.624203)
+rotation = 5.040215
+texture = ExtResource("6_yhenf")
+flip_h = true
+script = ExtResource("4_ltajv")
+swing = NodePath(".")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=691468279]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=971856863]
+position = Vector2(23.780396, -24.353945)
+rotation = 0.80155784
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_rnsrd")
