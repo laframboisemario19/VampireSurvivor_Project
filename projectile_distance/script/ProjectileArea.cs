@@ -8,9 +8,10 @@ public partial class ProjectileArea : Area2D, IAreaDetection
     Projectile InProjectile;
     public void _on_area_entered(Area2D InArea)
     {
+
         if (InArea.GetParent() is EnemyTest enemy)
         {
-            InProjectile.Colide(enemy);
+            InProjectile.Collide(enemy);
         }
         
     }

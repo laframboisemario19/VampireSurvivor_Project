@@ -11,6 +11,8 @@ public partial class MedCible : Node2D
     private DcmProjectile SpawnerProjectile; 
     [Export]
     private DcmEnemyTest SpawnerEnemy;
+    [Export]
+    private PlayerTest Player;
 
     public enum EAlgoSelectionCible
     {
@@ -50,4 +52,8 @@ public partial class MedCible : Node2D
         return ret;
     }
 
+    public Vector2 GetPlayerPosition()
+    {
+        return Player.EnsureValid().GlobalPosition;
+    }
 }

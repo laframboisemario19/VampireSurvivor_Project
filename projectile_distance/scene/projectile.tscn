@@ -5,6 +5,34 @@
 [ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://script/Poursuite.cs" id="2_u6xv6"]
 [ext_resource type="Script" uid="uid://pmbtfuwwddm8" path="res://script/ProjectileArea.cs" id="4_ujo14"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gaw4a"]
+atlas = ExtResource("1_v1jrq")
+region = Rect2(779, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sdoi"]
+atlas = ExtResource("1_v1jrq")
+region = Rect2(680, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53ky5"]
+atlas = ExtResource("1_v1jrq")
+region = Rect2(581, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qd7m"]
+atlas = ExtResource("1_v1jrq")
+region = Rect2(482, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tabn"]
+atlas = ExtResource("1_v1jrq")
+region = Rect2(383, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8okxr"]
+atlas = ExtResource("1_v1jrq")
+region = Rect2(284, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj1so"]
+atlas = ExtResource("1_v1jrq")
+region = Rect2(185, 296, 99, 95)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1ry8"]
 atlas = ExtResource("1_v1jrq")
 region = Rect2(25, 149, 49, 32)
@@ -27,6 +55,32 @@ region = Rect2(417, 149, 49, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yq8tf"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gaw4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sdoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53ky5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qd7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tabn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8okxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj1so")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p1ry8")
@@ -53,7 +107,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_xlg7c")
 }],
 "loop": true,
-"name": &"default",
+"name": &"move",
 "speed": 5.0
 }]
 
@@ -61,21 +115,24 @@ animations = [{
 radius = 13.997547
 height = 28.032524
 
-[node name="Projectile" type="Node2D" unique_id=1363312515 node_paths=PackedStringArray("Poursuite")]
+[node name="Projectile" type="Node2D" unique_id=1363312515 node_paths=PackedStringArray("Poursuite", "AnimatedSprite")]
 script = ExtResource("1_c0tm2")
 Poursuite = NodePath("DPM_Poursuite")
+AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=993463669]
+texture_filter = 1
 position = Vector2(1, 3)
 sprite_frames = SubResource("SpriteFrames_yq8tf")
-autoplay = "default"
-frame_progress = 0.6010019
+animation = &"explode"
+autoplay = "move"
 
 [node name="DPM_Poursuite" type="Node2D" parent="." unique_id=775055542 node_paths=PackedStringArray("Poursuivant")]
 script = ExtResource("2_u6xv6")
 Poursuivant = NodePath("..")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1204671389 node_paths=PackedStringArray("InProjectile")]
+visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_ujo14")
