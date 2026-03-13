@@ -33,14 +33,16 @@ public partial class DcmProjectile : Node2D, ISpawn
             if (spawn is ICiblable ciblable)
             {
                 spawn.SetCible(cible);
+
             }
+            spawn.GlobalPosition = MediateurCible.GetPlayerPosition();
             AddChild(spawn);
         };
         
     }
 
-    public void Colide(Node2D InEntering, Node2D InEntered)
+    public void Collide(Node2D InEntering, Node2D InEntered)
     {
-        MediateurAreaDetection.Colide(InAlgoSelectionDetection, InEntering, InEntered);
+        MediateurAreaDetection.Collide(InAlgoSelectionDetection, InEntering, InEntered);
     }
 }

@@ -17,6 +17,9 @@ public partial class Projectile : Node2D, ICiblable
     [Export]
     Poursuite Poursuite;
 
+    [Export]
+    private AnimatedSprite2D AnimatedSprite;
+
     public override void _Ready() {
         base._Ready();
 
@@ -39,9 +42,15 @@ public partial class Projectile : Node2D, ICiblable
         Cible = (Node2D)InCible;
     }
 
-    public void Colide(Node2D InEntered)
+    public void Collide(Node2D InEntered)
     {
         DcmProjectile parent = (DcmProjectile)GetParent();
-        parent.EnsureValid().Colide(this, InEntered);
+        parent.EnsureValid().Collide(this, InEntered);
+    }
+
+    public void Die()
+    {
+        AnimatedSprite.Animation = "explode";
+        AnimatedSprite.AnimationFinished += () => QueueFree();
     }
 }

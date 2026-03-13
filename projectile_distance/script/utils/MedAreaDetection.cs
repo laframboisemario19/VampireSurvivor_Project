@@ -12,14 +12,16 @@ public partial class MedAreaDetection : Node2D
         eEnemyOnPlayer
     }
 
-    public void Colide(EAlgoSelectionDetection InAlgoSelectionDetection, Node2D InEntering, Node2D InEntered)
+    public void Collide(EAlgoSelectionDetection InAlgoSelectionDetection, Node2D InEntering, Node2D InEntered)
     {
         switch (InAlgoSelectionDetection)
         {
             default:
             case EAlgoSelectionDetection.eProjectileOnEnemy:
                 {
-                    InEntering.QueueFree();
+                    Projectile projectile = (Projectile)InEntering;
+                    projectile.Die();
+                    // InEntering.QueueFree();
                     // à ajouter la modif sur l'enemie
                 }
                 break;
