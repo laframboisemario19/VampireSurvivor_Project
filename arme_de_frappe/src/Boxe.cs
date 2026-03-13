@@ -5,6 +5,8 @@ public partial class Boxe : Sprite2D
 {
 	[Export]
 	private Sprite2D node;
+	[Export]
+	private Sprite2D hitEffect;
 
 	private Tween tween;
 
@@ -34,6 +36,7 @@ public partial class Boxe : Sprite2D
 
 		node.Scale = Vector2.Zero;
 		node.Modulate = new Color(1, 1, 1, 0);
+		hitEffect.Modulate = new Color(1, 1, 1, 0);
 
 		tween = CreateTween();
 
@@ -66,13 +69,15 @@ public partial class Boxe : Sprite2D
 
 		// apparition
 		tween.TweenProperty(node, "scale", punchScale, 0.05f);
-		tween.TweenProperty(node, "modulate:a", 0.5f, 0.05f);
+		tween.TweenProperty(node, "modulate:a", 1.0f, 0.05f);
 
 		// coup vers l'avant
 		tween.TweenProperty(node, "position", hit, 0.07f);
+		tween.TweenProperty(hitEffect, "modulate:a", 1.0f, 0.02f);
 
 		// retour
 		tween.TweenProperty(node, "position", start, 0.07f);
+		tween.TweenProperty(hitEffect, "modulate:a", 0.0f, 0.02f);
 
 		// disparition
 		tween.TweenProperty(node, "scale", Vector2.Zero, 0.05f);

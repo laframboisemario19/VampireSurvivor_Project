@@ -17,10 +17,13 @@ boxe = NodePath("Boxe")
 
 [node name="Sword" parent="DCM_Attack" unique_id=1650852282 instance=ExtResource("1_lfbs4")]
 position = Vector2(1.9999847, 1.5258789e-05)
+rotation = 0.077751175
 
 [node name="Axe" parent="DCM_Attack" unique_id=2079424175 instance=ExtResource("2_te6w4")]
+visible = false
 position = Vector2(2.0000153, -2)
 rotation = 0.0041475566
 
 [node name="Boxe" parent="DCM_Attack" unique_id=1007668515 instance=ExtResource("3_omjhi")]
+visible = false
 rotation = 0.0
