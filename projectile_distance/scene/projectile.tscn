@@ -5,10 +5,6 @@
 [ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://script/Poursuite.cs" id="2_u6xv6"]
 [ext_resource type="Script" uid="uid://pmbtfuwwddm8" path="res://script/ProjectileArea.cs" id="4_ujo14"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ujo14"]
-atlas = ExtResource("1_v1jrq")
-region = Rect2(878, 296, 99, 95)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_gaw4a"]
 atlas = ExtResource("1_v1jrq")
 region = Rect2(779, 296, 99, 95)
@@ -60,9 +56,6 @@ region = Rect2(417, 149, 49, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_yq8tf"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujo14")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gaw4a")
 }, {
@@ -131,7 +124,7 @@ AnimatedSprite = NodePath("AnimatedSprite2D")
 texture_filter = 1
 position = Vector2(1, 3)
 sprite_frames = SubResource("SpriteFrames_yq8tf")
-animation = &"move"
+animation = &"explode"
 autoplay = "move"
 
 [node name="DPM_Poursuite" type="Node2D" parent="." unique_id=775055542 node_paths=PackedStringArray("Poursuivant")]
