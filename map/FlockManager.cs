@@ -3,7 +3,6 @@ using System;
 
 public partial class FlockManager : Node
 {
-
     private int dice;
     private int randomSlop;
     
