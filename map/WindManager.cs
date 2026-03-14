@@ -14,7 +14,7 @@ public partial class WindManager : Node
 
         foreach (Sprite2D nuage in this.GetChildren())
         {
-            float randomOpacity = rng.RandfRange(0.5f,0.7f);
+            float randomOpacity = rng.RandfRange(0.4f,0.6f);
             Color newOpacity = nuage.Modulate;
             newOpacity.A = randomOpacity;
             nuage.Modulate = newOpacity;
@@ -41,7 +41,7 @@ public partial class WindManager : Node
         {
             Vector2 nuagePosition = nuage.GlobalPosition;
 
-            float randomSpeed = rng.RandfRange(50.0f,70.0f);
+            float randomSpeed = rng.RandfRange(30.0f,50.0f);
 
             nuagePosition.X += randomSpeed * (float)delta;
 
