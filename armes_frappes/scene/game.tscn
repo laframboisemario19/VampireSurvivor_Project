@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://vqutbu7028fy"]
+
+[ext_resource type="Script" uid="uid://bf5ngrlne75ij" path="res://util/CameraMouvement.cs" id="1_33cqm"]
+[ext_resource type="PackedScene" uid="uid://cmeuaimsj8480" path="res://scene/dcm_environnement.tscn" id="2_xwcet"]
+[ext_resource type="PackedScene" uid="uid://73yowubvqmol" path="res://scene/player.tscn" id="3_p1ry8"]
+[ext_resource type="PackedScene" uid="uid://du635buyr5wxk" path="res://scene/ennemi_1.tscn" id="4_xwcet"]
+[ext_resource type="PackedScene" uid="uid://1gh2kakleaqb" path="res://scene/ennemi_2.tscn" id="5_p1ry8"]
+[ext_resource type="Script" uid="uid://d207xlwdgrasf" path="res://src/Ennemi1.cs" id="5_qpk70"]
+[ext_resource type="Script" uid="uid://bfj5ptpyr1ttb" path="res://src/Ennemi2.cs" id="7_ll5lq"]
+[ext_resource type="Texture2D" uid="uid://cemqm5vmanl6m" path="res://res/progress_bottom.png" id="8_yq8tf"]
+[ext_resource type="Texture2D" uid="uid://dkostj4xtrqq4" path="res://res/progress_over.png" id="9_ym5sv"]
+[ext_resource type="Texture2D" uid="uid://cs3hoxjjk3d6g" path="res://res/progress_progress.png" id="10_sng2h"]
+[ext_resource type="PackedScene" uid="uid://csggvtpgptftv" path="res://scene/gem_1.tscn" id="11_ym5sv"]
+
+[node name="Game" type="Node2D" unique_id=1438342078]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1134258768 node_paths=PackedStringArray("playerToFollow")]
+zoom = Vector2(3, 3)
+script = ExtResource("1_33cqm")
+smoothingSpeed = 2.0
+playerToFollow = NodePath("../player")
+
+[node name="XP_bar" type="TextureProgressBar" parent="Camera2D" unique_id=795983338]
+z_index = 100
+z_as_relative = false
+texture_filter = 1
+offset_left = -506.00003
+offset_top = -222.0
+offset_right = 632.0
+offset_bottom = -139.0
+scale = Vector2(0.9, 0.3)
+value = 40.0
+texture_under = ExtResource("8_yq8tf")
+texture_over = ExtResource("9_ym5sv")
+texture_progress = ExtResource("10_sng2h")
+tint_under = Color(0, 0, 0, 1)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0.14509805, 1, 1)
+
+[node name="DCM_Environnement" parent="." unique_id=181946096 instance=ExtResource("2_xwcet")]
+
+[node name="player" parent="." unique_id=607470767 node_paths=PackedStringArray("t") instance=ExtResource("3_p1ry8")]
+t = NodePath("../Camera2D/XP_bar")
+
+[node name="Ennemi1" parent="." unique_id=642995495 instance=ExtResource("4_xwcet")]
+position = Vector2(-254, -39)
+script = ExtResource("5_qpk70")
+
+[node name="Ennemi2" parent="." unique_id=1253479578 instance=ExtResource("5_p1ry8")]
+position = Vector2(243, 19)
+script = ExtResource("7_ll5lq")
+
+[node name="gem1" parent="." unique_id=1076464098 instance=ExtResource("11_ym5sv")]
+position = Vector2(-154, 139)
+scale = Vector2(0.03, 0.03)

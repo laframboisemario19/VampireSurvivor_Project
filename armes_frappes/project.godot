@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="VampireSurviver"
+run/main_scene="res://scene/game.tscn"
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+config/icon="res://res/icon.svg"
+
+[display]
+
+window/size/mode=2
+
+[dotnet]
+
+project/assembly_name="VampireSurviver"
+
+[layer_names]
+
+2d_physics/layer_1="Axe"
+2d_physics/layer_2="Sword"
+2d_physics/layer_3="Boxe"
+2d_physics/layer_5="player"
+2d_physics/layer_9="Ennemi1"
+2d_physics/layer_10="Ennemi2"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
