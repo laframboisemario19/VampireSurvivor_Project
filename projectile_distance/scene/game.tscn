@@ -7,9 +7,7 @@
 [ext_resource type="Script" uid="uid://cgeehc3nlklv4" path="res://script/DcmEnemyTest.cs" id="3_17rxn"]
 [ext_resource type="Script" uid="uid://b43vi3vxtw032" path="res://script/DcmProjectile.cs" id="3_p1ry8"]
 [ext_resource type="PackedScene" uid="uid://csytfx3dx63mk" path="res://scene/enemy_test.tscn" id="4_ll5lq"]
-[ext_resource type="PackedScene" uid="uid://njd6h66fpk62" path="res://scene/projectile_lineair.tscn" id="4_xwcet"]
 [ext_resource type="Script" uid="uid://cax4kwyhpuuab" path="res://script/PlayerTest.cs" id="9_17rxn"]
-[ext_resource type="PackedScene" uid="uid://cgr0h02ybbk7w" path="res://scene/projectile_circle.tscn" id="10_yq8tf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("1_5kiuu")
@@ -119,18 +117,9 @@ texture = ExtResource("2_33cqm")
 [node name="DPM_Timer" type="Timer" parent="MED_Attack/MED_Cible/Player/DCM_Attaque" unique_id=1127273580]
 autostart = true
 
-[node name="DCM_Projectile" type="Node2D" parent="MED_Attack" unique_id=642832070 node_paths=PackedStringArray("MediateurCible", "MediateurAttack", "timer1", "timer2", "timer3", "timer4", "timer5", "timer6")]
+[node name="DCM_Projectile" type="Node2D" parent="MED_Attack" unique_id=642832070 node_paths=PackedStringArray("MediateurCible")]
 script = ExtResource("3_p1ry8")
-ProjectileLinear = ExtResource("4_xwcet")
-ProjectileCircle = ExtResource("10_yq8tf")
 MediateurCible = NodePath("../MED_Cible")
-MediateurAttack = NodePath("..")
-timer1 = NodePath("DPM_Timer")
-timer2 = NodePath("DPM_Timer2")
-timer3 = NodePath("DPM_Timer3")
-timer4 = NodePath("DPM_Timer4")
-timer5 = NodePath("DPM_Timer5")
-timer6 = NodePath("DPM_Timer6")
 
 [node name="DPM_Timer" type="Timer" parent="MED_Attack/DCM_Projectile" unique_id=950247826]
 wait_time = 2.0
