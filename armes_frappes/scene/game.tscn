@@ -21,14 +21,12 @@ smoothingSpeed = 2.0
 playerToFollow = NodePath("../player")
 
 [node name="XP_bar" type="TextureProgressBar" parent="Camera2D" unique_id=795983338]
-z_index = 100
-z_as_relative = false
 texture_filter = 1
-offset_left = -506.00003
-offset_top = -222.0
-offset_right = 632.0
-offset_bottom = -139.0
-scale = Vector2(0.9, 0.3)
+offset_left = -285.0
+offset_top = -176.0
+offset_right = 853.0
+offset_bottom = -93.0
+scale = Vector2(0.5, 0.3)
 value = 40.0
 texture_under = ExtResource("8_yq8tf")
 texture_over = ExtResource("9_ym5sv")
@@ -38,6 +36,7 @@ tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0.14509805, 1, 1)
 
 [node name="DCM_Environnement" parent="." unique_id=181946096 instance=ExtResource("2_xwcet")]
+position = Vector2(26, 38)
 
 [node name="player" parent="." unique_id=607470767 node_paths=PackedStringArray("t") instance=ExtResource("3_p1ry8")]
 t = NodePath("../Camera2D/XP_bar")
