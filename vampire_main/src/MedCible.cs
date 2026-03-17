@@ -12,7 +12,7 @@ public partial class MedCible : Node2D
     [Export]
     private DcmEnemyTest SpawnerEnemy;
     [Export]
-    private PlayerTest Player;
+    private Player Player;
 
     public enum EAlgoSelectionCible
     {

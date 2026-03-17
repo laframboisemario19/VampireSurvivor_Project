@@ -27,7 +27,7 @@ public partial class MoulinManager : Node
 		float sinusValue = Mathf.Sin((float)time * frequency);
 		float newSpeed = (sinusValue * amplitude) + midpoint;
 
-		GD.Print(newSpeed);
+		// GD.Print(newSpeed);
 
 		foreach (AnimatedSprite2D moulin in this.GetChildren())
 		{

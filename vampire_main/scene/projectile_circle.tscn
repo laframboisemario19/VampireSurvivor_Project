@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://cgr0h02ybbk7w"]
+[gd_scene format=3 uid="uid://ccuihnipnmvvo"]
 
-[ext_resource type="Script" path="res://src/Projectile.cs" id="1_sx0gp"]
+[ext_resource type="Script" uid="uid://bk08gjg2jwgie" path="res://src/Projectile.cs" id="1_sx0gp"]
 [ext_resource type="Texture2D" uid="uid://md7hxwtvxh2l" path="res://res/gfx-sheet16.png" id="2_nj367"]
-[ext_resource type="Script" path="res://src/Poursuite.cs" id="3_27j51"]
-[ext_resource type="Script" path="res://src/ProjectileArea.cs" id="4_0s8j1"]
+[ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://src/Poursuite.cs" id="3_27j51"]
+[ext_resource type="Script" uid="uid://pmbtfuwwddm8" path="res://src/ProjectileArea.cs" id="4_0s8j1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gaw4a"]
 atlas = ExtResource("2_nj367")
@@ -122,7 +122,8 @@ AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=993463669]
 texture_filter = 1
-position = Vector2(25, 18)
+position = Vector2(13, 9)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_yq8tf")
 animation = &"move"
 autoplay = "move"
