@@ -3,13 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://cmeuaimsj8480" path="res://scene/dcm_environnement.tscn" id="1_5kiuu"]
 [ext_resource type="Script" uid="uid://daghi7h3mw2ik" path="res://src/CameraMouvement.cs" id="1_yq8tf"]
 [ext_resource type="Script" uid="uid://dlelj65apqxka" path="res://src/MedAttack.cs" id="2_33cqm"]
+[ext_resource type="Texture2D" uid="uid://cemqm5vmanl6m" path="res://res/progress_bottom.png" id="3_5g16k"]
 [ext_resource type="Script" uid="uid://umgcpr5bcxjc" path="res://src/MedCible.cs" id="3_xwcet"]
-[ext_resource type="PackedScene" path="res://scene/enemy_test.tscn" id="4_xlg7c"]
+[ext_resource type="Texture2D" uid="uid://dkostj4xtrqq4" path="res://res/progress_over.png" id="4_81276"]
+[ext_resource type="PackedScene" uid="uid://pt1a7hq61yy" path="res://scene/enemy_test.tscn" id="4_xlg7c"]
 [ext_resource type="Script" uid="uid://cgeehc3nlklv4" path="res://src/DcmEnemyTest.cs" id="4_yq8tf"]
-[ext_resource type="PackedScene" path="res://scene/player.tscn" id="6_17rxn"]
+[ext_resource type="Texture2D" uid="uid://cs3hoxjjk3d6g" path="res://res/progress_progress.png" id="5_ve786"]
+[ext_resource type="PackedScene" uid="uid://hj77b4wvwip1" path="res://scene/player.tscn" id="6_17rxn"]
 [ext_resource type="Script" uid="uid://b43vi3vxtw032" path="res://src/DcmProjectile.cs" id="6_ll5lq"]
-[ext_resource type="PackedScene" path="res://scene/projectile_lineair.tscn" id="8_17rxn"]
-[ext_resource type="PackedScene" path="res://scene/projectile_circle.tscn" id="9_yq8tf"]
+[ext_resource type="PackedScene" uid="uid://b7w1jye6ee7s3" path="res://scene/projectile_lineair.tscn" id="8_17rxn"]
+[ext_resource type="PackedScene" uid="uid://ccuihnipnmvvo" path="res://scene/projectile_circle.tscn" id="9_yq8tf"]
 
 [node name="Game" type="Node2D" unique_id=1438342078]
 
@@ -20,6 +23,18 @@ script = ExtResource("1_yq8tf")
 playerToFollow = NodePath("../MED_Cible/Player")
 
 [node name="DCM_Environnement" parent="." unique_id=181946096 instance=ExtResource("1_5kiuu")]
+
+[node name="XPBar" type="TextureProgressBar" parent="." unique_id=1033773378]
+offset_left = -528.0
+offset_top = -384.0
+offset_right = 610.0
+offset_bottom = -301.0
+value = 40.0
+texture_under = ExtResource("3_5g16k")
+texture_over = ExtResource("4_81276")
+texture_progress = ExtResource("5_ve786")
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0.36078432, 1, 1)
 
 [node name="MED_Attack" type="Node2D" parent="." unique_id=1828661138 node_paths=PackedStringArray("timer", "DcmProjectile")]
 script = ExtResource("2_33cqm")
@@ -46,8 +61,9 @@ position = Vector2(220.00003, -113.000015)
 [node name="DPM_Timer" type="Timer" parent="MED_Cible/DCM_Enemy" unique_id=1311761834]
 autostart = true
 
-[node name="Player" parent="MED_Cible" unique_id=607470767 instance=ExtResource("6_17rxn")]
+[node name="Player" parent="MED_Cible" unique_id=607470767 node_paths=PackedStringArray("t") instance=ExtResource("6_17rxn")]
 position = Vector2(-236, 120)
+t = NodePath("../../XPBar")
 
 [node name="DCM_Projectile" type="Node2D" parent="MED_Cible" unique_id=1476373430 node_paths=PackedStringArray("MediateurCible", "MediateurAttack", "timer1", "timer2", "timer3", "timer4", "timer5", "timer6")]
 script = ExtResource("6_ll5lq")
