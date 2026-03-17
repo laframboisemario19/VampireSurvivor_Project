@@ -8,16 +8,18 @@ public partial class MedCible : Node2D
 {
     [ExportGroup("External")]
     [Export]
-    private DcmProjectile SpawnerProjectile; 
+    private DcmProjectile SpawnerProjectile;
+
     [Export]
-    private DcmEnemyTest SpawnerEnemy;
+    private DcmEnemi SpawnerEnemy;
+
     [Export]
     private Player Player;
 
     public enum EAlgoSelectionCible
     {
         eClosestEnemy,
-        ePlayer
+        ePlayer,
     }
 
     public Node2D ChoisirCible(EAlgoSelectionCible InAlgoSelectionCible, Vector2 InPosition)
@@ -29,18 +31,21 @@ public partial class MedCible : Node2D
             case EAlgoSelectionCible.ePlayer:
                 {
                     // à coder
-                    ret = null;
+                    ret = Player.EnsureValid();
                 }
                 break;
             case EAlgoSelectionCible.eClosestEnemy:
                 {
-                    IEnumerable<EnemyTest> allEnemies = SpawnerEnemy.EnsureValid().GatherChildren().OfType<EnemyTest>();
+                    IEnumerable<Zombie> allEnemies = SpawnerEnemy
+                        .EnsureValid()
+                        .GatherChildren()
+                        .OfType<Zombie>();
                     ret = allEnemies.First();
                     float currentength = (InPosition - ret.GlobalPosition).Length();
-                    foreach (EnemyTest enemy in allEnemies)
+                    foreach (Zombie enemy in allEnemies)
                     {
                         float length = (InPosition - enemy.GlobalPosition).Length();
-                    
+
                         if (length < currentength)
                         {
                             ret = enemy;

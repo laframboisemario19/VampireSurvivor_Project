@@ -9,14 +9,16 @@ public partial class MedAttack : Node2D
 {
     [Export]
     private Timer timer;
+
     [Export]
     private DcmProjectile DcmProjectile;
     int i = 0;
+
     public enum EAlgoSelectionDetection
     {
         eProjectileOnEnemy,
         eEnemyOnPlayer,
-        eMeleeOnEnemy
+        eMeleeOnEnemy,
     }
 
     public override void _Ready()
@@ -34,7 +36,11 @@ public partial class MedAttack : Node2D
         };
     }
 
-    public void Collide(EAlgoSelectionDetection InAlgoSelectionDetection, Node2D InEntering, Node2D InEntered)
+    public void Collide(
+        EAlgoSelectionDetection InAlgoSelectionDetection,
+        Node2D InEntering,
+        Node2D InEntered
+    )
     {
         switch (InAlgoSelectionDetection)
         {
@@ -43,6 +49,8 @@ public partial class MedAttack : Node2D
                 {
                     Projectile projectile = (Projectile)InEntering;
                     projectile.Die();
+                    Zombie zombie = (Zombie)InEntered;
+                    zombie.Die();
                     // à ajouter la modif sur l'enemie
                 }
                 break;
@@ -51,12 +59,8 @@ public partial class MedAttack : Node2D
                     // à coder
                 }
                 break;
-            case EAlgoSelectionDetection.eMeleeOnEnemy:
-                {
-                    
-                }
+            case EAlgoSelectionDetection.eMeleeOnEnemy: { }
                 break;
         }
     }
-
 }

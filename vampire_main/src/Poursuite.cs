@@ -14,10 +14,10 @@ public partial class Poursuite : Node2D
     private float velocity = 100.0f;
     public float Velocity
     {
-        get {return velocity;} 
+        get { return velocity; }
         set
         {
-            if(value >= 0 && value <= 1000)
+            if (value >= 0 && value <= 1000)
             {
                 this.velocity = value;
             }
@@ -39,9 +39,21 @@ public partial class Poursuite : Node2D
 
             Vector2 deplacement = altDirection * Velocity * (float)InDelta;
             Poursuivant.GlobalPosition += deplacement;
-            
-            float angle = (float)Math.Atan2(deplacement.Y, deplacement.X);
-            Poursuivant.Rotation = angle;
+
+            if (Poursuivant is Projectile)
+            {
+                float angle = (float)Math.Atan2(deplacement.Y, deplacement.X);
+                Poursuivant.Rotation = angle;
+            }
+            else
+            {
+                float scaleX =
+                    deplacement.X > 0.0f
+                        ? Math.Abs(Poursuivant.Scale.X)
+                        : -Math.Abs(Poursuivant.Scale.X);
+                Vector2 newScale = new Vector2(scaleX, Poursuivant.Scale.Y);
+                Poursuivant.Scale = newScale;
+            }
         }
     }
 
