@@ -36,14 +36,15 @@ public partial class MedCible : Node2D
                 {
                     IEnumerable<EnemyTest> allEnemies = SpawnerEnemy.EnsureValid().GatherChildren().OfType<EnemyTest>();
                     ret = allEnemies.First();
-                    Vector2 currentDistance = InPosition - ret.GlobalPosition;
+                    float currentength = (InPosition - ret.GlobalPosition).Length();
                     foreach (EnemyTest enemy in allEnemies)
                     {
-                        Vector2 distance = InPosition - enemy.GlobalPosition;
-                        if (distance < currentDistance)
+                        float length = (InPosition - enemy.GlobalPosition).Length();
+                    
+                        if (length < currentength)
                         {
                             ret = enemy;
-                            currentDistance = distance;
+                            currentength = length;
                         }
                     }
                 }

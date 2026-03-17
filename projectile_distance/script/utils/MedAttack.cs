@@ -3,13 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Utils;
+using static DcmProjectile;
 
-public partial class MedAreaDetection : Node2D
+public partial class MedAttack : Node2D
 {
+    [Export]
+    private Timer timer;
+    [Export]
+    private DcmProjectile DcmProjectile;
+    int i = 0;
     public enum EAlgoSelectionDetection
     {
         eProjectileOnEnemy,
         eEnemyOnPlayer
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
+
+        // À remplacer par une fonction permettant le choix d'arme
+        timer.EnsureValid().Timeout += () =>
+        {
+            if (i < 6)
+            {
+                DcmProjectile.ActivateProjectile((EProjectileType)i);
+                i++;
+            }
+        };
     }
 
     public void Collide(EAlgoSelectionDetection InAlgoSelectionDetection, Node2D InEntering, Node2D InEntered)
@@ -21,7 +42,6 @@ public partial class MedAreaDetection : Node2D
                 {
                     Projectile projectile = (Projectile)InEntering;
                     projectile.Die();
-                    // InEntering.QueueFree();
                     // à ajouter la modif sur l'enemie
                 }
                 break;

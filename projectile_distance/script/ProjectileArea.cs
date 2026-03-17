@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using static MedAreaDetection;
+using static MedAttack;
 
 public partial class ProjectileArea : Area2D, IAreaDetection
 {

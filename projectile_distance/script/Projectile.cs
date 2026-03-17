@@ -1,6 +1,7 @@
 using Godot;
 using System;
-using static MedAreaDetection;
+using static MedAttack;
+using static DcmProjectile;
 using Utils;
 
 public partial class Projectile : Node2D, ICiblable
@@ -19,6 +20,11 @@ public partial class Projectile : Node2D, ICiblable
 
     [Export]
     private AnimatedSprite2D AnimatedSprite;
+    public EProjectileType MovementType
+    { get; set; }
+
+    private Tween tw;
+    private bool _isDying = false;
 
     public override void _Ready() {
         base._Ready();
@@ -27,7 +33,7 @@ public partial class Projectile : Node2D, ICiblable
         color.A = 0.0f;
         Modulate = color;
 
-        Tween tween = CreateTween();
+        Tween tween = this.CreateTween();
         
         tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Circ);
 
@@ -35,11 +41,18 @@ public partial class Projectile : Node2D, ICiblable
         tween.SetParallel();
         tween.TweenProperty(this, "scale:y", 1.0f, 0.3f).From(1.5f);
 
+        // if((int)MovementType % 2 != 0)
+        // {
+        //     tween.TweenProperty(this, "rotation", GlobalRotation + Mathf.Pi * 8, 5.0f);
+        //     tween.SetLoops();
+
+        // }
+
     }
 
     public void SetCible(Node2D InCible)
     {
-        Cible = (Node2D)InCible;
+        Cible = InCible;
     }
 
     public void Collide(Node2D InEntered)
@@ -50,7 +63,24 @@ public partial class Projectile : Node2D, ICiblable
 
     public void Die()
     {
-        AnimatedSprite.Animation = "explode";
-        AnimatedSprite.AnimationFinished += () => QueueFree();
+        if (!_isDying)
+        {
+            _isDying = true;
+            tw?.Stop();
+            Poursuite.Velocity = 60.0f; 
+            AnimatedSprite.Animation = "explode";
+            AnimatedSprite.AnimationFinished += () => QueueFree();
+        }
+
+
     }
+
+    public void InfiniteTurn()
+    {
+        tw = AnimatedSprite.CreateTween();
+        tw.TweenProperty(this, "rotation", GlobalRotation - Mathf.Pi * 8, 5.0f);
+        tw.SetLoops();
+    }
+
 }
+
