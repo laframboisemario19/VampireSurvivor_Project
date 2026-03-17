@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bpruvjed6678r"]
+
+[ext_resource type="Texture2D" uid="uid://ctdjqenharpwq" path="res://res/boxe-glove.png" id="1_vj7ou"]
+[ext_resource type="Script" uid="uid://btxy8clb0jprv" path="res://src/Boxe.cs" id="2_u2iyp"]
+[ext_resource type="Texture2D" uid="uid://bej1w8f7nfpem" path="res://res/Fire-Wrath__03.png" id="3_ml1qf"]
+[ext_resource type="Script" uid="uid://b7qvhnfd0r17p" path="res://src/WeaponAreaDetection.cs" id="4_yahxu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vj7ou"]
+radius = 144.11925
+
+[node name="Boxe" type="Sprite2D" unique_id=1007668515 node_paths=PackedStringArray("node", "hitEffect", "timer")]
+rotation = 3.1342537
+scale = Vector2(0.1754658, 0.18442623)
+texture = ExtResource("1_vj7ou")
+script = ExtResource("2_u2iyp")
+node = NodePath(".")
+hitEffect = NodePath("BoxingEffect")
+timer = NodePath("TimerBoxe")
+
+[node name="BoxingEffect" type="Sprite2D" parent="." unique_id=1090551613]
+position = Vector2(-7.539259, 238.53156)
+scale = Vector2(1.6613668, 1.6613668)
+texture = ExtResource("3_ml1qf")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2058423572]
+position = Vector2(0, 5.422222)
+script = ExtResource("4_yahxu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1598623230]
+position = Vector2(-0.4182496, 48.798534)
+shape = SubResource("CircleShape2D_vj7ou")
+
+[node name="TimerBoxe" type="Timer" parent="." unique_id=1619001716]
+wait_time = 10.0
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="." method="OnAreaEntered"]

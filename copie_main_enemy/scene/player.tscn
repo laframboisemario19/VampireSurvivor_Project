@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://hj77b4wvwip1"]
+
+[ext_resource type="Script" uid="uid://bvmq32raxwnsn" path="res://src/Player.cs" id="1_ml7e8"]
+[ext_resource type="Texture2D" uid="uid://d4krfldri8uia" path="res://res/Vampires1_Walk_full-Photoroom.png" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://df146fuwxpdbb" path="res://src/DcmAttack.cs" id="3_oh5ij"]
+[ext_resource type="Script" uid="uid://buen2mhxbp3k5" path="res://src/MouvementPlayer.cs" id="3_s4jxa"]
+[ext_resource type="PackedScene" path="res://scene/axe.tscn" id="4_hp4bs"]
+[ext_resource type="PackedScene" path="res://scene/boxe.tscn" id="5_g2vtq"]
+[ext_resource type="PackedScene" path="res://scene/sword.tscn" id="6_2fvbb"]
+[ext_resource type="Texture2D" uid="uid://cemqm5vmanl6m" path="res://res/progress_bottom.png" id="7_2fvbb"]
+[ext_resource type="Texture2D" uid="uid://dkostj4xtrqq4" path="res://res/progress_over.png" id="8_ml7e8"]
+[ext_resource type="Texture2D" uid="uid://cs3hoxjjk3d6g" path="res://res/progress_progress.png" id="9_ihjo1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("1_onrkg")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ml7e8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3pqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
+}],
+"loop": true,
+"name": &"marche_bas",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(8, 10.399999)
+
+[node name="player" type="Node2D" unique_id=607470767]
+texture_filter = 1
+script = ExtResource("1_ml7e8")
+
+[node name="Node2D" type="AnimatedSprite2D" parent="." unique_id=433802151]
+sprite_frames = SubResource("SpriteFrames_ml7e8")
+animation = &"marche_bas"
+autoplay = "marche_bas"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1768256024]
+collision_layer = 16
+collision_mask = 2816
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=91807387]
+position = Vector2(-1.000001, 9.536743e-07)
+scale = Vector2(2.5, 2.5)
+shape = SubResource("RectangleShape2D_onrkg")
+debug_color = Color(0.7176471, 0.6, 0.69803923, 0.41960785)
+
+[node name="DPM_Mouvement" type="Node2D" parent="." unique_id=928642638 node_paths=PackedStringArray("NodeToControl")]
+script = ExtResource("3_s4jxa")
+NodeToControl = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1985002375]
+scale = Vector2(0.5, 0.5)
+zoom = Vector2(5, 5)
+
+[node name="DCM_Attack" type="Node2D" parent="." unique_id=1284805521 node_paths=PackedStringArray("sword", "axe", "boxe")]
+script = ExtResource("3_oh5ij")
+sword = NodePath("Sword")
+axe = NodePath("Axe")
+boxe = NodePath("Boxe")
+
+[node name="Axe" parent="DCM_Attack" unique_id=2079424175 node_paths=PackedStringArray("attackManager") instance=ExtResource("4_hp4bs")]
+visible = false
+scale = Vector2(0.8, 0.8)
+attackManager = NodePath("..")
+
+[node name="Boxe" parent="DCM_Attack" unique_id=1007668515 node_paths=PackedStringArray("attackManager") instance=ExtResource("5_g2vtq")]
+visible = false
+scale = Vector2(0.05, 0.053)
+attackManager = NodePath("..")
+
+[node name="Sword" parent="DCM_Attack" unique_id=1650852282 node_paths=PackedStringArray("attackManager") instance=ExtResource("6_2fvbb")]
+visible = false
+texture_filter = 1
+position = Vector2(0, 5)
+scale = Vector2(0.5, 0.5)
+attackManager = NodePath("..")
+
+[node name="Health_bar" type="TextureProgressBar" parent="." unique_id=1803834093]
+offset_left = -12.000002
+offset_top = 19.000002
+offset_right = 1126.0
+offset_bottom = 102.0
+scale = Vector2(0.02, 0.033)
+max_value = 5.0
+value = 3.0
+texture_under = ExtResource("7_2fvbb")
+texture_over = ExtResource("8_ml7e8")
+texture_progress = ExtResource("9_ihjo1")
+tint_under = Color(0, 0, 0, 1)
+tint_over = Color(0.012617188, 0.012617188, 0.012617188, 1)
+tint_progress = Color(1, 0.08235294, 0.05490196, 1)
