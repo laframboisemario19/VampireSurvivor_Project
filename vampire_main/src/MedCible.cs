@@ -36,13 +36,13 @@ public partial class MedCible : Node2D
                 break;
             case EAlgoSelectionCible.eClosestEnemy:
                 {
-                    IEnumerable<Zombie> allEnemies = SpawnerEnemy
+                    IEnumerable<BaseEnemy> allEnemies = SpawnerEnemy
                         .EnsureValid()
                         .GatherChildren()
-                        .OfType<Zombie>();
+                        .OfType<BaseEnemy>();
                     ret = allEnemies.First();
                     float currentength = (InPosition - ret.GlobalPosition).Length();
-                    foreach (Zombie enemy in allEnemies)
+                    foreach (BaseEnemy enemy in allEnemies)
                     {
                         float length = (InPosition - enemy.GlobalPosition).Length();
 

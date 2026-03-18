@@ -1,16 +1,15 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class gemDetection : Area2D
 {
-	private void OnAreaEntered(Area2D InArea)
-	{
+    private void OnAreaEntered(Area2D InArea)
+    {
+        Node player = InArea.GetParent();
 
-		Node player = InArea.GetParent();
-
-		if(player is Player p)
-		{
-			p.AddXp(20);
-		}
-	}
+        if (player is Player p)
+        {
+            p.AddXp(20);
+        }
+    }
 }

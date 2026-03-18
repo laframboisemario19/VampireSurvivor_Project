@@ -2,27 +2,15 @@ using System;
 using Godot;
 using Utils;
 
-public partial class Zombie : Node2D, ICiblable
+public partial class Zombie : BaseEnemy, ICiblable
 {
     [ExportGroup("External")]
     [Export]
     public Node2D Cible
     {
-        get => Poursuite.EnsureValid().GetCible();
-        set { Poursuite.EnsureValid().SetCible(value); }
+        get => base.Poursuite.EnsureValid().GetCible();
+        set { base.Poursuite.EnsureValid().SetCible(value); }
     }
-
-    [ExportGroup("Internal")]
-    [Export]
-    Poursuite Poursuite;
-
-    [Export]
-    private AnimatedSprite2D AnimatedSprite;
-
-    [Export]
-    private EnemyArea Area;
-
-    public bool isDying = false;
 
     public override void _Ready()
     {
@@ -39,17 +27,5 @@ public partial class Zombie : Node2D, ICiblable
     public void SetCible(Node2D InCible)
     {
         Cible = InCible;
-    }
-
-    public void Die()
-    {
-        if (!isDying)
-        {
-            isDying = true;
-            Area.Die();
-            Poursuite.Velocity = 60.0f;
-            AnimatedSprite.Play("explode");
-            AnimatedSprite.AnimationFinished += () => QueueFree();
-        }
     }
 }

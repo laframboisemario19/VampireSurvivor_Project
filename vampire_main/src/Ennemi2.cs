@@ -1,13 +1,13 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class Ennemi2 : Node2D
 {
-	public int healthPoints = 100; 
+    public int healthPoints = 100;
 
-	public void TakeDamage(int damage)
-	{
-		healthPoints -= damage;
-		GD.Print("Ennemi2 HP: " + healthPoints);
-	}
+    public void TakeDamage(int damage)
+    {
+        healthPoints -= damage;
+        GD.Print("Ennemi2 HP: " + healthPoints);
+    }
 }

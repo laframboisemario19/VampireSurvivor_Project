@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ugx63we18e7l" path="res://res/skeleton.png" id="2_wufa4"]
 [ext_resource type="Texture2D" uid="uid://bh1mq12aqyfrg" path="res://res/squelette-forward.png" id="3_vboas"]
 [ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://src/Poursuite.cs" id="5_6hm1a"]
-[ext_resource type="Script" uid="uid://s46qbr0ptqi4" path="res://scene/EnemyArea.cs" id="6_2ep7w"]
+[ext_resource type="Script" uid="uid://s46qbr0ptqi4" path="res://src/EnemyArea.cs" id="6_2ep7w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gaw4a"]
 atlas = ExtResource("2_6hm1a")

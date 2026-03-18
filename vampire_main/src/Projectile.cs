@@ -54,7 +54,7 @@ public partial class Projectile : Node2D, ICiblable
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        if (Cible is Zombie z && z.isDying)
+        if (Cible is BaseEnemy e && e.isDying)
         {
             Die();
         }

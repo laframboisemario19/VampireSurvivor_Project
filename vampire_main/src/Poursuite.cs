@@ -32,7 +32,7 @@ public partial class Poursuite : Node2D
     public override void _PhysicsProcess(double InDelta)
     {
         base._PhysicsProcess(InDelta);
-        if (Poursuivant is Zombie z && z.isDying)
+        if ((Poursuivant is BaseEnemy e && e.isDying) || (Cible is BaseEnemy ce && ce.isDying))
         {
             return;
         }
