@@ -32,6 +32,11 @@ public partial class Poursuite : Node2D
     public override void _PhysicsProcess(double InDelta)
     {
         base._PhysicsProcess(InDelta);
+        if (Poursuivant is Zombie z && z.isDying)
+        {
+            return;
+        }
+
         if (Cible != null)
         {
             Cible.EnsureValid();
@@ -47,12 +52,44 @@ public partial class Poursuite : Node2D
             }
             else
             {
-                float scaleX =
-                    deplacement.X > 0.0f
-                        ? Math.Abs(Poursuivant.Scale.X)
-                        : -Math.Abs(Poursuivant.Scale.X);
-                Vector2 newScale = new Vector2(scaleX, Poursuivant.Scale.Y);
-                Poursuivant.Scale = newScale;
+                var anim = Poursuivant.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+                if (Math.Abs(deplacement.X) > Mathf.Abs(deplacement.Y))
+                {
+                    anim.Play("marche_cote");
+
+                    if (deplacement.X < 0)
+                    {
+                        Poursuivant.Scale = new Vector2(
+                            -Math.Abs(Poursuivant.Scale.X),
+                            Poursuivant.Scale.Y
+                        );
+                    }
+                    else
+                    {
+                        Poursuivant.Scale = new Vector2(
+                            Math.Abs(Poursuivant.Scale.X),
+                            Poursuivant.Scale.Y
+                        );
+                    }
+                }
+                else
+                {
+                    if (deplacement.Y > 0)
+                    {
+                        anim.Play("marche_bas");
+                    }
+                    else
+                    {
+                        anim.Play("marche_haut");
+                    }
+                }
+
+                // float scaleX =
+                //     deplacement.X > 0.0f
+                //         ? Math.Abs(Poursuivant.Scale.X)
+                //         : -Math.Abs(Poursuivant.Scale.X);
+                // Vector2 newScale = new Vector2(scaleX, Poursuivant.Scale.Y);
+                // Poursuivant.Scale = newScale;
             }
         }
     }

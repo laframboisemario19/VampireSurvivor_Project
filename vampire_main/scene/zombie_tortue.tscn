@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cg3n0msmiqu7d"]
+
+[ext_resource type="Texture2D" uid="uid://btg1j2ly1alo7" path="res://res/spiriticon-sheet20.png" id="1_rvmh6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynem1"]
+atlas = ExtResource("1_rvmh6")
+region = Rect2(1, 1, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtkg7"]
+atlas = ExtResource("1_rvmh6")
+region = Rect2(43, 1, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb0ag"]
+atlas = ExtResource("1_rvmh6")
+region = Rect2(126, 1, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6glw"]
+atlas = ExtResource("1_rvmh6")
+region = Rect2(167, 1, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgs7r"]
+atlas = ExtResource("1_rvmh6")
+region = Rect2(788, 48, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_we62t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynem1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtkg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rb0ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6glw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgs7r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ZombieTortue" type="Node2D" unique_id=1927711094]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1122965034]
+sprite_frames = SubResource("SpriteFrames_we62t")
+frame = 4
+frame_progress = 0.92638826
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1522743630]
