@@ -628,7 +628,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_0fmm8")
 }],
 "loop": true,
-"name": &"dommage_droit",
+"name": &"dommage_droite",
 "speed": 5.0
 }, {
 "frames": [{
@@ -921,9 +921,8 @@ healthBar = NodePath("Health_bar")
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="." unique_id=433802151]
 sprite_frames = SubResource("SpriteFrames_ml7e8")
-animation = &"mort_haut"
+animation = &"dommage_droite"
 autoplay = "marche_bas"
-frame_progress = 0.4293363
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1768256024 node_paths=PackedStringArray("Player")]
 collision_layer = 4096

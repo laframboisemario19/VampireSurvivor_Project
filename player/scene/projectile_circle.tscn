@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://ccuihnipnmvvo"]
+
+[ext_resource type="Script" uid="uid://bk08gjg2jwgie" path="res://src/Projectile.cs" id="1_sx0gp"]
+[ext_resource type="Texture2D" uid="uid://md7hxwtvxh2l" path="res://res/gfx-sheet16.png" id="2_nj367"]
+[ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://src/Poursuite.cs" id="3_27j51"]
+[ext_resource type="Script" uid="uid://pmbtfuwwddm8" path="res://src/ProjectileArea.cs" id="4_0s8j1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gaw4a"]
+atlas = ExtResource("2_nj367")
+region = Rect2(779, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sdoi"]
+atlas = ExtResource("2_nj367")
+region = Rect2(680, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53ky5"]
+atlas = ExtResource("2_nj367")
+region = Rect2(581, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qd7m"]
+atlas = ExtResource("2_nj367")
+region = Rect2(482, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tabn"]
+atlas = ExtResource("2_nj367")
+region = Rect2(383, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8okxr"]
+atlas = ExtResource("2_nj367")
+region = Rect2(284, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj1so"]
+atlas = ExtResource("2_nj367")
+region = Rect2(185, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1ry8"]
+atlas = ExtResource("2_nj367")
+region = Rect2(25, 149, 49, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlg7c"]
+atlas = ExtResource("2_nj367")
+region = Rect2(123, 149, 49, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpk70"]
+atlas = ExtResource("2_nj367")
+region = Rect2(221, 149, 49, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll5lq"]
+atlas = ExtResource("2_nj367")
+region = Rect2(319, 149, 49, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17rxn"]
+atlas = ExtResource("2_nj367")
+region = Rect2(417, 149, 49, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yq8tf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gaw4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sdoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53ky5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qd7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tabn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8okxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj1so")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1ry8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlg7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpk70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll5lq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17rxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll5lq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpk70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlg7c")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c0tm2"]
+radius = 13.997547
+height = 28.032524
+
+[node name="Projectile" type="Node2D" unique_id=1363312515 node_paths=PackedStringArray("Poursuite", "AnimatedSprite")]
+script = ExtResource("1_sx0gp")
+Poursuite = NodePath("DPM_Poursuite")
+AnimatedSprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=993463669]
+texture_filter = 1
+position = Vector2(13, 9)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_yq8tf")
+animation = &"move"
+autoplay = "move"
+
+[node name="DPM_Poursuite" type="Node2D" parent="." unique_id=775055542 node_paths=PackedStringArray("Poursuivant")]
+script = ExtResource("3_27j51")
+Poursuivant = NodePath("..")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1204671389 node_paths=PackedStringArray("InProjectile")]
+visible = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_0s8j1")
+InProjectile = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=154193131]
+position = Vector2(3.7252885e-09, 3)
+rotation = -0.018715858
+shape = SubResource("CapsuleShape2D_c0tm2")
+
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
