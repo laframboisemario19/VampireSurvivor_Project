@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://lmoe3354vkkp"]
+
+[ext_resource type="Script" uid="uid://dpl216xp81bho" path="res://scene/Gem.cs" id="1_rl2rh"]
+[ext_resource type="Texture2D" uid="uid://cqiihinjerji" path="res://res/gem.png" id="1_srufu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srufu"]
+radius = 190.25136
+height = 805.77045
+
+[node name="Gem" type="Node2D" unique_id=1948922442]
+script = ExtResource("1_rl2rh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=342394569]
+position = Vector2(0, 5.9604645e-08)
+scale = Vector2(0.089355476, 0.089355476)
+texture = ExtResource("1_srufu")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=1099905623]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1000966854]
+shape = SubResource("CapsuleShape2D_srufu")
