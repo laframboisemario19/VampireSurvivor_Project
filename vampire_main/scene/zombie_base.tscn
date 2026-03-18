@@ -1,31 +1,39 @@
-[gd_scene format=3 uid="uid://dtl74woi13c2u"]
+[gd_scene format=3 uid="uid://c8jfbxuo1x17o"]
 
 [ext_resource type="Texture2D" uid="uid://ctdrpmrull3nk" path="res://res/spiriticon-sheet15.png" id="1_qpu6x"]
+[ext_resource type="Script" uid="uid://d1qfbx3n7c4kn" path="res://src/BaseEnemy.cs" id="1_wgy2h"]
 [ext_resource type="Texture2D" uid="uid://ca2a6ruw6t4dp" path="res://res/spiriticon-sheet14.png" id="2_btu76"]
+[ext_resource type="Texture2D" uid="uid://md7hxwtvxh2l" path="res://res/gfx-sheet16.png" id="2_wgy2h"]
+[ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://src/Poursuite.cs" id="3_wiip2"]
+[ext_resource type="Script" uid="uid://s46qbr0ptqi4" path="res://src/EnemyArea.cs" id="4_wgy2h"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6atqb"]
-atlas = ExtResource("1_qpu6x")
-region = Rect2(6, 133, 58, 51)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gaw4a"]
+atlas = ExtResource("2_wgy2h")
+region = Rect2(779, 296, 99, 95)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cdmbu"]
-atlas = ExtResource("1_qpu6x")
-region = Rect2(6, 184, 58, 51)
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sdoi"]
+atlas = ExtResource("2_wgy2h")
+region = Rect2(680, 296, 99, 95)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ws5yb"]
-atlas = ExtResource("1_qpu6x")
-region = Rect2(6, 235, 58, 51)
+[sub_resource type="AtlasTexture" id="AtlasTexture_53ky5"]
+atlas = ExtResource("2_wgy2h")
+region = Rect2(581, 296, 99, 95)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_u7apg"]
-atlas = ExtResource("1_qpu6x")
-region = Rect2(6, 286, 58, 51)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qd7m"]
+atlas = ExtResource("2_wgy2h")
+region = Rect2(482, 296, 99, 95)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qiolr"]
-atlas = ExtResource("1_qpu6x")
-region = Rect2(6, 337, 58, 51)
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tabn"]
+atlas = ExtResource("2_wgy2h")
+region = Rect2(383, 296, 99, 95)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y22mq"]
-atlas = ExtResource("1_qpu6x")
-region = Rect2(6, 388, 58, 51)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8okxr"]
+atlas = ExtResource("2_wgy2h")
+region = Rect2(284, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj1so"]
+atlas = ExtResource("2_wgy2h")
+region = Rect2(185, 296, 99, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_webm2"]
 atlas = ExtResource("1_qpu6x")
@@ -75,29 +83,56 @@ region = Rect2(401, 347, 58, 56)
 atlas = ExtResource("2_btu76")
 region = Rect2(414, 551, 58, 56)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6atqb"]
+atlas = ExtResource("1_qpu6x")
+region = Rect2(6, 133, 58, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdmbu"]
+atlas = ExtResource("1_qpu6x")
+region = Rect2(6, 184, 58, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws5yb"]
+atlas = ExtResource("1_qpu6x")
+region = Rect2(6, 235, 58, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7apg"]
+atlas = ExtResource("1_qpu6x")
+region = Rect2(6, 286, 58, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiolr"]
+atlas = ExtResource("1_qpu6x")
+region = Rect2(6, 337, 58, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y22mq"]
+atlas = ExtResource("1_qpu6x")
+region = Rect2(6, 388, 58, 51)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_cfo1s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6atqb")
+"texture": SubResource("AtlasTexture_gaw4a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cdmbu")
+"texture": SubResource("AtlasTexture_5sdoi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ws5yb")
+"texture": SubResource("AtlasTexture_53ky5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_u7apg")
+"texture": SubResource("AtlasTexture_0qd7m")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qiolr")
+"texture": SubResource("AtlasTexture_5tabn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y22mq")
+"texture": SubResource("AtlasTexture_8okxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj1so")
 }],
-"loop": true,
-"name": &"marche_arriere",
+"loop": false,
+"name": &"explode",
 "speed": 5.0
 }, {
 "frames": [{
@@ -120,7 +155,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_2kncw")
 }],
 "loop": true,
-"name": &"marche_devant",
+"name": &"marche_bas",
 "speed": 5.0
 }, {
 "frames": [{
@@ -143,15 +178,59 @@ animations = [{
 "texture": SubResource("AtlasTexture_v2voy")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"marche_cote",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6atqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdmbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws5yb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7apg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qiolr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y22mq")
+}],
+"loop": true,
+"name": &"marche_haut",
 "speed": 5.0
 }]
 
-[node name="ZombieGene" type="Node2D" unique_id=2038445170]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cxs3j"]
+radius = 16.0
+height = 32.0
+
+[node name="ZombieGene" type="Node2D" unique_id=2038445170 node_paths=PackedStringArray("Area", "Poursuite", "AnimatedSprite")]
+script = ExtResource("1_wgy2h")
+Area = NodePath("Area2D")
+Poursuite = NodePath("DPM_Poursuite")
+AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=303377857]
 sprite_frames = SubResource("SpriteFrames_cfo1s")
-animation = &"new_animation"
-frame_progress = 0.64126337
+animation = &"explode"
+autoplay = "marche_bas"
+frame = 6
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=256323183]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_wgy2h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1465673131]
+shape = SubResource("CapsuleShape2D_cxs3j")
+
+[node name="DPM_Poursuite" type="Node2D" parent="." unique_id=1163021957 node_paths=PackedStringArray("Poursuivant")]
+script = ExtResource("3_wiip2")
+Poursuivant = NodePath("..")
+velocity = 50.0

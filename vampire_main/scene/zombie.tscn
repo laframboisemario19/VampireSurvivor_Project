@@ -223,11 +223,11 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40jid"]
 radius = 8.0
 
-[node name="Zombie" type="Node2D" unique_id=839054400 node_paths=PackedStringArray("Poursuite", "AnimatedSprite", "Area")]
+[node name="Zombie" type="Node2D" unique_id=839054400 node_paths=PackedStringArray("Area", "Poursuite", "AnimatedSprite")]
 script = ExtResource("1_vboas")
+Area = NodePath("Area2D")
 Poursuite = NodePath("DPM_Poursuite")
 AnimatedSprite = NodePath("AnimatedSprite2D")
-Area = NodePath("Area2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1339741889]
 sprite_frames = SubResource("SpriteFrames_r26mb")

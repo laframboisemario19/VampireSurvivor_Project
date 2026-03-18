@@ -13,9 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://ccuihnipnmvvo" path="res://scene/projectile_circle.tscn" id="9_yq8tf"]
 [ext_resource type="PackedScene" uid="uid://crsbhyuwvavrl" path="res://scene/dcm_spawner.tscn" id="12_5g16k"]
 [ext_resource type="PackedScene" uid="uid://dyoi5q5wko48" path="res://scene/zombie.tscn" id="13_81276"]
+[ext_resource type="PackedScene" uid="uid://c8jfbxuo1x17o" path="res://scene/zombie_base.tscn" id="13_jhlss"]
 [ext_resource type="Script" uid="uid://o5sg173xpm4g" path="res://src/DcmObject.cs" id="14_81276"]
+[ext_resource type="PackedScene" uid="uid://bem8uonps6iei" path="res://scene/zombie_rapide.tscn" id="15_1it6f"]
 [ext_resource type="PackedScene" uid="uid://coqlyulov18r3" path="res://scene/treasure.tscn" id="15_ve786"]
+[ext_resource type="PackedScene" uid="uid://dcgvkjkorb3uw" path="res://scene/zombie_tank.tscn" id="15_ww6yf"]
 [ext_resource type="PackedScene" uid="uid://bxgs2xya20p6f" path="res://scene/trap.tscn" id="16_0lu6w"]
+[ext_resource type="PackedScene" uid="uid://c0kupi3xrgaky" path="res://scene/zombie_gene.tscn" id="16_1it6f"]
 [ext_resource type="PackedScene" uid="uid://lmoe3354vkkp" path="res://scene/gem.tscn" id="16_i6gbm"]
 
 [node name="Game" type="Node2D" unique_id=1438342078]
@@ -101,10 +105,33 @@ autostart = true
 wait_time = 2.0
 autostart = true
 
-[node name="DCM_Spawner" parent="MED_Cible" unique_id=192703619 node_paths=PackedStringArray("MediateurCible") instance=ExtResource("12_5g16k")]
+[node name="DCM_Spawner" parent="MED_Cible" unique_id=192703619 node_paths=PackedStringArray("MediateurCible", "timer1", "timer2", "timer3", "timer4") instance=ExtResource("12_5g16k")]
 SpawneeScene = ExtResource("13_81276")
+ZombieBase = ExtResource("13_jhlss")
+ZombieRapide = ExtResource("15_1it6f")
+ZombieTank = ExtResource("15_ww6yf")
+ZombieGene = ExtResource("16_1it6f")
 MediateurCible = NodePath("..")
 AlgoSelectionCible = 1
+timer1 = NodePath("DPM_Timer2")
+timer2 = NodePath("DPM_Timer3")
+timer3 = NodePath("DPM_Timer4")
+timer4 = NodePath("DPM_Timer5")
+
+[node name="DPM_Timer2" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=835770349]
+autostart = true
+
+[node name="DPM_Timer3" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=958502534]
+wait_time = 10.0
+autostart = true
+
+[node name="DPM_Timer4" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=1563278495]
+wait_time = 11.0
+autostart = true
+
+[node name="DPM_Timer5" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=662672533]
+wait_time = 15.0
+autostart = true
 
 [node name="DCM_Object" type="Node2D" parent="MED_Cible" unique_id=2023334156 node_paths=PackedStringArray("MediateurAttack", "MediateurCible", "timer1", "timer2")]
 script = ExtResource("14_81276")
