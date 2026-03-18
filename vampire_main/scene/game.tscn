@@ -13,8 +13,14 @@
 [ext_resource type="PackedScene" uid="uid://ccuihnipnmvvo" path="res://scene/projectile_circle.tscn" id="9_yq8tf"]
 [ext_resource type="PackedScene" uid="uid://crsbhyuwvavrl" path="res://scene/dcm_spawner.tscn" id="12_5g16k"]
 [ext_resource type="PackedScene" uid="uid://cdq7moe8jtqv6" path="res://scene/zombie.tscn" id="13_81276"]
+[ext_resource type="Script" uid="uid://o5sg173xpm4g" path="res://src/DcmObject.cs" id="14_81276"]
+[ext_resource type="PackedScene" uid="uid://coqlyulov18r3" path="res://scene/treasure.tscn" id="15_ve786"]
+[ext_resource type="PackedScene" uid="uid://bxgs2xya20p6f" path="res://scene/trap.tscn" id="16_0lu6w"]
+[ext_resource type="PackedScene" uid="uid://lmoe3354vkkp" path="res://scene/gem.tscn" id="16_i6gbm"]
 
 [node name="Game" type="Node2D" unique_id=1438342078]
+
+[node name="DCM_Environnement" parent="." unique_id=181946096 instance=ExtResource("1_5kiuu")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1134258768 node_paths=PackedStringArray("playerToFollow")]
 position = Vector2(-220, 87)
@@ -22,13 +28,14 @@ zoom = Vector2(5, 5)
 script = ExtResource("1_yq8tf")
 playerToFollow = NodePath("../MED_Cible/Player")
 
-[node name="DCM_Environnement" parent="." unique_id=181946096 instance=ExtResource("1_5kiuu")]
-
-[node name="XPBar" type="TextureProgressBar" parent="." unique_id=1033773378]
-offset_left = -528.0
-offset_top = -384.0
-offset_right = 610.0
-offset_bottom = -301.0
+[node name="XPBar" type="TextureProgressBar" parent="Camera2D" unique_id=1033773378]
+z_index = 1000
+z_as_relative = false
+offset_left = -335.0
+offset_top = -198.0
+offset_right = 803.0
+offset_bottom = -115.0
+scale = Vector2(0.6, 0.4)
 value = 40.0
 texture_under = ExtResource("3_5g16k")
 texture_over = ExtResource("4_81276")
@@ -54,7 +61,7 @@ Player = NodePath("Player")
 [node name="Player" parent="MED_Cible" unique_id=607470767 node_paths=PackedStringArray("InMedAttack", "t") instance=ExtResource("6_17rxn")]
 position = Vector2(-236, 120)
 InMedAttack = NodePath("../../MED_Attack")
-t = NodePath("../../XPBar")
+t = NodePath("../../Camera2D/XPBar")
 
 [node name="DCM_Projectile" type="Node2D" parent="MED_Cible" unique_id=1476373430 node_paths=PackedStringArray("MediateurCible", "MediateurAttack", "timer1", "timer2", "timer3", "timer4", "timer5", "timer6")]
 script = ExtResource("6_ll5lq")
@@ -98,7 +105,14 @@ SpawneeScene = ExtResource("13_81276")
 MediateurCible = NodePath("..")
 AlgoSelectionCible = 1
 
-[node name="DCM_Object" type="Node2D" parent="MED_Cible" unique_id=2023334156]
+[node name="DCM_Object" type="Node2D" parent="MED_Cible" unique_id=2023334156 node_paths=PackedStringArray("MediateurAttack", "timer1", "timer2")]
+script = ExtResource("14_81276")
+TreasureScene = ExtResource("15_ve786")
+GemScene = ExtResource("16_i6gbm")
+TrapScene = ExtResource("16_0lu6w")
+MediateurAttack = NodePath("../../MED_Attack")
+timer1 = NodePath("Timer")
+timer2 = NodePath("Timer2")
 
 [node name="Timer" type="Timer" parent="MED_Cible/DCM_Object" unique_id=796488326]
 wait_time = 10.0
