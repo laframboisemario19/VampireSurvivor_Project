@@ -316,6 +316,15 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv1a5"]
+size = Vector2(912, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dxs6"]
+size = Vector2(16, 544)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvisj"]
+size = Vector2(16, 544)
+
 [node name="DCM_Environnement" type="Node2D" unique_id=181946096]
 
 [node name="Herbe" type="TileMapLayer" parent="." unique_id=1201323890]
@@ -470,6 +479,7 @@ autoplay = "fly"
 frame_progress = 0.346753
 
 [node name="DCM_Ciel" type="Node2D" parent="." unique_id=1583767403]
+visible = false
 z_index = 2
 script = ExtResource("2_qatn3")
 
@@ -516,3 +526,21 @@ texture_filter = 1
 position = Vector2(-1728, 0)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_l7rnq")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1791544643]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=738447725]
+position = Vector2(8, -264)
+shape = SubResource("RectangleShape2D_rv1a5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1138961222]
+position = Vector2(8, 264)
+shape = SubResource("RectangleShape2D_rv1a5")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D" unique_id=256089093]
+position = Vector2(-456, 0)
+shape = SubResource("RectangleShape2D_1dxs6")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D" unique_id=757971093]
+position = Vector2(472, 0)
+shape = SubResource("RectangleShape2D_tvisj")
