@@ -58,8 +58,9 @@ public partial class MedAttack : Node2D, ICollide
                     BaseEnemy enemy = (BaseEnemy)InEntered;
 
                     // À remplacer Die pour TakeDamage + Spawn seulement si TakeDamage return True
-                    enemy.Die();
-                    DcmObject.SpawnGem(enemy.GlobalPosition);
+                    bool spawnGem = enemy.TakeDamage(1);
+                    if (spawnGem)
+                        DcmObject.SpawnGem(enemy.GlobalPosition);
                 }
                 break;
             case EAlgoSelectionDetection.eEnemyOnPlayer:
@@ -80,8 +81,9 @@ public partial class MedAttack : Node2D, ICollide
                 {
                     BaseEnemy enemy = (BaseEnemy)InEntering;
                     // À remplacer Die pour TakeDamage + Spawn seulement si TakeDamage return True
-                    enemy.Die();
-                    DcmObject.SpawnGem(enemy.GlobalPosition);
+                    bool spawnGem = enemy.TakeDamage(1);
+                    if (spawnGem)
+                        DcmObject.SpawnGem(enemy.GlobalPosition);
                 }
                 break;
             case EAlgoSelectionDetection.eMapOnPlayer:

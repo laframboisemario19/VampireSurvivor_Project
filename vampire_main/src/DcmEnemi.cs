@@ -39,7 +39,7 @@ public partial class DcmEnemi : Node2D, ISpawn
         timer.EnsureValid().Timeout += () =>
         {
             Camera2D _camera2D = MediateurCible.GetParent().GetNode<Camera2D>("Camera2D");
-            GD.Print(GetViewport().GetVisibleRect().Size.Y);
+
             var spawn = (Node2D)((ISpawn)this).Spawn(SpawneeScene);
 
             Vector2 playerPos = MediateurCible.GetPlayerPosition();

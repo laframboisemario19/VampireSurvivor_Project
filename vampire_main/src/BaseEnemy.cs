@@ -1,8 +1,17 @@
 using System;
 using Godot;
+using Utils;
 
-public partial class BaseEnemy : Node2D
+public partial class BaseEnemy : Node2D, ICiblable
 {
+    [ExportGroup("External")]
+    [Export]
+    public Node2D Cible
+    {
+        get => this.Poursuite.EnsureValid().GetCible();
+        set { this.Poursuite.EnsureValid().SetCible(value); }
+    }
+
     [ExportGroup("Internal")]
     [Export]
     protected EnemyArea Area;
@@ -13,39 +22,46 @@ public partial class BaseEnemy : Node2D
     [Export]
     protected AnimatedSprite2D AnimatedSprite;
     public bool isDying = false;
+    private int hp = 5;
 
-    // public void TakeDamage()
-    // {
-    //     if (!isDying)
-    //     {
-    //         isDying = true;
-    //         var anim = Area.GetParent().GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-    //         string currentAnimName = anim.Animation;
+    public virtual bool TakeDamage(int damage)
+    {
+        if (isDying)
+            return false;
 
-    //         switch (currentAnimName)
-    //         {
-    //             case "marche_bas":
-    //                 v = new((float)GD.RandRange(-_tailleX, _tailleX), -_decalageY);
-    //                 break;
-    //             case "marche_haut":
-    //                 v = new(_decalageX, (float)GD.RandRange(-_decalageY, _decalageY));
-    //                 break;
-    //             case "marche_cote":
-    //                 v = new((float)GD.RandRange(-_tailleX, _tailleX), _decalageY);
-    //                 break;
-    //             case 3:
-    //                 v = new(_decalageX, (float)GD.RandRange(-_decalageY, _decalageY));
-    //                 break;
-    //         }
+        Vector2 posPlayer = Cible.GlobalPosition;
+        Vector2 posSelf = this.GlobalPosition;
+        Vector2 offset = posSelf + ((posSelf - posPlayer).Normalized() * 10.0f);
+        Color baseMod = Modulate;
 
-    //         Area.GlobalPosition.Area.Die();
-    //         Poursuite.Velocity = 60.0f;
-    //         AnimatedSprite.Play("explode");
-    //         AnimatedSprite.AnimationFinished += () => QueueFree();
-    //     }
-    // }
+        GD.Print($"Enemi old position : {posSelf}");
+        GD.Print($"Enemi new position : {offset}");
 
-    public void Die()
+        Tween tween = CreateTween();
+        tween
+            .TweenProperty(this, "position", offset, 0.5f)
+            .SetTrans(Tween.TransitionType.Back)
+            .SetEase(Tween.EaseType.InOut);
+        tween
+            .Parallel()
+            .TweenProperty(this, "modulate:a", 0.2f, 1.0f)
+            .SetTrans(Tween.TransitionType.Bounce)
+            .SetEase(Tween.EaseType.OutIn);
+        tween.Chain().TweenProperty(this, "modulate:a", 1.0, 0.1f);
+
+        hp -= damage;
+        GD.Print($"Enemy {GetHashCode()} hit! HP: {hp}");
+
+        if (hp <= 0)
+        {
+            Die();
+            return true;
+        }
+
+        return false;
+    }
+
+    public virtual void Die()
     {
         if (!isDying)
         {
@@ -55,5 +71,10 @@ public partial class BaseEnemy : Node2D
             AnimatedSprite.Play("explode");
             AnimatedSprite.AnimationFinished += () => QueueFree();
         }
+    }
+
+    public void SetCible(Node2D InCible)
+    {
+        Cible = InCible;
     }
 }

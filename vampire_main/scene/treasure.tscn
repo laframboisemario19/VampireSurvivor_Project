@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://coqlyulov18r3"]
 
-[ext_resource type="Script" uid="uid://bu03g2cnttbrq" path="res://src/Treasure.cs" id="1_4m0ij"]
+[ext_resource type="Script" path="res://src/Treasure.cs" id="1_4m0ij"]
 [ext_resource type="Texture2D" uid="uid://djtehpmhn6shd" path="res://res/Chests.png" id="1_cuvlc"]
-[ext_resource type="Script" uid="uid://cx3xa5xcmomj" path="res://src/AreaTreasure.cs" id="3_bkwci"]
+[ext_resource type="Script" path="res://src/AreaTreasure.cs" id="3_bkwci"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1m5a2"]
 atlas = ExtResource("1_cuvlc")
