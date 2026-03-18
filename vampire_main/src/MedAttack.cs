@@ -5,14 +5,14 @@ using Godot;
 using Utils;
 using static DcmProjectile;
 
-public partial class MedAttack : Node2D
+public partial class MedAttack : Node2D, ICollide
 {
     [Export]
     private Timer timer;
 
     [Export]
     private DcmProjectile DcmProjectile;
-    int i = 0;
+    int i = 6;
 
     public enum EAlgoSelectionDetection
     {
@@ -59,7 +59,12 @@ public partial class MedAttack : Node2D
                     // à coder
                 }
                 break;
-            case EAlgoSelectionDetection.eMeleeOnEnemy: { }
+            case EAlgoSelectionDetection.eMeleeOnEnemy:
+                {
+                    GD.Print("Touché !");
+                    Zombie zombie = (Zombie)InEntering;
+                    zombie.Die();
+                }
                 break;
         }
     }

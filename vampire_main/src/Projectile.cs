@@ -1,8 +1,6 @@
 using Godot;
-using System;
-using static MedAttack;
-using static DcmProjectile;
 using Utils;
+using static DcmProjectile;
 
 public partial class Projectile : Node2D, ICiblable
 {
@@ -20,13 +18,13 @@ public partial class Projectile : Node2D, ICiblable
 
     [Export]
     private AnimatedSprite2D AnimatedSprite;
-    public EProjectileType MovementType
-    { get; set; }
+    public EProjectileType MovementType { get; set; }
 
     private Tween tw;
     private bool _isDying = false;
 
-    public override void _Ready() {
+    public override void _Ready()
+    {
         base._Ready();
 
         Color color = Modulate;
@@ -34,20 +32,12 @@ public partial class Projectile : Node2D, ICiblable
         Modulate = color;
 
         Tween tween = this.CreateTween();
-        
+
         tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Circ);
 
         tween.TweenProperty(this, "modulate:a", 1.0f, 0.3f);
         tween.SetParallel();
         tween.TweenProperty(this, "scale:y", 1.0f, 0.3f).From(1.5f);
-
-        // if((int)MovementType % 2 != 0)
-        // {
-        //     tween.TweenProperty(this, "rotation", GlobalRotation + Mathf.Pi * 8, 5.0f);
-        //     tween.SetLoops();
-
-        // }
-
     }
 
     public void SetCible(Node2D InCible)
@@ -67,12 +57,11 @@ public partial class Projectile : Node2D, ICiblable
         {
             _isDying = true;
             tw?.Stop();
-            Poursuite.Velocity = 60.0f; 
+            Poursuite.Velocity = 60.0f;
+
             AnimatedSprite.Animation = "explode";
             AnimatedSprite.AnimationFinished += () => QueueFree();
         }
-
-
     }
 
     public void InfiniteTurn()
@@ -81,6 +70,4 @@ public partial class Projectile : Node2D, ICiblable
         tw.TweenProperty(this, "rotation", GlobalRotation - Mathf.Pi * 8, 5.0f);
         tw.SetLoops();
     }
-
 }
-

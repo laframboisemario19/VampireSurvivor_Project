@@ -1,111 +1,130 @@
-using Godot;
 using System;
+using Godot;
+using Utils;
+using static MedAttack;
 
-public partial class Sword : Sprite2D
+public partial class Sword : Sprite2D, ICollide
 {
-	[Export] private Sprite2D node;
+    [Export]
+    private Player Player;
 
-	[Export] private Sprite2D AnimLeft;
-	[Export] private Sprite2D AnimRight;
+    [Export]
+    private Sprite2D node;
 
-	[Export] private DcmAttack attackManager;
-	[Export] private Timer timer;
+    [Export]
+    private Sprite2D AnimLeft;
 
-	private Tween tween;
-	private Vector2 newScale = new Vector2();
+    [Export]
+    private Sprite2D AnimRight;
 
-	private bool _usePatternA = true;
+    [Export]
+    private DcmAttack attackManager;
 
+    [Export]
+    private Timer timer;
 
-	public override void _Ready()
-	{
-		base._Ready();
-		timer.Timeout += Attack;
-	}
+    private Tween tween;
+    private Vector2 newScale = new Vector2();
 
-		private void Attack()
-	{
-		if (!attackManager.TryAttacking())
-		{
-			return;
-		}
-		else
-		{
-			Swing();
-		}
-	}
+    private bool _usePatternA = true;
 
-	public void Swing()
-	{
-		if (!IsInstanceValid(node))
-			return;
+    public override void _Ready()
+    {
+        base._Ready();
+        timer.Timeout += Attack;
+    }
 
-		Visible = true;
+    private void Attack()
+    {
+        if (!attackManager.TryAttacking())
+        {
+            return;
+        }
+        else
+        {
+            Swing();
+        }
+    }
 
-		tween?.Kill();
+    public void Swing()
+    {
+        if (!IsInstanceValid(node))
+            return;
 
-		tween = CreateTween();
+        Visible = true;
 
-		Scale = new Vector2(0.0f, 0.0f);
-		newScale = new Vector2(0.5f, 0.5f);
+        tween?.Kill();
 
-		AnimLeft.Modulate = new Color(1, 1, 1, 0);
-		AnimRight.Modulate = new Color(1, 1, 1, 0);
+        tween = CreateTween();
 
-		float left = Mathf.Pi;
-		float right = 0.0f;
+        Scale = new Vector2(0.0f, 0.0f);
+        newScale = new Vector2(0.5f, 0.5f);
 
-		if (_usePatternA)
-		{
-			tween.TweenProperty(node, "scale", newScale, 0.3f);
+        AnimLeft.Modulate = new Color(1, 1, 1, 0);
+        AnimRight.Modulate = new Color(1, 1, 1, 0);
 
-			tween.TweenProperty(AnimRight, "modulate:a", 1.0f, 0.02f);
-			CreateHitTween(left);
-			tween.TweenProperty(AnimRight, "modulate:a", 0.0f, 0.02f);
+        float left = Mathf.Pi;
+        float right = 0.0f;
 
-			tween.TweenProperty(AnimLeft, "modulate:a", 1.0f, 0.02f);
-			CreateHitTween(right);
-			tween.TweenProperty(AnimLeft, "modulate:a", 0.0f, 0.02f);
+        if (_usePatternA)
+        {
+            tween.TweenProperty(node, "scale", newScale, 0.3f);
 
-			tween.TweenProperty(AnimRight, "modulate:a", 1.0f, 0.02f);
-			CreateHitTween(left);
-			tween.TweenProperty(AnimRight, "modulate:a", 0.0f, 0.02f);
+            tween.TweenProperty(AnimRight, "modulate:a", 1.0f, 0.02f);
+            CreateHitTween(left);
+            tween.TweenProperty(AnimRight, "modulate:a", 0.0f, 0.02f);
 
-			tween.TweenProperty(node, "scale", Vector2.Zero, 0.3f);
-		}
-		else
-		{
-			tween.TweenProperty(node, "scale", newScale, 0.3f);
+            tween.TweenProperty(AnimLeft, "modulate:a", 1.0f, 0.02f);
+            CreateHitTween(right);
+            tween.TweenProperty(AnimLeft, "modulate:a", 0.0f, 0.02f);
 
-			tween.TweenProperty(AnimLeft, "modulate:a", 1.0f, 0.02f);
-			CreateHitTween(right);
-			tween.TweenProperty(AnimLeft, "modulate:a", 0.0f, 0.02f);
+            tween.TweenProperty(AnimRight, "modulate:a", 1.0f, 0.02f);
+            CreateHitTween(left);
+            tween.TweenProperty(AnimRight, "modulate:a", 0.0f, 0.02f);
 
-			tween.TweenProperty(AnimRight, "modulate:a", 1.0f, 0.02f);
-			CreateHitTween(left);
-			tween.TweenProperty(AnimRight, "modulate:a", 0.0f, 0.02f);
+            tween.TweenProperty(node, "scale", Vector2.Zero, 0.3f);
+        }
+        else
+        {
+            tween.TweenProperty(node, "scale", newScale, 0.3f);
 
-			tween.TweenProperty(AnimLeft, "modulate:a", 1.0f, 0.02f);
-			CreateHitTween(right);
-			tween.TweenProperty(AnimLeft, "modulate:a", 0.0f, 0.02f);
+            tween.TweenProperty(AnimLeft, "modulate:a", 1.0f, 0.02f);
+            CreateHitTween(right);
+            tween.TweenProperty(AnimLeft, "modulate:a", 0.0f, 0.02f);
 
-			tween.TweenProperty(node, "scale", Vector2.Zero, 0.3f);
-		}
+            tween.TweenProperty(AnimRight, "modulate:a", 1.0f, 0.02f);
+            CreateHitTween(left);
+            tween.TweenProperty(AnimRight, "modulate:a", 0.0f, 0.02f);
 
-		_usePatternA = !_usePatternA;
+            tween.TweenProperty(AnimLeft, "modulate:a", 1.0f, 0.02f);
+            CreateHitTween(right);
+            tween.TweenProperty(AnimLeft, "modulate:a", 0.0f, 0.02f);
 
-		tween.Finished += FinAttaque;
-	}
+            tween.TweenProperty(node, "scale", Vector2.Zero, 0.3f);
+        }
 
+        _usePatternA = !_usePatternA;
 
-	private void CreateHitTween(float rotation)
-	{
-		tween.TweenProperty(node, "rotation", rotation, 0.12f);
-	}
-	
-	private void FinAttaque()
-	{
-		Visible = false;
-		attackManager.EndAttacking();
-	}
+        tween.Finished += FinAttaque;
+    }
+
+    private void CreateHitTween(float rotation)
+    {
+        tween.TweenProperty(node, "rotation", rotation, 0.12f);
+    }
+
+    private void FinAttaque()
+    {
+        Visible = false;
+        attackManager.EndAttacking();
+    }
+
+    public void Collide(
+        EAlgoSelectionDetection InAlgoSelectionDetection,
+        Node2D InEntering,
+        Node2D InEntered
+    )
+    {
+        ((ICollide)(Player.EnsureValid())).Collide(InAlgoSelectionDetection, InEntering, InEntered);
+    }
 }

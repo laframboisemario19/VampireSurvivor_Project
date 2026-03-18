@@ -338,6 +338,7 @@ autoplay = "windy"
 frame_progress = 0.68460464
 
 [node name="DCM_Oiseaux1" type="Node2D" parent="." unique_id=451163801]
+z_index = 2
 script = ExtResource("7_mi226")
 
 [node name="Oiseau1" type="AnimatedSprite2D" parent="DCM_Oiseaux1" unique_id=503040195]
@@ -381,6 +382,7 @@ autoplay = "fly"
 frame_progress = 0.42122507
 
 [node name="DCM_Oiseaux2" type="Node2D" parent="." unique_id=1489550381]
+z_index = 2
 script = ExtResource("7_mi226")
 
 [node name="Oiseau1" type="AnimatedSprite2D" parent="DCM_Oiseaux2" unique_id=1783875874]
@@ -424,6 +426,7 @@ autoplay = "fly"
 frame_progress = 0.346753
 
 [node name="DCM_Oiseaux3" type="Node2D" parent="." unique_id=59002769]
+z_index = 2
 script = ExtResource("7_mi226")
 
 [node name="Oiseau1" type="AnimatedSprite2D" parent="DCM_Oiseaux3" unique_id=1845467777]
@@ -467,6 +470,7 @@ autoplay = "fly"
 frame_progress = 0.346753
 
 [node name="DCM_Ciel" type="Node2D" parent="." unique_id=1583767403]
+z_index = 2
 script = ExtResource("2_qatn3")
 
 [node name="nuage1" type="Sprite2D" parent="DCM_Ciel" unique_id=1370330455]

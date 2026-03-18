@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bpruvjed6678r"]
 
 [ext_resource type="Texture2D" uid="uid://ctdjqenharpwq" path="res://res/boxe-glove.png" id="1_vj7ou"]
-[ext_resource type="Script" uid="uid://btxy8clb0jprv" path="res://src/Boxe.cs" id="2_u2iyp"]
+[ext_resource type="Script" uid="uid://yup1rdqqtb7q" path="res://src/Boxe.cs" id="2_u2iyp"]
 [ext_resource type="Texture2D" uid="uid://bej1w8f7nfpem" path="res://res/Fire-Wrath__03.png" id="3_ml1qf"]
-[ext_resource type="Script" uid="uid://b7qvhnfd0r17p" path="res://src/WeaponAreaDetection.cs" id="4_yahxu"]
+[ext_resource type="Script" uid="uid://micj0wxdyybr" path="res://src/WeaponAreaDetection.cs" id="4_yahxu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vj7ou"]
 radius = 144.11925
@@ -22,9 +22,12 @@ position = Vector2(-7.539259, 238.53156)
 scale = Vector2(1.6613668, 1.6613668)
 texture = ExtResource("3_ml1qf")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=2058423572]
+[node name="Area2D" type="Area2D" parent="." unique_id=2058423572 node_paths=PackedStringArray("Weapon")]
 position = Vector2(0, 5.422222)
+collision_mask = 2
 script = ExtResource("4_yahxu")
+Weapon = NodePath("..")
+eAlgoSelectionDetection = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1598623230]
 position = Vector2(-0.4182496, 48.798534)

@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://ds7hmkxblfpjs" path="res://res/Vampires1_Run_full.png" id="3_ihjo1"]
 [ext_resource type="Script" uid="uid://df146fuwxpdbb" path="res://src/DcmAttack.cs" id="3_oh5ij"]
 [ext_resource type="Script" uid="uid://buen2mhxbp3k5" path="res://src/MouvementPlayer.cs" id="3_s4jxa"]
-[ext_resource type="PackedScene" path="res://scene/axe.tscn" id="4_hp4bs"]
+[ext_resource type="PackedScene" uid="uid://bl2cy04bbjk14" path="res://scene/axe.tscn" id="4_hp4bs"]
 [ext_resource type="Texture2D" uid="uid://0b6f5datdy5t" path="res://res/Vampires1_Death.png" id="4_ml7e8"]
-[ext_resource type="PackedScene" path="res://scene/boxe.tscn" id="5_g2vtq"]
-[ext_resource type="PackedScene" path="res://scene/sword.tscn" id="6_2fvbb"]
+[ext_resource type="PackedScene" uid="uid://bpruvjed6678r" path="res://scene/boxe.tscn" id="5_g2vtq"]
+[ext_resource type="PackedScene" uid="uid://ck5yldxfklkw8" path="res://scene/sword.tscn" id="6_2fvbb"]
 [ext_resource type="Texture2D" uid="uid://cemqm5vmanl6m" path="res://res/progress_bottom.png" id="7_2fvbb"]
 [ext_resource type="Texture2D" uid="uid://dkostj4xtrqq4" path="res://res/progress_over.png" id="8_ml7e8"]
 [ext_resource type="Texture2D" uid="uid://cs3hoxjjk3d6g" path="res://res/progress_progress.png" id="9_ihjo1"]
@@ -943,21 +943,24 @@ sword = NodePath("Sword")
 axe = NodePath("Axe")
 boxe = NodePath("Boxe")
 
-[node name="Axe" parent="DCM_Attack" unique_id=2079424175 node_paths=PackedStringArray("attackManager") instance=ExtResource("4_hp4bs")]
+[node name="Axe" parent="DCM_Attack" unique_id=2079424175 node_paths=PackedStringArray("Player", "attackManager") instance=ExtResource("4_hp4bs")]
 visible = false
 scale = Vector2(0.8, 0.8)
+Player = NodePath("../..")
 attackManager = NodePath("..")
 
-[node name="Boxe" parent="DCM_Attack" unique_id=1007668515 node_paths=PackedStringArray("attackManager") instance=ExtResource("5_g2vtq")]
+[node name="Boxe" parent="DCM_Attack" unique_id=1007668515 node_paths=PackedStringArray("Player", "attackManager") instance=ExtResource("5_g2vtq")]
 visible = false
 scale = Vector2(0.05, 0.053)
+Player = NodePath("../..")
 attackManager = NodePath("..")
 
-[node name="Sword" parent="DCM_Attack" unique_id=1650852282 node_paths=PackedStringArray("attackManager") instance=ExtResource("6_2fvbb")]
+[node name="Sword" parent="DCM_Attack" unique_id=1650852282 node_paths=PackedStringArray("Player", "attackManager") instance=ExtResource("6_2fvbb")]
 visible = false
 texture_filter = 1
 position = Vector2(0, 5)
 scale = Vector2(0.5, 0.5)
+Player = NodePath("../..")
 attackManager = NodePath("..")
 
 [node name="Health_bar" type="TextureProgressBar" parent="." unique_id=1803834093]
