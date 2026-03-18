@@ -57,11 +57,11 @@ public partial class MedAttack : Node2D, ICollide
             case EAlgoSelectionDetection.eEnemyOnPlayer:
                 {
                     // à coder
+                    GD.Print("Ouch!");
                 }
                 break;
             case EAlgoSelectionDetection.eMeleeOnEnemy:
                 {
-                    GD.Print("Touché !");
                     Zombie zombie = (Zombie)InEntering;
                     zombie.Die();
                 }

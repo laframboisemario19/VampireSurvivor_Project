@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://0b6f5datdy5t" path="res://res/Vampires1_Death.png" id="4_ml7e8"]
 [ext_resource type="PackedScene" uid="uid://bpruvjed6678r" path="res://scene/boxe.tscn" id="5_g2vtq"]
 [ext_resource type="PackedScene" uid="uid://ck5yldxfklkw8" path="res://scene/sword.tscn" id="6_2fvbb"]
+[ext_resource type="Script" uid="uid://c5r6g1awu10ke" path="res://scene/PlayerArea.cs" id="6_u7b46"]
 [ext_resource type="Texture2D" uid="uid://cemqm5vmanl6m" path="res://res/progress_bottom.png" id="7_2fvbb"]
 [ext_resource type="Texture2D" uid="uid://dkostj4xtrqq4" path="res://res/progress_over.png" id="8_ml7e8"]
 [ext_resource type="Texture2D" uid="uid://cs3hoxjjk3d6g" path="res://res/progress_progress.png" id="9_ihjo1"]
@@ -923,9 +924,11 @@ animation = &"mort_haut"
 autoplay = "marche_bas"
 frame_progress = 0.4293363
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1768256024]
+[node name="Area2D" type="Area2D" parent="." unique_id=1768256024 node_paths=PackedStringArray("Player")]
 collision_layer = 4096
 collision_mask = 2
+script = ExtResource("6_u7b46")
+Player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=91807387]
 position = Vector2(-1.000001, 9.536743e-07)
@@ -977,3 +980,5 @@ texture_progress = ExtResource("9_ihjo1")
 tint_under = Color(0, 0, 0, 1)
 tint_over = Color(0.012617188, 0.012617188, 0.012617188, 1)
 tint_progress = Color(1, 0.08235294, 0.05490196, 1)
+
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
