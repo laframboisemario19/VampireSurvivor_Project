@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ccuihnipnmvvo" path="res://scene/projectile_circle.tscn" id="9_yq8tf"]
 [ext_resource type="PackedScene" uid="uid://crsbhyuwvavrl" path="res://scene/dcm_spawner.tscn" id="12_5g16k"]
 [ext_resource type="PackedScene" uid="uid://cdq7moe8jtqv6" path="res://scene/zombie.tscn" id="13_81276"]
+[ext_resource type="Script" uid="uid://o5sg173xpm4g" path="res://src/DcmObject.cs" id="14_81276"]
 
 [node name="Game" type="Node2D" unique_id=1438342078]
 
@@ -98,7 +99,9 @@ SpawneeScene = ExtResource("13_81276")
 MediateurCible = NodePath("..")
 AlgoSelectionCible = 1
 
-[node name="DCM_Object" type="Node2D" parent="MED_Cible" unique_id=2023334156]
+[node name="DCM_Object" type="Node2D" parent="MED_Cible" unique_id=2023334156 node_paths=PackedStringArray("MediateurAttack")]
+script = ExtResource("14_81276")
+MediateurAttack = NodePath("../../MED_Attack")
 
 [node name="Timer" type="Timer" parent="MED_Cible/DCM_Object" unique_id=796488326]
 wait_time = 10.0

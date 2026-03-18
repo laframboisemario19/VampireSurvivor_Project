@@ -17,6 +17,16 @@ public partial class CameraMouvement : Camera2D
         {
             return;
         }
+
+        Vector2I CenterPosition = new(
+            (int)GetScreenCenterPosition().X,
+            (int)GetScreenCenterPosition().Y
+        );
+
+        Vector2I targetSize = new((int)(1920.0 * 1.5), (int)(1080.0 * 1.5));
+        GetTree().Root.ContentScaleSize = targetSize;
+        GetTree().Root.ContentScaleMode = Window.ContentScaleModeEnum.CanvasItems;
+        GetTree().Root.ContentScaleAspect = Window.ContentScaleAspectEnum.Keep;
     }
 
     public override void _PhysicsProcess(double delta)
