@@ -12,7 +12,7 @@ public partial class MedAttack : Node2D, ICollide
 
     [Export]
     private DcmProjectile DcmProjectile;
-    int i = 6;
+    int i = 0;
 
     public enum EAlgoSelectionDetection
     {
@@ -49,8 +49,8 @@ public partial class MedAttack : Node2D, ICollide
                 {
                     Projectile projectile = (Projectile)InEntering;
                     projectile.Die();
-                    Zombie zombie = (Zombie)InEntered;
-                    zombie.Die();
+                    BaseEnemy enemy = (BaseEnemy)InEntered;
+                    enemy.Die();
                     // à ajouter la modif sur l'enemie
                 }
                 break;
@@ -62,8 +62,8 @@ public partial class MedAttack : Node2D, ICollide
                 break;
             case EAlgoSelectionDetection.eMeleeOnEnemy:
                 {
-                    Zombie zombie = (Zombie)InEntering;
-                    zombie.Die();
+                    BaseEnemy enemy = (BaseEnemy)InEntering;
+                    enemy.Die();
                 }
                 break;
         }

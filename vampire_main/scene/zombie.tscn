@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://cdq7moe8jtqv6"]
 
 [ext_resource type="Texture2D" uid="uid://5fb1b27qme7x" path="res://res/spiriticon-sheet18.png" id="1_4wibt"]
-[ext_resource type="Script" uid="uid://ce38m80sngvcy" path="res://src/Zombie.cs" id="1_vboas"]
+[ext_resource type="Script" uid="uid://bka5tyt21f3bu" path="res://src/Zombie.cs" id="1_vboas"]
 [ext_resource type="Texture2D" uid="uid://md7hxwtvxh2l" path="res://res/gfx-sheet16.png" id="2_6hm1a"]
 [ext_resource type="Texture2D" uid="uid://ugx63we18e7l" path="res://res/skeleton.png" id="2_wufa4"]
 [ext_resource type="Texture2D" uid="uid://bh1mq12aqyfrg" path="res://res/squelette-forward.png" id="3_vboas"]
 [ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://src/Poursuite.cs" id="5_6hm1a"]
+[ext_resource type="Script" uid="uid://s46qbr0ptqi4" path="res://src/EnemyArea.cs" id="6_2ep7w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gaw4a"]
 atlas = ExtResource("2_6hm1a")
@@ -222,10 +223,11 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40jid"]
 radius = 8.0
 
-[node name="Zombie" type="Node2D" unique_id=839054400 node_paths=PackedStringArray("Poursuite", "AnimatedSprite")]
+[node name="Zombie" type="Node2D" unique_id=839054400 node_paths=PackedStringArray("Poursuite", "AnimatedSprite", "Area")]
 script = ExtResource("1_vboas")
 Poursuite = NodePath("DPM_Poursuite")
 AnimatedSprite = NodePath("AnimatedSprite2D")
+Area = NodePath("Area2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1339741889]
 sprite_frames = SubResource("SpriteFrames_r26mb")
@@ -235,6 +237,7 @@ autoplay = "marche_cote"
 [node name="Area2D" type="Area2D" parent="." unique_id=426308510]
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("6_2ep7w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1730283012]
 shape = SubResource("CapsuleShape2D_40jid")
