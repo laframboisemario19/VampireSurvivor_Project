@@ -97,3 +97,13 @@ autostart = true
 SpawneeScene = ExtResource("13_81276")
 MediateurCible = NodePath("..")
 AlgoSelectionCible = 1
+
+[node name="DCM_Object" type="Node2D" parent="MED_Cible" unique_id=2023334156]
+
+[node name="Timer" type="Timer" parent="MED_Cible/DCM_Object" unique_id=796488326]
+wait_time = 10.0
+autostart = true
+
+[node name="Timer2" type="Timer" parent="MED_Cible/DCM_Object" unique_id=1844914015]
+wait_time = 10.0
+autostart = true
