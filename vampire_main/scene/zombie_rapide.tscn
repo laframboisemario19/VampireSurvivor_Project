@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cdq7moe8jtqv6"]
+[gd_scene format=3 uid="uid://bem8uonps6iei"]
 
 [ext_resource type="Texture2D" uid="uid://5fb1b27qme7x" path="res://res/spiriticon-sheet18.png" id="1_4wibt"]
 [ext_resource type="Script" uid="uid://bka5tyt21f3bu" path="res://src/Zombie.cs" id="1_vboas"]

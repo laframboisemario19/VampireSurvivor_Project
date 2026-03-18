@@ -20,6 +20,11 @@ public partial class Player : Node2D, ICollide
 
     private bool _is_taking_damage = false;
     private bool _is_dead = false;
+    public bool IsDead
+    {
+        get { return _is_dead; }
+        private set { _is_dead = value; }
+    }
     private string _currentDirection = "bas";
 
     public override void _Ready()
@@ -123,7 +128,7 @@ public partial class Player : Node2D, ICollide
         animatedPlayer.Play($"dommage_{_currentDirection}");
     }
 
-    private void Die()
+    public void Die()
     {
         _is_dead = true;
         animatedPlayer.Play($"mort_{_currentDirection}");
@@ -138,7 +143,8 @@ public partial class Player : Node2D, ICollide
         }
         else if (((string)animatedPlayer.Animation).StartsWith("mort"))
         {
-            QueueFree();
+            // QueueFree();
+            GetTree().Quit();
         }
     }
 

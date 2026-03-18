@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://0b6f5datdy5t" path="res://res/Vampires1_Death.png" id="4_ml7e8"]
 [ext_resource type="PackedScene" uid="uid://bpruvjed6678r" path="res://scene/boxe.tscn" id="5_g2vtq"]
 [ext_resource type="PackedScene" uid="uid://ck5yldxfklkw8" path="res://scene/sword.tscn" id="6_2fvbb"]
+[ext_resource type="Script" uid="uid://bvm7s4fcjgt7s" path="res://src/AreaAuraPlayer.cs" id="6_j4wxg"]
 [ext_resource type="Script" uid="uid://c5r6g1awu10ke" path="res://src/PlayerArea.cs" id="6_u7b46"]
 [ext_resource type="Texture2D" uid="uid://cemqm5vmanl6m" path="res://res/progress_bottom.png" id="7_2fvbb"]
 [ext_resource type="Texture2D" uid="uid://dkostj4xtrqq4" path="res://res/progress_over.png" id="8_ml7e8"]
@@ -628,7 +629,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_0fmm8")
 }],
 "loop": false,
-"name": &"dommage_droit",
+"name": &"dommage_droite",
 "speed": 5.0
 }, {
 "frames": [{
@@ -910,6 +911,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_u7b46"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(8, 10.399999)
 
@@ -921,16 +924,28 @@ healthBar = NodePath("Health_bar")
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="." unique_id=433802151]
 sprite_frames = SubResource("SpriteFrames_ml7e8")
-animation = &"dommage_bas"
+animation = &"dommage_droite"
 autoplay = "marche_bas"
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1768256024 node_paths=PackedStringArray("Player")]
+[node name="AreaAuraPlayer" type="Area2D" parent="." unique_id=1785184078 node_paths=PackedStringArray("Player")]
+collision_layer = 8192
+collision_mask = 8
+script = ExtResource("6_j4wxg")
+Player = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAuraPlayer" unique_id=253762363]
+position = Vector2(-1.000001, 9.536743e-07)
+scale = Vector2(3.9594042, 3.9594042)
+shape = SubResource("CircleShape2D_u7b46")
+debug_color = Color(0.7176471, 0.6, 0.69803923, 0.41960785)
+
+[node name="AreaPlayer" type="Area2D" parent="." unique_id=1768256024 node_paths=PackedStringArray("Player")]
 collision_layer = 4096
-collision_mask = 2
+collision_mask = 14
 script = ExtResource("6_u7b46")
 Player = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=91807387]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaPlayer" unique_id=91807387]
 position = Vector2(-1.000001, 9.536743e-07)
 scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_onrkg")
@@ -972,8 +987,7 @@ offset_top = 19.000002
 offset_right = 1126.0
 offset_bottom = 102.0
 scale = Vector2(0.02, 0.033)
-max_value = 5.0
-value = 3.0
+value = 100.0
 texture_under = ExtResource("7_2fvbb")
 texture_over = ExtResource("8_ml7e8")
 texture_progress = ExtResource("9_ihjo1")
@@ -981,4 +995,5 @@ tint_under = Color(0, 0, 0, 1)
 tint_over = Color(0.012617188, 0.012617188, 0.012617188, 1)
 tint_progress = Color(1, 0.08235294, 0.05490196, 1)
 
-[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
+[connection signal="area_entered" from="AreaAuraPlayer" to="AreaAuraPlayer" method="_on_area_entered"]
+[connection signal="area_entered" from="AreaPlayer" to="AreaPlayer" method="_on_area_entered"]

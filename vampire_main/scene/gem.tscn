@@ -1,21 +1,32 @@
 [gd_scene format=3 uid="uid://lmoe3354vkkp"]
 
-[ext_resource type="Script" uid="uid://dpl216xp81bho" path="res://scene/Gem.cs" id="1_rl2rh"]
+[ext_resource type="Script" uid="uid://dpl216xp81bho" path="res://src/Gem.cs" id="1_rl2rh"]
 [ext_resource type="Texture2D" uid="uid://cqiihinjerji" path="res://res/gem.png" id="1_srufu"]
+[ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://src/Poursuite.cs" id="3_hk8u8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srufu"]
 radius = 190.25136
 height = 805.77045
 
-[node name="Gem" type="Node2D" unique_id=1948922442]
+[node name="Gem" type="Node2D" unique_id=1948922442 node_paths=PackedStringArray("Poursuite")]
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_rl2rh")
+Poursuite = NodePath("DPM_Poursuite")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=342394569]
 position = Vector2(0, 5.9604645e-08)
 scale = Vector2(0.089355476, 0.089355476)
 texture = ExtResource("1_srufu")
 
-[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=1099905623]
+[node name="DPM_Poursuite" type="Node2D" parent="." unique_id=2026730749 node_paths=PackedStringArray("Poursuivant")]
+script = ExtResource("3_hk8u8")
+Poursuivant = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1000966854]
+[node name="Area2D" type="Area2D" parent="." unique_id=1099905623]
+position = Vector2(0, 5.960464e-08)
+scale = Vector2(0.08935547, 0.08935547)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1000966854]
 shape = SubResource("CapsuleShape2D_srufu")

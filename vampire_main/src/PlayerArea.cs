@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Markup;
 using Godot;
 using static MedAttack;
 
@@ -12,12 +13,23 @@ public partial class PlayerArea : Area2D
         EAlgoSelectionDetection algo;
         switch (InArea.CollisionLayer)
         {
-            default:
             case 2: // layer 2 = Enemy
                 {
                     algo = EAlgoSelectionDetection.eEnemyOnPlayer;
                 }
                 break;
+            case 4: // layer 4 = Map
+                {
+                    algo = EAlgoSelectionDetection.eMapOnPlayer;
+                }
+                break;
+            case 8:
+                {
+                    algo = EAlgoSelectionDetection.eTreasureOnPlayer;
+                }
+                break;
+            default:
+                return;
         }
         ((ICollide)Player).Collide(algo, (Node2D)InArea.GetParent(), Player);
     }

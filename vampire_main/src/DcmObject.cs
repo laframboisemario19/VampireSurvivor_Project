@@ -15,6 +15,9 @@ public partial class DcmObject : Node2D, ISpawn, ICollide
     [Export]
     private MedAttack MediateurAttack;
 
+    [Export]
+    private MedCible MediateurCible;
+
     [ExportGroup("Internal")]
     [Export]
     private Timer timer1,
@@ -58,34 +61,79 @@ public partial class DcmObject : Node2D, ISpawn, ICollide
     {
         BaseObject spawn = (BaseObject)((ISpawn)this).Spawn(GemScene);
         spawn.GlobalPosition = InPosition;
-        AddChild(spawn);
+        Callable
+            .From(() =>
+            {
+                AddChild(spawn);
+            })
+            .CallDeferred();
     }
 
     private Vector2 _DefinePosition()
     {
-        float tailleX = 1000.0f;
-        float tailleY = 600.0f;
-        float decalageX = 900.0f;
-        float decalageY = 500.0f;
+        float tailleX = 700.0f;
+        float tailleY = 500.0f;
+        float buffer = 10.0f;
+
+        Vector2 playerPos = MediateurCible.GetPlayerPosition();
+        Camera2D camera2D = MediateurCible.GetParent().GetNode<Camera2D>("Camera2D");
+        Vector2 cameraSize = camera2D.GetViewportRect().Size / camera2D.Zoom;
+
+        float cameraH = cameraSize.Y;
+
+        float cameraW = cameraSize.X;
+
+        float cameraTop = playerPos.Y - (cameraH / 2);
+        float cameraBottom = playerPos.Y + (cameraH / 2);
+        float cameraRight = playerPos.X + (cameraW / 2);
+        float cameraLeft = playerPos.X - (cameraW / 2);
+
         int coteApparition = GD.RandRange(0, 3);
         Vector2 v = new(0, 0);
 
         switch (coteApparition)
         {
             case 0:
-                v = new((float)GD.RandRange(-tailleX, tailleX), -decalageY);
-                break;
+                if (cameraTop - buffer >= -tailleY / 2)
+                {
+                    v = new(
+                        (float)GD.RandRange(-tailleX / 2, tailleX / 2),
+                        (float)GD.RandRange(-cameraH / 2 - buffer, -tailleY / 2)
+                    );
+                    break;
+                }
+                goto case 2;
             case 1:
-                v = new(decalageX, (float)GD.RandRange(-tailleY, tailleY));
-                break;
+                if (cameraRight + buffer <= tailleX / 2)
+                {
+                    v = new(
+                        (float)GD.RandRange(cameraW / 2 + buffer, tailleX / 2),
+                        (float)GD.RandRange(tailleY / 2, -tailleY / 2)
+                    );
+                    break;
+                }
+                goto case 3;
             case 2:
-                v = new((float)GD.RandRange(-tailleX, tailleX), decalageY);
-                break;
+                if (cameraBottom + buffer <= tailleY / 2)
+                {
+                    v = new(
+                        (float)GD.RandRange(-tailleX / 2, tailleX / 2),
+                        (float)GD.RandRange(cameraH / 2 + buffer, tailleY / 2)
+                    );
+                    break;
+                }
+                goto case 0;
             case 3:
-                v = new(decalageX, (float)GD.RandRange(-tailleY, tailleY));
-                break;
+                if (cameraLeft - buffer >= -tailleX / 2)
+                {
+                    v = new(
+                        (float)GD.RandRange(-cameraW / 2 + buffer, -tailleX / 2),
+                        (float)GD.RandRange(tailleY / 2, -tailleY / 2)
+                    );
+                    break;
+                }
+                goto case 1;
         }
-
         return v;
     }
 }

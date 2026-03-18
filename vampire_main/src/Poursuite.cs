@@ -50,7 +50,7 @@ public partial class Poursuite : Node2D
                 float angle = (float)Math.Atan2(deplacement.Y, deplacement.X);
                 Poursuivant.Rotation = angle;
             }
-            else
+            else if (Poursuivant is BaseEnemy)
             {
                 var anim = Poursuivant.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
                 if (Math.Abs(deplacement.X) > Mathf.Abs(deplacement.Y))

@@ -12,6 +12,9 @@ public partial class MedAttack : Node2D, ICollide
 
     [Export]
     private DcmProjectile DcmProjectile;
+
+    [Export]
+    private DcmObject DcmObject;
     int i = 0;
 
     public enum EAlgoSelectionDetection
@@ -19,6 +22,9 @@ public partial class MedAttack : Node2D, ICollide
         eProjectileOnEnemy,
         eEnemyOnPlayer,
         eMeleeOnEnemy,
+        eMapOnPlayer,
+        eTreasureOnPlayer,
+        eTreasureOnAuraPlayer,
     }
 
     public override void _Ready()
@@ -50,8 +56,10 @@ public partial class MedAttack : Node2D, ICollide
                     Projectile projectile = (Projectile)InEntering;
                     projectile.Die();
                     BaseEnemy enemy = (BaseEnemy)InEntered;
+
+                    // À remplacer Die pour TakeDamage + Spawn seulement si TakeDamage return True
                     enemy.Die();
-                    // à ajouter la modif sur l'enemie
+                    DcmObject.SpawnGem(enemy.GlobalPosition);
                 }
                 break;
             case EAlgoSelectionDetection.eEnemyOnPlayer:
@@ -71,7 +79,32 @@ public partial class MedAttack : Node2D, ICollide
             case EAlgoSelectionDetection.eMeleeOnEnemy:
                 {
                     BaseEnemy enemy = (BaseEnemy)InEntering;
+                    // À remplacer Die pour TakeDamage + Spawn seulement si TakeDamage return True
                     enemy.Die();
+                    DcmObject.SpawnGem(enemy.GlobalPosition);
+                }
+                break;
+            case EAlgoSelectionDetection.eMapOnPlayer:
+                {
+                    Player player = (Player)InEntered;
+                    player.Die();
+                }
+                break;
+
+            case EAlgoSelectionDetection.eTreasureOnAuraPlayer:
+                {
+                    BaseObject baseObject = (BaseObject)InEntering;
+                    Player player = (Player)InEntered;
+                    baseObject.Animate(player);
+                }
+                break;
+            case EAlgoSelectionDetection.eTreasureOnPlayer:
+                {
+                    BaseObject baseObject = (BaseObject)InEntering;
+                    Player player = (Player)InEntered;
+                    baseObject.Die();
+                    player.AddXp(baseObject.XpValue);
+                    // Player addXp() à coder
                 }
                 break;
         }

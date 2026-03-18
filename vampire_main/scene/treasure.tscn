@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://coqlyulov18r3"]
 
-[ext_resource type="Script" uid="uid://bu03g2cnttbrq" path="res://scene/Treasure.cs" id="1_4m0ij"]
+[ext_resource type="Script" uid="uid://bu03g2cnttbrq" path="res://src/Treasure.cs" id="1_4m0ij"]
 [ext_resource type="Texture2D" uid="uid://djtehpmhn6shd" path="res://res/Chests.png" id="1_cuvlc"]
+[ext_resource type="Script" uid="uid://cx3xa5xcmomj" path="res://src/AreaTreasure.cs" id="3_bkwci"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1m5a2"]
 atlas = ExtResource("1_cuvlc")
@@ -49,15 +50,22 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cuvlc"]
 size = Vector2(47, 16)
 
-[node name="Treasure" type="Node2D" unique_id=1235162860]
+[node name="Treasure" type="Node2D" unique_id=1235162860 node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_4m0ij")
+Sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1434516695]
 sprite_frames = SubResource("SpriteFrames_t1wto")
 animation = &"open"
 
-[node name="Area2D" type="Area2D" parent="." unique_id=511351561]
+[node name="Area2D" type="Area2D" parent="." unique_id=511351561 node_paths=PackedStringArray("InSprite")]
+collision_layer = 8
+collision_mask = 8192
+script = ExtResource("3_bkwci")
+InSprite = NodePath("../AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=796755925]
 position = Vector2(-1.5, 9)
 shape = SubResource("RectangleShape2D_cuvlc")
+
+[connection signal="area_exited" from="Area2D" to="Area2D" method="_on_area_exited"]
