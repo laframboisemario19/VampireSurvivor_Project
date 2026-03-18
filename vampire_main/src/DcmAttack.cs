@@ -1,55 +1,39 @@
 using System;
+using System.Collections;
 using Godot;
 
 public partial class DcmAttack : Node2D
 {
     [ExportGroup("External")]
     [Export]
-    private Sword sword;
+    private BaseWeapon sword,
+        axe,
+        boxe;
 
-    [Export]
-    private Axe axe;
-
-    [Export]
-    private Boxe boxe;
-
-    private bool IsAttacking = false;
-
-    public bool TryAttacking()
+    public enum eWeaponType
     {
-        if (IsAttacking)
-        {
-            return false;
-        }
-        else
-        {
-            IsAttacking = true;
-            return true;
-        }
+        eSword = 6,
+        eAxe = 7,
+        eBoxe = 8,
     }
 
-    public void EndAttacking()
-    {
-        IsAttacking = false;
-    }
+    ArrayList attackList = [];
 
     public override void _Ready()
     {
         base._Ready();
+        attackList.AddRange(new[] { sword, axe, boxe });
     }
 
-    public void AttackEpee()
+    public void ActivateAttack(eWeaponType WeaponType)
     {
-        sword.Swing();
+        ((BaseWeapon)attackList[(int)WeaponType - 6]).ActivateAttack();
     }
 
-    public void AttackHache()
-    {
-        axe.Swing();
-    }
+    private bool IsAttacking = false;
 
-    public void AttackBoxe()
+    public void EndAttacking()
     {
-        boxe.Hit();
+        IsAttacking = false;
     }
 }

@@ -47,11 +47,12 @@ texture_progress = ExtResource("5_ve786")
 tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0.36078432, 1, 1)
 
-[node name="MED_Attack" type="Node2D" parent="." unique_id=1828661138 node_paths=PackedStringArray("timer", "DcmProjectile", "DcmObject")]
+[node name="MED_Attack" type="Node2D" parent="." unique_id=1828661138 node_paths=PackedStringArray("timer", "DcmProjectile", "DcmObject", "Player")]
 script = ExtResource("2_33cqm")
 timer = NodePath("DPM_Timer")
 DcmProjectile = NodePath("../MED_Cible/DCM_Projectile")
 DcmObject = NodePath("../MED_Cible/DCM_Object")
+Player = NodePath("../MED_Cible/Player")
 
 [node name="DPM_Timer" type="Timer" parent="MED_Attack" unique_id=1387762677]
 wait_time = 5.0
@@ -63,10 +64,10 @@ SpawnerProjectile = NodePath("DCM_Projectile")
 SpawnerEnemy = NodePath("DCM_Spawner")
 Player = NodePath("Player")
 
-[node name="Player" parent="MED_Cible" unique_id=607470767 node_paths=PackedStringArray("InMedAttack", "t") instance=ExtResource("6_17rxn")]
+[node name="Player" parent="MED_Cible" unique_id=607470767 node_paths=PackedStringArray("InMedAttack", "XpBar") instance=ExtResource("6_17rxn")]
 position = Vector2(-236, 120)
 InMedAttack = NodePath("../../MED_Attack")
-t = NodePath("../../Camera2D/XPBar")
+XpBar = NodePath("../../Camera2D/XPBar")
 
 [node name="DCM_Projectile" type="Node2D" parent="MED_Cible" unique_id=1476373430 node_paths=PackedStringArray("MediateurCible", "MediateurAttack", "timer1", "timer2", "timer3", "timer4", "timer5", "timer6")]
 script = ExtResource("6_ll5lq")
@@ -90,11 +91,11 @@ wait_time = 2.0
 autostart = true
 
 [node name="DPM_Timer3" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1462136540]
-wait_time = 2.0
+wait_time = 0.5
 autostart = true
 
 [node name="DPM_Timer4" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1239431613]
-wait_time = 2.0
+wait_time = 0.5
 autostart = true
 
 [node name="DPM_Timer5" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=294430853]

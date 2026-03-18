@@ -37,6 +37,7 @@ skew = 0.12671006
 texture = ExtResource("3_v2yo3")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=326287917 node_paths=PackedStringArray("Weapon")]
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_rlqbj")
 Weapon = NodePath("..")

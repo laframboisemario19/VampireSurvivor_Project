@@ -1,8 +1,9 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using Godot;
 using Utils;
+using static DcmAttack;
 using static DcmProjectile;
 
 public partial class MedAttack : Node2D, ICollide
@@ -15,6 +16,9 @@ public partial class MedAttack : Node2D, ICollide
 
     [Export]
     private DcmObject DcmObject;
+
+    [Export]
+    private Player Player;
     int i = 0;
 
     public enum EAlgoSelectionDetection
@@ -27,19 +31,26 @@ public partial class MedAttack : Node2D, ICollide
         eTreasureOnAuraPlayer,
     }
 
+    private ArrayList weaponList = new ArrayList() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+
     public override void _Ready()
     {
         base._Ready();
 
-        // À remplacer par une fonction permettant le choix d'arme
-        timer.EnsureValid().Timeout += () =>
-        {
-            if (i < 6)
-            {
-                DcmProjectile.ActivateProjectile((EProjectileType)i);
-                i++;
-            }
-        };
+        // À remplacer par une fonction permettant le choix d'arme et utiliser pour les spawns de monstres
+        // timer.EnsureValid().Timeout += () =>
+        // {
+        //     if (i < 6)
+        //     {
+        //         DcmProjectile.ActivateProjectile((EProjectileType)i);
+        //         i++;
+        //     }
+        // };
+        object[] list = weaponList.ToArray();
+        Random.Shared.Shuffle(list);
+        weaponList.Clear();
+        weaponList.AddRange(list);
+        CallDeferred(MethodName._ActivateWeapon);
     }
 
     public void Collide(
@@ -105,10 +116,32 @@ public partial class MedAttack : Node2D, ICollide
                     BaseObject baseObject = (BaseObject)InEntering;
                     Player player = (Player)InEntered;
                     baseObject.Die();
-                    player.AddXp(baseObject.XpValue);
-                    // Player addXp() à coder
+                    // à coder le return de AddXp pour le choix d'arme
+                    if (player.AddXp(baseObject.XpValue))
+                    {
+                        _ActivateWeapon();
+                    }
+                    ;
                 }
                 break;
+        }
+    }
+
+    private void _ActivateWeapon()
+    {
+        if (weaponList.Count > 0)
+        {
+            int index = (int)weaponList[0];
+            weaponList.RemoveAt(0);
+
+            if (index < 6)
+            {
+                DcmProjectile.ActivateProjectile((EProjectileType)index);
+            }
+            else
+            {
+                Player.DcmAttack.ActivateAttack((eWeaponType)index);
+            }
         }
     }
 }

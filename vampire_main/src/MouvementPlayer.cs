@@ -43,7 +43,7 @@ public partial class MouvementPlayer : Node2D
     public override void _PhysicsProcess(double InDelta)
     {
         base._PhysicsProcess(InDelta);
-        if (NodeToControl is null)
+        if (NodeToControl is null || NodeToControl is Player p && p.IsDead)
         {
             return;
         }

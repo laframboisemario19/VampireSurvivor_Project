@@ -3,7 +3,7 @@ using Godot;
 using Utils;
 using static MedAttack;
 
-public partial class Boxe : Sprite2D, ICollide
+public partial class Boxe : BaseWeapon, ICollide
 {
     [Export]
     private Player Player;
@@ -28,22 +28,9 @@ public partial class Boxe : Sprite2D, ICollide
 
     int cpt = 0;
 
-    public override void _Ready()
+    public override void ActivateAttack()
     {
-        base._Ready();
-        timer.Timeout += Attack;
-    }
-
-    private void Attack()
-    {
-        if (!attackManager.TryAttacking())
-        {
-            return;
-        }
-        else
-        {
-            Hit();
-        }
+        timer.Timeout += Hit;
     }
 
     public void Hit()
@@ -71,8 +58,12 @@ public partial class Boxe : Sprite2D, ICollide
         }
 
         _directionIndex++;
+        if (_directionIndex > 3)
+        {
+            _directionIndex = 0;
+        }
 
-        tween.Finished += FinAttaque;
+        // tween.Finished += FinAttaque;
     }
 
     private void CreatePunch(Vector2 dir)
@@ -98,11 +89,11 @@ public partial class Boxe : Sprite2D, ICollide
         tween.TweenInterval(0.05f);
     }
 
-    private void FinAttaque()
-    {
-        Visible = false;
-        attackManager.EndAttacking();
-    }
+    // private void FinAttaque()
+    // {
+    //     _directionIndex = 0;
+    //     // Visible = false;
+    // }
 
     public void Collide(
         EAlgoSelectionDetection InAlgoSelectionDetection,

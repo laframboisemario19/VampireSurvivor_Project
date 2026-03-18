@@ -9,7 +9,7 @@ public partial class Player : Node2D, ICollide
     MedAttack InMedAttack;
 
     [Export]
-    private TextureProgressBar t;
+    private TextureProgressBar XpBar;
 
     [ExportGroup("Internal")]
     [Export]
@@ -17,6 +17,9 @@ public partial class Player : Node2D, ICollide
 
     [Export]
     TextureProgressBar healthBar;
+
+    [Export]
+    public DcmAttack DcmAttack { get; private set; }
 
     private bool _is_taking_damage = false;
     private bool _is_dead = false;
@@ -101,12 +104,24 @@ public partial class Player : Node2D, ICollide
     //     }
     // }
 
-    public void AddXp(int value)
+    public bool AddXp(int value)
     {
-        if (t != null)
+        if (XpBar != null)
         {
-            t.Value += value;
+            XpBar.Value += value;
+            if (XpBar.Value == XpBar.MaxValue)
+            {
+                _LevelUp();
+                return true;
+            }
         }
+        return false;
+    }
+
+    private void _LevelUp()
+    {
+        XpBar.Value = 0;
+        XpBar.MaxValue = (int)(XpBar.MaxValue * 1.2);
     }
 
     public void TakeDamage(int damage)

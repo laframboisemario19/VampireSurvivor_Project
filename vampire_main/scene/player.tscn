@@ -916,11 +916,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(8, 10.399999)
 
-[node name="player" type="Node2D" unique_id=607470767 node_paths=PackedStringArray("animatedPlayer", "healthBar")]
+[node name="player" type="Node2D" unique_id=607470767 node_paths=PackedStringArray("animatedPlayer", "healthBar", "DcmAttack")]
 texture_filter = 1
 script = ExtResource("1_ml7e8")
 animatedPlayer = NodePath("PlayerAnimations")
 healthBar = NodePath("Health_bar")
+DcmAttack = NodePath("DCM_Attack")
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="." unique_id=433802151]
 sprite_frames = SubResource("SpriteFrames_ml7e8")

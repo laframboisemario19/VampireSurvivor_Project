@@ -3,7 +3,7 @@ using Godot;
 using Utils;
 using static MedAttack;
 
-public partial class Sword : Sprite2D, ICollide
+public partial class Sword : BaseWeapon, ICollide
 {
     [Export]
     private Player Player;
@@ -28,22 +28,9 @@ public partial class Sword : Sprite2D, ICollide
 
     private bool _usePatternA = true;
 
-    public override void _Ready()
+    public override void ActivateAttack()
     {
-        base._Ready();
-        timer.Timeout += Attack;
-    }
-
-    private void Attack()
-    {
-        if (!attackManager.TryAttacking())
-        {
-            return;
-        }
-        else
-        {
-            Swing();
-        }
+        timer.Timeout += Swing;
     }
 
     public void Swing()
