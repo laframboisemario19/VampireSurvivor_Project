@@ -12,7 +12,7 @@ public partial class MedAttack : Node2D, ICollide
 
     [Export]
     private DcmProjectile DcmProjectile;
-    int i = 6;
+    int i = 0;
 
     public enum EAlgoSelectionDetection
     {

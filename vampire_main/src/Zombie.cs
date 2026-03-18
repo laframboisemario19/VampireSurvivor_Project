@@ -19,6 +19,9 @@ public partial class Zombie : Node2D, ICiblable
     [Export]
     private AnimatedSprite2D AnimatedSprite;
 
+    [Export]
+    private EnemyArea Area;
+
     public bool isDying = false;
 
     public override void _Ready()
@@ -43,6 +46,7 @@ public partial class Zombie : Node2D, ICiblable
         if (!isDying)
         {
             isDying = true;
+            Area.Die();
             Poursuite.Velocity = 60.0f;
             AnimatedSprite.Play("explode");
             AnimatedSprite.AnimationFinished += () => QueueFree();

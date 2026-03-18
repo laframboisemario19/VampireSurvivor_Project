@@ -51,6 +51,15 @@ public partial class Projectile : Node2D, ICiblable
         parent.EnsureValid().Collide(this, InEntered);
     }
 
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+        if (Cible is Zombie z && z.isDying)
+        {
+            Die();
+        }
+    }
+
     public void Die()
     {
         if (!_isDying)
