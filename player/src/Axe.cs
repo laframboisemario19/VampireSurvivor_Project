@@ -1,44 +1,82 @@
-using Godot;
 using System;
+using System.Runtime.CompilerServices;
+using Godot;
+using Utils;
+using static MedAttack;
 
-public partial class Axe : Sprite2D
+public partial class Axe : Sprite2D, ICollide
 {
-	[Export]
-	private Sprite2D node;
+    [Export]
+    private Player Player;
 
-	private Tween tween;
-	private Vector2 newScale = new Vector2();
+    [Export]
+    private Sprite2D node;
 
-	public override void _Ready()
-	{
-		base._Ready();
-		Swing();
+    [Export]
+    private DcmAttack attackManager;
 
-	}
+    [Export]
+    private Timer timer;
 
-	public void Swing()
-	{
-		tween?.Kill();
+    private Tween tween;
+    private Vector2 newScale = new Vector2();
 
-		Scale = new Vector2(1.6f, 1.6f);
-		newScale = new Vector2(2.0f, 2.0f);
+    public override void _Ready()
+    {
+        base._Ready();
+        timer.Timeout += Attack;
+    }
 
-		tween = CreateTween();
+    private void Attack()
+    {
+        if (!attackManager.TryAttacking())
+        {
+            return;
+        }
+        else
+        {
+            Swing();
+        }
+    }
 
+    public void Swing()
+    {
+        if (!IsInstanceValid(node))
+            return;
 
-		tween.TweenProperty(node, "scale", newScale, 0.3f);
-		tween.TweenInterval(0.2f);
+        Visible = true;
 
-		tween.TweenProperty(node, "rotation", Mathf.Tau, 0.6f);
-		tween.TweenInterval(0.3f);
+        tween?.Kill();
 
-		tween.TweenProperty(node, "scale", Vector2.Zero, 0.3f);
+        Scale = new Vector2(0.0f, 0.0f);
+        newScale = new Vector2(1.0f, 1.0f);
 
-		tween.Finished += FinAttaque;
-	}
+        tween = CreateTween();
 
-	private void FinAttaque()
-	{
-		Rotation = 0;
-	}
+        tween.TweenProperty(node, "scale", newScale, 0.3f);
+        tween.TweenInterval(0.2f);
+
+        tween.TweenProperty(node, "rotation", Mathf.Tau, 0.6f);
+        tween.TweenInterval(0.3f);
+
+        tween.TweenProperty(node, "scale", Vector2.Zero, 0.3f);
+
+        tween.Finished += FinAttaque;
+    }
+
+    private void FinAttaque()
+    {
+        Rotation = 0;
+        Visible = false;
+        attackManager.EndAttacking();
+    }
+
+    public void Collide(
+        EAlgoSelectionDetection InAlgoSelectionDetection,
+        Node2D InEntering,
+        Node2D InEntered
+    )
+    {
+        ((ICollide)(Player.EnsureValid())).Collide(InAlgoSelectionDetection, InEntering, InEntered);
+    }
 }

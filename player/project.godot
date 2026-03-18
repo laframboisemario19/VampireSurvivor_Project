@@ -13,7 +13,6 @@ config_version=5
 config/name="VampireSurviver"
 run/main_scene="res://scene/game.tscn"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
-config/icon="res://res/icon.svg"
 
 [display]
 
@@ -22,6 +21,11 @@ window/size/mode=2
 [dotnet]
 
 project/assembly_name="VampireSurviver"
+
+[layer_names]
+
+2d_physics/layer_2="Ennemi"
+2d_physics/layer_13="Player"
 
 [physics]
 

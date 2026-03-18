@@ -1,88 +1,115 @@
-using Godot;
 using System;
+using Godot;
+using Utils;
+using static MedAttack;
 
-public partial class Boxe : Sprite2D
+public partial class Boxe : Sprite2D, ICollide
 {
-	[Export]
-	private Sprite2D node;
-	[Export]
-	private Sprite2D hitEffect;
+    [Export]
+    private Player Player;
 
-	private Tween tween;
+    [Export]
+    private Sprite2D node;
 
-	private int _directionIndex = 0;
+    [Export]
+    private Sprite2D hitEffect;
 
-	private Vector2[] directions =
-	{
-		Vector2.Right,
-		Vector2.Down,
-		Vector2.Left,
-		Vector2.Up
-	};
+    [Export]
+    private DcmAttack attackManager;
 
-	int cpt = 0;
+    [Export]
+    private Timer timer;
 
-	public override void _Ready()
-	{
-		Hit();
-	}
+    private Tween tween;
 
-	public void Hit()
-	{
-		if (!IsInstanceValid(node))
-			return;
+    private int _directionIndex = 0;
 
-		tween?.Kill();
+    private Vector2[] directions = { Vector2.Right, Vector2.Down, Vector2.Left, Vector2.Up };
 
-		node.Scale = Vector2.Zero;
-		node.Modulate = new Color(1, 1, 1, 0);
-		hitEffect.Modulate = new Color(1, 1, 1, 0);
+    int cpt = 0;
 
-		tween = CreateTween();
+    public override void _Ready()
+    {
+        base._Ready();
+        timer.Timeout += Attack;
+    }
 
-		Vector2 dir = directions[_directionIndex];
+    private void Attack()
+    {
+        if (!attackManager.TryAttacking())
+        {
+            return;
+        }
+        else
+        {
+            Hit();
+        }
+    }
 
-		node.Rotation = dir.Angle() - Mathf.Pi / 2;
+    public void Hit()
+    {
+        if (!IsInstanceValid(node))
+            return;
 
-		for (int i = 0; i < 4; i++)
-		{
-			CreatePunch(dir);
-		}
+        Visible = true;
 
-		_directionIndex++;
+        tween?.Kill();
 
-		// Animation infinie
-		// if (_directionIndex >= directions.Length)
-		// 	_directionIndex = 0;
+        node.Scale = Vector2.Zero;
+        node.Modulate = new Color(1, 1, 1, 0);
+        hitEffect.Modulate = new Color(1, 1, 1, 0);
 
-		tween.Finished += Hit;
+        tween = CreateTween();
 
-	}
+        Vector2 dir = directions[_directionIndex];
 
-	private void CreatePunch(Vector2 dir)
-	{
-		Vector2 start = node.Position;
+        node.Rotation = dir.Angle() - Mathf.Pi / 2;
 
-		Vector2 hit = start + dir * 30;
+        for (int i = 0; i < 4; i++)
+        {
+            CreatePunch(dir);
+        }
 
-		Vector2 punchScale = new Vector2(0.35f, 0.35f);
+        _directionIndex++;
 
-		// apparition
-		tween.TweenProperty(node, "scale", punchScale, 0.05f);
-		tween.TweenProperty(node, "modulate:a", 1.0f, 0.05f);
+        tween.Finished += FinAttaque;
+    }
 
-		// coup vers l'avant
-		tween.TweenProperty(node, "position", hit, 0.07f);
-		tween.TweenProperty(hitEffect, "modulate:a", 1.0f, 0.02f);
+    private void CreatePunch(Vector2 dir)
+    {
+        Vector2 start = node.Position;
 
-		// retour
-		tween.TweenProperty(node, "position", start, 0.07f);
-		tween.TweenProperty(hitEffect, "modulate:a", 0.0f, 0.02f);
+        Vector2 hit = start + dir * 30;
 
-		// disparition
-		tween.TweenProperty(node, "scale", Vector2.Zero, 0.05f);
-		tween.TweenProperty(node, "modulate:a", 0.0f, 0.05f);
+        Vector2 punchScale = new Vector2(0.1f, 0.1f);
 
-		tween.TweenInterval(0.05f);
-	}
+        tween.TweenProperty(node, "scale", punchScale, 0.05f);
+        tween.TweenProperty(node, "modulate:a", 0.5f, 0.05f);
+
+        tween.TweenProperty(node, "position", hit, 0.07f);
+        tween.TweenProperty(hitEffect, "modulate:a", 0.5f, 0.02f);
+
+        tween.TweenProperty(node, "position", start, 0.07f);
+        tween.TweenProperty(hitEffect, "modulate:a", 0.0f, 0.02f);
+
+        tween.TweenProperty(node, "scale", Vector2.Zero, 0.05f);
+        tween.TweenProperty(node, "modulate:a", 0.0f, 0.05f);
+
+        tween.TweenInterval(0.05f);
+    }
+
+    private void FinAttaque()
+    {
+        Visible = false;
+        attackManager.EndAttacking();
+    }
+
+    public void Collide(
+        EAlgoSelectionDetection InAlgoSelectionDetection,
+        Node2D InEntering,
+        Node2D InEntered
+    )
+    {
+        ((ICollide)(Player.EnsureValid())).Collide(InAlgoSelectionDetection, InEntering, InEntered);
+    }
 }

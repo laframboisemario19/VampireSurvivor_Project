@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://ck5yldxfklkw8"]
 
-[ext_resource type="Texture2D" uid="uid://bsbd3mmy6llup" path="res://res/epee.png" id="1_b0qhw"]
-[ext_resource type="Script" uid="uid://due3s27xyvird" path="res://src/Sword.cs" id="2_ayxj0"]
-[ext_resource type="Texture2D" uid="uid://selhp6kvdb2" path="res://res/Alternative_3_03.png" id="3_v2yo3"]
+[ext_resource type="Texture2D" uid="uid://cfbe00vy7gm5c" path="res://res/epee.png" id="1_b0qhw"]
+[ext_resource type="Script" uid="uid://bsjv8c0skl7yy" path="res://src/Sword.cs" id="2_ayxj0"]
+[ext_resource type="Texture2D" uid="uid://dfh05vvt2jgur" path="res://res/Alternative_3_03.png" id="3_v2yo3"]
+[ext_resource type="Script" uid="uid://micj0wxdyybr" path="res://src/WeaponAreaDetection.cs" id="4_rlqbj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b0qhw"]
 radius = 13.377274
 height = 45.740677
 
-[node name="Sword" type="Sprite2D" unique_id=1650852282 node_paths=PackedStringArray("node", "AnimLeft", "AnimRight")]
+[node name="Sword" type="Sprite2D" unique_id=1650852282 node_paths=PackedStringArray("node", "AnimLeft", "AnimRight", "timer")]
 scale = Vector2(1.9499998, 1.95)
 texture = ExtResource("1_b0qhw")
 offset = Vector2(16.410257, -16.410261)
@@ -16,8 +17,10 @@ script = ExtResource("2_ayxj0")
 node = NodePath(".")
 AnimLeft = NodePath("SwingAnimationLeft")
 AnimRight = NodePath("SwingAnimationRight")
+timer = NodePath("TimerSword")
 
 [node name="SwingAnimationRight" type="Sprite2D" parent="." unique_id=1363017282]
+texture_filter = 1
 position = Vector2(21.025639, -48.20513)
 rotation = 2.413707
 scale = Vector2(0.39282814, 1.1233569)
@@ -26,15 +29,26 @@ texture = ExtResource("3_v2yo3")
 flip_h = true
 
 [node name="SwingAnimationLeft" type="Sprite2D" parent="." unique_id=1616401517]
+texture_filter = 1
 position = Vector2(55.384624, -19.487179)
 rotation = -0.83353424
 scale = Vector2(0.2933756, 1.2089972)
 skew = 0.12671006
 texture = ExtResource("3_v2yo3")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=326287917]
+[node name="Area2D" type="Area2D" parent="." unique_id=326287917 node_paths=PackedStringArray("Weapon")]
+collision_mask = 2
+script = ExtResource("4_rlqbj")
+Weapon = NodePath("..")
+eAlgoSelectionDetection = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=513546209]
 position = Vector2(23.589745, -25.12821)
 rotation = 0.8398545
 shape = SubResource("CapsuleShape2D_b0qhw")
+
+[node name="TimerSword" type="Timer" parent="." unique_id=1870546733]
+wait_time = 3.0
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
