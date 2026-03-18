@@ -610,7 +610,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4hm66")
 }],
-"loop": true,
+"loop": false,
 "name": &"dommage_bas",
 "speed": 5.0
 }, {
@@ -627,7 +627,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0fmm8")
 }],
-"loop": true,
+"loop": false,
 "name": &"dommage_droit",
 "speed": 5.0
 }, {
@@ -644,7 +644,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ytl04")
 }],
-"loop": true,
+"loop": false,
 "name": &"dommage_gauche",
 "speed": 5.0
 }, {
@@ -661,7 +661,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j2mpt")
 }],
-"loop": true,
+"loop": false,
 "name": &"dommage_haut",
 "speed": 5.0
 }, {
@@ -791,7 +791,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dm46t")
 }],
-"loop": true,
+"loop": false,
 "name": &"mort_bas",
 "speed": 5.0
 }, {
@@ -829,7 +829,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d1347")
 }],
-"loop": true,
+"loop": false,
 "name": &"mort_droite",
 "speed": 5.0
 }, {
@@ -867,7 +867,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n7cfl")
 }],
-"loop": true,
+"loop": false,
 "name": &"mort_gauche",
 "speed": 5.0
 }, {
@@ -905,7 +905,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wqho7")
 }],
-"loop": true,
+"loop": false,
 "name": &"mort_haut",
 "speed": 5.0
 }]
@@ -921,9 +921,8 @@ healthBar = NodePath("Health_bar")
 
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="." unique_id=433802151]
 sprite_frames = SubResource("SpriteFrames_ml7e8")
-animation = &"mort_haut"
+animation = &"dommage_bas"
 autoplay = "marche_bas"
-frame_progress = 0.4293363
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1768256024 node_paths=PackedStringArray("Player")]
 collision_layer = 4096
