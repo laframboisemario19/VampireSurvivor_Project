@@ -13,10 +13,15 @@ public partial class Axe : BaseWeapon, ICollide
     private Sprite2D node;
 
     [Export]
+    private Area2D AxeArea;
+
+    [Export]
     private DcmAttack attackManager;
 
     [Export]
     private Timer timer;
+
+
 
     private Tween tween;
     private Vector2 newScale = new Vector2();
@@ -32,6 +37,7 @@ public partial class Axe : BaseWeapon, ICollide
             return;
 
         Visible = true;
+        AxeArea.SetCollisionMaskValue(2, true);
 
         tween?.Kill();
 
@@ -55,6 +61,7 @@ public partial class Axe : BaseWeapon, ICollide
     {
         Rotation = 0;
         Visible = false;
+        AxeArea.SetCollisionMaskValue(2, false);
         attackManager.EndAttacking();
     }
 

@@ -9,12 +9,13 @@
 radius = 13.377274
 height = 96.63455
 
-[node name="Sword" type="Sprite2D" unique_id=1650852282 node_paths=PackedStringArray("node", "AnimLeft", "AnimRight", "timer")]
+[node name="Sword" type="Sprite2D" unique_id=1650852282 node_paths=PackedStringArray("node", "SwordArea", "AnimLeft", "AnimRight", "timer")]
 scale = Vector2(2.0481706, 2.0499997)
 texture = ExtResource("1_b0qhw")
 offset = Vector2(16.410257, -16.410261)
 script = ExtResource("2_ayxj0")
 node = NodePath(".")
+SwordArea = NodePath("Area2D")
 AnimLeft = NodePath("SwingAnimationLeft")
 AnimRight = NodePath("SwingAnimationRight")
 timer = NodePath("TimerSword")
@@ -39,7 +40,7 @@ texture = ExtResource("3_v2yo3")
 [node name="Area2D" type="Area2D" parent="." unique_id=326287917 node_paths=PackedStringArray("Weapon")]
 position = Vector2(1.0256411, -1.5384614)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("4_rlqbj")
 Weapon = NodePath("..")
 eAlgoSelectionDetection = 2

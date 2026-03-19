@@ -9,12 +9,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnsrd"]
 size = Vector2(50.243477, 38.123917)
 
-[node name="Axe" type="Sprite2D" unique_id=2079424175 node_paths=PackedStringArray("node", "timer")]
+[node name="Axe" type="Sprite2D" unique_id=2079424175 node_paths=PackedStringArray("node", "AxeArea", "timer")]
 scale = Vector2(1.7444445, 1.7444445)
 texture = ExtResource("1_rnsrd")
 offset = Vector2(18.343948, -18.343948)
 script = ExtResource("2_piu5p")
 node = NodePath(".")
+AxeArea = NodePath("Area2D")
 timer = NodePath("TimerAxe")
 
 [node name="swing_animation" type="Sprite2D" parent="." unique_id=671930514 node_paths=PackedStringArray("swing", "timer")]
@@ -28,7 +29,7 @@ timer = NodePath("../TimerAxe")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=691468279 node_paths=PackedStringArray("Weapon")]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("5_8flyt")
 Weapon = NodePath("..")
 eAlgoSelectionDetection = 2

@@ -12,6 +12,9 @@ public partial class Sword : BaseWeapon, ICollide
     private Sprite2D node;
 
     [Export]
+    private Area2D SwordArea;
+
+    [Export]
     private Sprite2D AnimLeft;
 
     [Export]
@@ -39,6 +42,7 @@ public partial class Sword : BaseWeapon, ICollide
             return;
 
         Visible = true;
+        SwordArea.SetCollisionMaskValue(2, true);
 
         tween?.Kill();
 
@@ -52,6 +56,7 @@ public partial class Sword : BaseWeapon, ICollide
 
         float left = Mathf.Pi;
         float right = 0.0f;
+        
 
         if (_usePatternA)
         {
@@ -103,6 +108,7 @@ public partial class Sword : BaseWeapon, ICollide
     private void FinAttaque()
     {
         Visible = false;
+        SwordArea.SetCollisionMaskValue(2, false);
         attackManager.EndAttacking();
     }
 
