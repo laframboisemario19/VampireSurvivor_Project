@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://c8jfbxuo1x17o" path="res://scene/zombie_base.tscn" id="16_1it6f"]
 [ext_resource type="PackedScene" uid="uid://lmoe3354vkkp" path="res://scene/gem.tscn" id="16_i6gbm"]
 [ext_resource type="PackedScene" uid="uid://c0kupi3xrgaky" path="res://scene/zombie_gene.tscn" id="17_ww6yf"]
+[ext_resource type="PackedScene" uid="uid://bmv5qyk1jt22y" path="res://scene/zombie_boss.tscn" id="18_1it6f"]
 
 [node name="Game" type="Node2D" unique_id=1438342078]
 
@@ -114,6 +115,7 @@ ZombieBase = ExtResource("16_1it6f")
 ZombieRapide = ExtResource("15_1it6f")
 ZombieTank = ExtResource("15_ww6yf")
 ZombieGene = ExtResource("17_ww6yf")
+ZombieBoss = ExtResource("18_1it6f")
 MediateurCible = NodePath("..")
 AlgoSelectionCible = 1
 timer1 = NodePath("DPM_Timer2")

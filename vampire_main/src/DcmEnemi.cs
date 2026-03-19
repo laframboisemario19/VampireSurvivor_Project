@@ -16,7 +16,8 @@ public partial class DcmEnemi : Node2D, ISpawn
         ZombieBase,
         ZombieRapide,
         ZombieTank,
-        ZombieGene;
+        ZombieGene,
+        ZombieBoss;
 
     [Export]
     private Vector2 IntervalRange = new(1.0f, 2.0f);
@@ -35,7 +36,7 @@ public partial class DcmEnemi : Node2D, ISpawn
         timer3,
         timer4;
 
-    int i = 0;
+    int i = -1;
 
     private ArrayList timerList = [];
     private ArrayList sceneList = [];
@@ -46,6 +47,7 @@ public partial class DcmEnemi : Node2D, ISpawn
         eZombieRapide = 1,
         eZombieTank = 2,
         eZombieGene = 3,
+        eZombieBoss = 4,
     }
 
     private float _tailleX = 700.0f;
@@ -56,14 +58,19 @@ public partial class DcmEnemi : Node2D, ISpawn
     {
         base._Ready();
         timerList.AddRange(new[] { timer1, timer2, timer3, timer4 });
-        sceneList.AddRange(new[] { ZombieBase, ZombieRapide, ZombieTank, ZombieGene });
+        sceneList.AddRange(new[] { ZombieBase, ZombieRapide, ZombieTank, ZombieGene, ZombieBoss });
 
         timer.EnsureValid().Timeout += () =>
         {
-            if (i < 4)
+            if (i < 4 && i >= 0)
             {
                 this.ActivateWave((ETypeEnemi)i);
                 i++;
+            }
+            else if (i == -1)
+            {
+                _SpawnWithTarget(ETypeEnemi.eZombieBoss);
+                i--;
             }
         };
     }
@@ -175,5 +182,44 @@ public partial class DcmEnemi : Node2D, ISpawn
     public IEnumerable<Node2D> GatherChildren()
     {
         return ChildManipulator.GatherChildren(SpawneeScene, this);
+    }
+
+    public void SpawnRandomEnemy()
+    {
+        int index = (int)Random.Shared.NextInt64(0, 4);
+
+        var spawn = (Node2D)((ISpawn)this).Spawn((PackedScene)sceneList[index]);
+        Vector2 playerPos = MediateurCible.GetPlayerPosition();
+
+        int posX = 0;
+        int posY = 0;
+
+        // while (
+        //     posX + playerPos.X > _tailleX
+        //     || posX + playerPos.X < 0
+        //     || posY + playerPos.Y > _tailleY
+        //     || posY + playerPos.Y < 0
+        // )
+        {
+            int minOffset = 50;
+            int maxOffset = 300;
+
+            int multX = Random.Shared.Next(1, 3) == 1 ? -1 : 1;
+            int multY = Random.Shared.Next(1, 3) == 1 ? -1 : 1;
+
+            posX = Random.Shared.Next(minOffset, maxOffset) * multX;
+            posY = Random.Shared.Next(minOffset, maxOffset) * multY;
+        }
+
+        spawn.GlobalPosition = playerPos + new Vector2(posX, posY);
+
+        Node2D cible = MediateurCible
+            .EnsureValid()
+            .ChoisirCible(AlgoSelectionCible, GlobalPosition);
+        if (spawn is ICiblable ciblable)
+        {
+            ciblable.SetCible(cible);
+        }
+        AddChild(spawn);
     }
 }

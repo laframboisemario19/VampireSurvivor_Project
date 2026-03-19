@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://bqyt5qa0nokbf"]
+[gd_scene format=3 uid="uid://bmv5qyk1jt22y"]
 
-[ext_resource type="Script" uid="uid://d1qfbx3n7c4kn" path="res://src/BaseEnemy.cs" id="1_kpym2"]
 [ext_resource type="Texture2D" uid="uid://md7hxwtvxh2l" path="res://res/gfx-sheet16.png" id="1_lrywj"]
+[ext_resource type="Script" uid="uid://c3ppgcnqesdkv" path="res://src/ZombieBoss.cs" id="1_o3i23"]
 [ext_resource type="Script" uid="uid://s46qbr0ptqi4" path="res://src/EnemyArea.cs" id="3_kpym2"]
 [ext_resource type="Texture2D" uid="uid://jwbmey80nhm0" path="res://res/spiriticon-sheet9.png" id="3_o3i23"]
 [ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://src/Poursuite.cs" id="4_2s7qe"]
@@ -250,18 +250,17 @@ animations = [{
 radius = 15.0
 height = 56.0
 
-[node name="ZombieBoss" type="Node2D" unique_id=473365435 node_paths=PackedStringArray("Area", "Poursuite", "AnimatedSprite")]
-script = ExtResource("1_kpym2")
+[node name="ZombieBoss" type="Node2D" unique_id=473365435 node_paths=PackedStringArray("timer", "Area", "Poursuite", "AnimatedSprite")]
+script = ExtResource("1_o3i23")
+timer = NodePath("Timer")
 Area = NodePath("Area2D")
 Poursuite = NodePath("DPM_Poursuite")
 AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1790034751]
 sprite_frames = SubResource("SpriteFrames_ei37u")
-animation = &"explode"
+animation = &"marche_bas"
 autoplay = "marche_bas"
-frame = 6
-frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=468854307]
 collision_layer = 2
@@ -275,3 +274,7 @@ shape = SubResource("CapsuleShape2D_lrywj")
 script = ExtResource("4_2s7qe")
 Poursuivant = NodePath("..")
 velocity = 30.0
+
+[node name="Timer" type="Timer" parent="." unique_id=1038450436]
+wait_time = 0.5
+autostart = true
