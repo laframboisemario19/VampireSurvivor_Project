@@ -141,7 +141,7 @@ public partial class Player : Node2D, ICollide, ITakeDamage
         }
         _is_taking_damage = true;
         animatedPlayer.Play($"dommage_{_currentDirection}");
-        return true;
+        return false;
     }
 
     public void Die()

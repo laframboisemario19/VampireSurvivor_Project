@@ -47,8 +47,9 @@ texture_progress = ExtResource("5_ve786")
 tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0.36078432, 1, 1)
 
-[node name="MED_Attack" type="Node2D" parent="." unique_id=1828661138 node_paths=PackedStringArray("timer", "DcmProjectile", "DcmObject", "Player")]
+[node name="MED_Attack" type="Node2D" parent="." unique_id=1828661138 node_paths=PackedStringArray("Game", "timer", "DcmProjectile", "DcmObject", "Player")]
 script = ExtResource("2_33cqm")
+Game = NodePath("..")
 timer = NodePath("DPM_Timer")
 DcmProjectile = NodePath("../MED_Cible/DCM_Projectile")
 DcmObject = NodePath("../MED_Cible/DCM_Object")

@@ -9,6 +9,9 @@ using static DcmProjectile;
 public partial class MedAttack : Node2D, ICollide
 {
     [Export]
+    private Node2D Game;
+
+    [Export]
     private Timer timer;
 
     [Export]
@@ -85,7 +88,11 @@ public partial class MedAttack : Node2D, ICollide
                         {
                             damage = 1;
                         }
-                        player.TakeDamage(damage);
+                        if (player.TakeDamage(damage))
+                        {
+                            Tween tw = CreateTween();
+                            tw.TweenProperty(Game, "modulate", Colors.Red, 2.0f);
+                        }
                     }
                 }
                 break;
@@ -102,6 +109,8 @@ public partial class MedAttack : Node2D, ICollide
                 {
                     Player player = (Player)InEntered;
                     player.Die();
+                    Tween tw = CreateTween();
+                    tw.TweenProperty(Game, "modulate", Colors.Red, 2.0f);
                 }
                 break;
 
@@ -129,7 +138,20 @@ public partial class MedAttack : Node2D, ICollide
                 {
                     Trap trap = (Trap)InEntering;
                     ITakeDamage character = (ITakeDamage)InEntered;
-                    character.TakeDamage(1);
+
+                    if (character.TakeDamage(1))
+                    {
+                        if (character is Player)
+                        {
+                            Tween tw = CreateTween();
+                            tw.TweenProperty(Game, "modulate", Colors.Red, 2.0f);
+                        }
+                        else if (character is BaseEnemy)
+                        {
+                            DcmObject.SpawnGem(((BaseEnemy)character).GlobalPosition);
+                        }
+                    }
+
                     trap.TakeDamage(1);
                 }
                 break;
