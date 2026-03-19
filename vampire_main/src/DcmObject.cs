@@ -51,7 +51,7 @@ public partial class DcmObject : Node2D, ISpawn, ICollide
             {
                 int index = TimerList.IndexOf(timer);
                 BaseObject spawn = (BaseObject)((ISpawn)this).Spawn((PackedScene)SceneList[index]);
-                spawn.GlobalPosition = _DefinePosition();
+                spawn.GlobalPosition += _DefinePosition();
                 AddChild(spawn);
             };
         }
@@ -71,9 +71,9 @@ public partial class DcmObject : Node2D, ISpawn, ICollide
 
     private Vector2 _DefinePosition()
     {
-        float tailleX = 700.0f;
-        float tailleY = 500.0f;
-        float buffer = 10.0f;
+        float tailleX = 1320.0f;
+        float tailleY = 720.0f;
+        float buffer = 20.0f;
 
         Vector2 playerPos = MediateurCible.GetPlayerPosition();
         Camera2D camera2D = MediateurCible.GetParent().GetNode<Camera2D>("Camera2D");

@@ -24,8 +24,11 @@
 [ext_resource type="PackedScene" uid="uid://bmv5qyk1jt22y" path="res://scene/zombie_boss.tscn" id="18_1it6f"]
 
 [node name="Game" type="Node2D" unique_id=1438342078]
+metadata/_edit_vertical_guides_ = [-685.0, 685.0]
+metadata/_edit_horizontal_guides_ = [-386.0, 385.0]
 
 [node name="DCM_Environnement" parent="." unique_id=181946096 instance=ExtResource("1_5kiuu")]
+position = Vector2(-12, -5)
 scale = Vector2(1.5, 1.5)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1134258768 node_paths=PackedStringArray("playerToFollow")]
@@ -68,7 +71,7 @@ SpawnerEnemy = NodePath("DCM_Spawner")
 Player = NodePath("Player")
 
 [node name="Player" parent="MED_Cible" unique_id=607470767 node_paths=PackedStringArray("InMedAttack", "XpBar") instance=ExtResource("6_17rxn")]
-position = Vector2(-236, 120)
+position = Vector2(0, -3)
 InMedAttack = NodePath("../../MED_Attack")
 XpBar = NodePath("../../Camera2D/XPBar")
 
@@ -131,11 +134,11 @@ wait_time = 10.0
 autostart = true
 
 [node name="DPM_Timer4" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=1563278495]
-wait_time = 11.0
+wait_time = 7.0
 autostart = true
 
 [node name="DPM_Timer5" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=662672533]
-wait_time = 15.0
+wait_time = 4.0
 autostart = true
 
 [node name="DCM_Object" type="Node2D" parent="MED_Cible" unique_id=2023334156 node_paths=PackedStringArray("MediateurAttack", "MediateurCible", "timer1", "timer2")]

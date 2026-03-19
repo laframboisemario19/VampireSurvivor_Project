@@ -32,7 +32,16 @@ public partial class Poursuite : Node2D
     public override void _PhysicsProcess(double InDelta)
     {
         base._PhysicsProcess(InDelta);
-        if ((Poursuivant is BaseEnemy e && e.isDying) || (Cible is BaseEnemy ce && ce.isDying))
+        if (
+            (Poursuivant is BaseEnemy e && e.isDying)
+            || (Cible is BaseEnemy ce && ce.isDying)
+            || (
+                Poursuivant is ZombieGene
+                && Math.Abs(Poursuivant.GlobalPosition.X - Cible.GlobalPosition.X)
+                    + Math.Abs(Poursuivant.GlobalPosition.Y - Cible.GlobalPosition.Y)
+                    <= 150.0f
+            )
+        )
         {
             return;
         }
