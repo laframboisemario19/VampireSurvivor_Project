@@ -7,10 +7,10 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b0qhw"]
 radius = 13.377274
-height = 45.740677
+height = 96.63455
 
 [node name="Sword" type="Sprite2D" unique_id=1650852282 node_paths=PackedStringArray("node", "AnimLeft", "AnimRight", "timer")]
-scale = Vector2(1.9499998, 1.95)
+scale = Vector2(2.0481706, 2.0499997)
 texture = ExtResource("1_b0qhw")
 offset = Vector2(16.410257, -16.410261)
 script = ExtResource("2_ayxj0")
@@ -21,7 +21,7 @@ timer = NodePath("TimerSword")
 
 [node name="SwingAnimationRight" type="Sprite2D" parent="." unique_id=1363017282]
 texture_filter = 1
-position = Vector2(21.025639, -48.20513)
+position = Vector2(32.134926, -56.748566)
 rotation = 2.413707
 scale = Vector2(0.39282814, 1.1233569)
 skew = -0.45401502
@@ -30,13 +30,14 @@ flip_h = true
 
 [node name="SwingAnimationLeft" type="Sprite2D" parent="." unique_id=1616401517]
 texture_filter = 1
-position = Vector2(55.384624, -19.487179)
+position = Vector2(66.49391, -28.030615)
 rotation = -0.83353424
 scale = Vector2(0.2933756, 1.2089972)
 skew = 0.12671006
 texture = ExtResource("3_v2yo3")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=326287917 node_paths=PackedStringArray("Weapon")]
+position = Vector2(1.0256411, -1.5384614)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_rlqbj")
@@ -44,8 +45,8 @@ Weapon = NodePath("..")
 eAlgoSelectionDetection = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=513546209]
-position = Vector2(23.589745, -25.12821)
-rotation = 0.8398545
+position = Vector2(42.719982, -43.65229)
+rotation = 3.9400377
 shape = SubResource("CapsuleShape2D_b0qhw")
 
 [node name="TimerSword" type="Timer" parent="." unique_id=1870546733]

@@ -14,17 +14,17 @@
 [ext_resource type="PackedScene" uid="uid://crsbhyuwvavrl" path="res://scene/dcm_spawner.tscn" id="12_5g16k"]
 [ext_resource type="PackedScene" uid="uid://dyoi5q5wko48" path="res://scene/zombie.tscn" id="13_81276"]
 [ext_resource type="Script" uid="uid://o5sg173xpm4g" path="res://src/DcmObject.cs" id="14_81276"]
-[ext_resource type="PackedScene" uid="uid://dtl74woi13c2u" path="res://scene/zombie_base.tscn" id="14_ww6yf"]
 [ext_resource type="PackedScene" uid="uid://bem8uonps6iei" path="res://scene/zombie_rapide.tscn" id="15_1it6f"]
 [ext_resource type="PackedScene" uid="uid://coqlyulov18r3" path="res://scene/treasure.tscn" id="15_ve786"]
-[ext_resource type="PackedScene" uid="uid://v8s7jrktwicg" path="res://scene/zombie_tank.tscn" id="15_ww6yf"]
+[ext_resource type="PackedScene" uid="uid://dcgvkjkorb3uw" path="res://scene/zombie_tank.tscn" id="15_ww6yf"]
 [ext_resource type="PackedScene" uid="uid://bxgs2xya20p6f" path="res://scene/trap.tscn" id="16_0lu6w"]
-[ext_resource type="PackedScene" uid="uid://c8jfbxuo1x17o" path="res://scene/zombie_gene.tscn" id="16_1it6f"]
+[ext_resource type="PackedScene" uid="uid://c8jfbxuo1x17o" path="res://scene/zombie_base.tscn" id="16_1it6f"]
 [ext_resource type="PackedScene" uid="uid://lmoe3354vkkp" path="res://scene/gem.tscn" id="16_i6gbm"]
 
 [node name="Game" type="Node2D" unique_id=1438342078]
 
 [node name="DCM_Environnement" parent="." unique_id=181946096 instance=ExtResource("1_5kiuu")]
+scale = Vector2(1.5, 1.5)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1134258768 node_paths=PackedStringArray("playerToFollow")]
 position = Vector2(-220, 87)
@@ -108,7 +108,7 @@ autostart = true
 
 [node name="DCM_Spawner" parent="MED_Cible" unique_id=192703619 node_paths=PackedStringArray("MediateurCible", "timer1", "timer2", "timer3", "timer4") instance=ExtResource("12_5g16k")]
 SpawneeScene = ExtResource("13_81276")
-ZombieBase = ExtResource("14_ww6yf")
+ZombieBase = ExtResource("16_1it6f")
 ZombieRapide = ExtResource("15_1it6f")
 ZombieTank = ExtResource("15_ww6yf")
 ZombieGene = ExtResource("16_1it6f")

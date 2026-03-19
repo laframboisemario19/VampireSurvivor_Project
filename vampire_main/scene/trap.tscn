@@ -106,13 +106,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"activate",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8u7s"]
 size = Vector2(38, 20)
 
 [node name="Trap" type="Node2D" unique_id=288457860]
+z_index = -1
 script = ExtResource("1_qx3ty")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1425088982]
