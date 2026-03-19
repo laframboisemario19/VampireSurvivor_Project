@@ -1,4 +1,5 @@
 using System;
+<<<<<<< HEAD
 using System.Reflection.PortableExecutable;
 using Godot;
 
@@ -18,3 +19,8 @@ public partial class ZombieGene : BaseEnemy
         }
     }
 }
+=======
+using Godot;
+
+public partial class ZombieGene : BaseEnemy { }
+>>>>>>> bd59c9a96f6ca393e5d9dffb035c045c0eab26d7

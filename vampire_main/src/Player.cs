@@ -23,6 +23,13 @@ public partial class Player : Node2D, ICollide, ITakeDamage
 
     private bool _is_taking_damage = false;
     private bool _is_dead = false;
+    private bool _player_won = false;
+    public bool PlayerWon
+    {
+        get { return _player_won; }
+        private set { _player_won = value; }
+    }
+
     public bool IsDead
     {
         get { return _is_dead; }
@@ -39,8 +46,15 @@ public partial class Player : Node2D, ICollide, ITakeDamage
     {
         if (_is_dead || _is_taking_damage)
             return;
-
-        HandleMouvementAnimation();
+        if (_player_won)
+        {
+            win();
+            return;
+        }
+        else
+        {
+            HandleMouvementAnimation();
+        }
     }
 
     private void HandleMouvementAnimation()
@@ -78,31 +92,6 @@ public partial class Player : Node2D, ICollide, ITakeDamage
             animatedPlayer.Stop();
         }
     }
-
-    // public override void _Process(double delta)
-    // {
-    //     if (Input.IsActionPressed("ui_right"))
-    //     {
-    //         animatedPlayer.Play("marche_droite");
-    //     }
-    //     else if (Input.IsActionPressed("ui_left"))
-    //     {
-    //         animatedPlayer.Play("marche_gauche");
-    //     }
-    //     else if (Input.IsActionPressed("ui_up"))
-    //     {
-    //         animatedPlayer.Play("marche_haut");
-    //     }
-    //     else if (Input.IsActionPressed("ui_down"))
-    //     {
-    //         animatedPlayer.Play("marche_bas");
-    //     }
-    //     else
-    //     {
-    //         animatedPlayer.Play("marche_bas");
-    //         animatedPlayer.Stop();
-    //     }
-    // }
 
     public bool AddXp(int value)
     {
@@ -148,6 +137,13 @@ public partial class Player : Node2D, ICollide, ITakeDamage
     {
         _is_dead = true;
         animatedPlayer.Play($"mort_{_currentDirection}");
+    }
+
+    public void win()
+    {
+        _player_won = true;
+        animatedPlayer.Play("animation_victoire");
+        GD.Print("tu as gagné");
     }
 
     private void OnAnimationFinished()
