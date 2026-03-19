@@ -927,7 +927,7 @@ DcmAttack = NodePath("DCM_Attack")
 sprite_frames = SubResource("SpriteFrames_ml7e8")
 animation = &"animation_victoire"
 autoplay = "marche_bas"
-frame_progress = 0.81055945
+frame_progress = 0.22559842
 
 [node name="AreaAuraPlayer" type="Area2D" parent="." unique_id=1785184078 node_paths=PackedStringArray("Player")]
 collision_layer = 8192

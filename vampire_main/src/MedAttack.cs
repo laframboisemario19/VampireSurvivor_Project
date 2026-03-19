@@ -24,6 +24,8 @@ public partial class MedAttack : Node2D, ICollide
     private Player Player;
     int i = 0;
 
+    private bool _gameOver = false;
+
     public enum EAlgoSelectionDetection
     {
         eProjectileOnEnemy,
@@ -76,7 +78,18 @@ public partial class MedAttack : Node2D, ICollide
                     // À remplacer Die pour TakeDamage + Spawn seulement si TakeDamage return True
                     bool spawnGem = enemy.TakeDamage(1);
                     if (spawnGem)
-                        DcmObject.SpawnGem(enemy.GlobalPosition);
+                    {
+                        if (enemy is ZombieBoss)
+                        {
+                            Tween tw = CreateTween();
+                            tw.TweenProperty(Game, "modulate", Colors.Green, 2.0f);
+                            Player.win();
+                        }
+                        else if (spawnGem)
+                        {
+                            DcmObject.SpawnGem(enemy.GlobalPosition);
+                        }
+                    }
                 }
                 break;
             case EAlgoSelectionDetection.eEnemyOnPlayer:
@@ -102,8 +115,15 @@ public partial class MedAttack : Node2D, ICollide
                     BaseEnemy enemy = (BaseEnemy)InEntering;
                     // À remplacer Die pour TakeDamage + Spawn seulement si TakeDamage return True
                     bool spawnGem = enemy.TakeDamage(1);
-                    if (spawnGem)
+                    if (enemy is ZombieBoss)
+                    {
+                        Tween tw = CreateTween();
+                        tw.TweenProperty(Game, "modulate", Colors.Green, 2.0f);
+                    }
+                    else if (spawnGem)
+                    {
                         DcmObject.SpawnGem(enemy.GlobalPosition);
+                    }
                 }
                 break;
             case EAlgoSelectionDetection.eMapOnPlayer:
@@ -178,4 +198,6 @@ public partial class MedAttack : Node2D, ICollide
             }
         }
     }
+
+    private void on_arrete_tout() { }
 }
