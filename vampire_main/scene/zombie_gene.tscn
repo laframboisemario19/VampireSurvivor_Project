@@ -3,8 +3,37 @@
 [ext_resource type="Script" uid="uid://d1qfbx3n7c4kn" path="res://src/BaseEnemy.cs" id="1_6atqb"]
 [ext_resource type="Texture2D" uid="uid://btg1j2ly1alo7" path="res://res/spiriticon-sheet20.png" id="1_jn0dr"]
 [ext_resource type="Texture2D" uid="uid://kb4yncjgkyco" path="res://res/spiriticon-sheet19.png" id="2_cdmbu"]
+[ext_resource type="Texture2D" uid="uid://md7hxwtvxh2l" path="res://res/gfx-sheet16.png" id="2_ws5yb"]
 [ext_resource type="Script" uid="uid://s46qbr0ptqi4" path="res://src/EnemyArea.cs" id="4_u7apg"]
 [ext_resource type="Script" uid="uid://d1ldevjh55ba6" path="res://src/Poursuite.cs" id="5_qiolr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gaw4a"]
+atlas = ExtResource("2_ws5yb")
+region = Rect2(779, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sdoi"]
+atlas = ExtResource("2_ws5yb")
+region = Rect2(680, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53ky5"]
+atlas = ExtResource("2_ws5yb")
+region = Rect2(581, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qd7m"]
+atlas = ExtResource("2_ws5yb")
+region = Rect2(482, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tabn"]
+atlas = ExtResource("2_ws5yb")
+region = Rect2(383, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8okxr"]
+atlas = ExtResource("2_ws5yb")
+region = Rect2(284, 296, 99, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj1so"]
+atlas = ExtResource("2_ws5yb")
+region = Rect2(185, 296, 99, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ws5yb"]
 atlas = ExtResource("2_cdmbu")
@@ -76,8 +105,29 @@ region = Rect2(453, 428, 41, 41)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_we62t"]
 animations = [{
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gaw4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sdoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53ky5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qd7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tabn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8okxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj1so")
+}],
+"loop": false,
 "name": &"explode",
 "speed": 5.0
 }, {
@@ -159,9 +209,8 @@ AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1122965034]
 sprite_frames = SubResource("SpriteFrames_we62t")
-animation = &"marche_cote"
+animation = &"explode"
 autoplay = "marche_bas"
-frame_progress = 0.106247395
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1522743630]
 collision_layer = 2

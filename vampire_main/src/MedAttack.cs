@@ -35,8 +35,9 @@ public partial class MedAttack : Node2D, ICollide
         eTrapOnCharacter,
     }
 
-    // private ArrayList weaponList = new ArrayList() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-    private ArrayList weaponList = new ArrayList() { 8 };
+    private ArrayList weaponList = new ArrayList() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+
+    // private ArrayList weaponList = new ArrayList() { 8 };
 
     public override void _Ready()
     {

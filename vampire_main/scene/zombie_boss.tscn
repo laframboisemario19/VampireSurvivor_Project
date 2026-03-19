@@ -256,6 +256,7 @@ timer = NodePath("Timer")
 Area = NodePath("Area2D")
 Poursuite = NodePath("DPM_Poursuite")
 AnimatedSprite = NodePath("AnimatedSprite2D")
+hp = 50
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1790034751]
 sprite_frames = SubResource("SpriteFrames_ei37u")
