@@ -989,12 +989,7 @@ offset_top = 19.000002
 offset_right = 1126.0
 offset_bottom = 102.0
 scale = Vector2(0.02, 0.033)
-<<<<<<< HEAD
-max_value = 1000.0
-value = 1000.0
-=======
 value = 50.0
->>>>>>> bd59c9a96f6ca393e5d9dffb035c045c0eab26d7
 texture_under = ExtResource("7_2fvbb")
 texture_over = ExtResource("8_ml7e8")
 texture_progress = ExtResource("9_ihjo1")

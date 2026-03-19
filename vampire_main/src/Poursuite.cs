@@ -41,6 +41,11 @@ public partial class Poursuite : Node2D
                     + Math.Abs(Poursuivant.GlobalPosition.Y - Cible.GlobalPosition.Y)
                     <= 150.0f
             )
+            || (
+                Math.Abs(Poursuivant.GlobalPosition.X - Cible.GlobalPosition.X)
+                    + Math.Abs(Poursuivant.GlobalPosition.Y - Cible.GlobalPosition.Y)
+                <= 4.0f
+            )
         )
         {
             return;

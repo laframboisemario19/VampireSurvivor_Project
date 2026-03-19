@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://umgcpr5bcxjc" path="res://src/MedCible.cs" id="3_xwcet"]
 [ext_resource type="Texture2D" uid="uid://dkostj4xtrqq4" path="res://res/progress_over.png" id="4_81276"]
 [ext_resource type="Texture2D" uid="uid://cs3hoxjjk3d6g" path="res://res/progress_progress.png" id="5_ve786"]
-[ext_resource type="PackedScene" uid="uid://hj77b4wvwip1" path="res://scene/player.tscn" id="6_17rxn"]
 [ext_resource type="Script" uid="uid://b43vi3vxtw032" path="res://src/DcmProjectile.cs" id="6_ll5lq"]
 [ext_resource type="PackedScene" uid="uid://b7w1jye6ee7s3" path="res://scene/projectile_lineair.tscn" id="8_17rxn"]
 [ext_resource type="PackedScene" uid="uid://ccuihnipnmvvo" path="res://scene/projectile_circle.tscn" id="9_yq8tf"]
@@ -21,7 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://c8jfbxuo1x17o" path="res://scene/zombie_base.tscn" id="16_1it6f"]
 [ext_resource type="PackedScene" uid="uid://lmoe3354vkkp" path="res://scene/gem.tscn" id="16_i6gbm"]
 [ext_resource type="PackedScene" uid="uid://c0kupi3xrgaky" path="res://scene/zombie_gene.tscn" id="17_ww6yf"]
-[ext_resource type="PackedScene" uid="uid://bmv5qyk1jt22y" path="res://scene/zombie_boss.tscn" id="18_1it6f"]
+[ext_resource type="PackedScene" uid="uid://hj77b4wvwip1" path="res://scene/player.tscn" id="18_1it6f"]
+[ext_resource type="PackedScene" uid="uid://bmv5qyk1jt22y" path="res://scene/zombie_boss.tscn" id="18_pp3pk"]
 
 [node name="Game" type="Node2D" unique_id=1438342078]
 metadata/_edit_vertical_guides_ = [-685.0, 685.0]
@@ -32,7 +32,7 @@ position = Vector2(-12, -5)
 scale = Vector2(1.5, 1.5)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1134258768 node_paths=PackedStringArray("playerToFollow")]
-position = Vector2(-220, 87)
+position = Vector2(3, 2)
 zoom = Vector2(5, 5)
 script = ExtResource("1_yq8tf")
 playerToFollow = NodePath("../MED_Cible/Player")
@@ -70,8 +70,8 @@ SpawnerProjectile = NodePath("DCM_Projectile")
 SpawnerEnemy = NodePath("DCM_Spawner")
 Player = NodePath("Player")
 
-[node name="Player" parent="MED_Cible" unique_id=607470767 node_paths=PackedStringArray("InMedAttack", "XpBar") instance=ExtResource("6_17rxn")]
-position = Vector2(0, -3)
+[node name="Player" parent="MED_Cible" unique_id=607470767 node_paths=PackedStringArray("InMedAttack", "XpBar") instance=ExtResource("18_1it6f")]
+position = Vector2(2, 3)
 InMedAttack = NodePath("../../MED_Attack")
 XpBar = NodePath("../../Camera2D/XPBar")
 
@@ -118,7 +118,7 @@ ZombieBase = ExtResource("16_1it6f")
 ZombieRapide = ExtResource("15_1it6f")
 ZombieTank = ExtResource("15_ww6yf")
 ZombieGene = ExtResource("17_ww6yf")
-ZombieBoss = ExtResource("18_1it6f")
+ZombieBoss = ExtResource("18_pp3pk")
 MediateurCible = NodePath("..")
 AlgoSelectionCible = 1
 timer1 = NodePath("DPM_Timer2")

@@ -256,11 +256,6 @@ timer = NodePath("Timer")
 Area = NodePath("Area2D")
 Poursuite = NodePath("DPM_Poursuite")
 AnimatedSprite = NodePath("AnimatedSprite2D")
-<<<<<<< HEAD
-hp = 50
-=======
-hp = 1
->>>>>>> bd59c9a96f6ca393e5d9dffb035c045c0eab26d7
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1790034751]
 sprite_frames = SubResource("SpriteFrames_ei37u")
@@ -281,5 +276,5 @@ Poursuivant = NodePath("..")
 velocity = 30.0
 
 [node name="Timer" type="Timer" parent="." unique_id=1038450436]
-wait_time = 3.0
+wait_time = 0.5
 autostart = true
