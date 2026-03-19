@@ -110,7 +110,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8u7s"]
-size = Vector2(38, 20)
+size = Vector2(38, 16)
 
 [node name="Trap" type="Node2D" unique_id=288457860]
 z_index = -1
@@ -130,6 +130,7 @@ InSprite = NodePath("..")
 Trappe = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D" unique_id=1006839848]
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_t8u7s")
 
 [connection signal="area_entered" from="AnimatedSprite2D/Area2D" to="AnimatedSprite2D/Area2D" method="_on_area_entered"]
