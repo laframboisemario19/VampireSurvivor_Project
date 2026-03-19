@@ -8,12 +8,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_vj7ou"]
 radius = 144.11925
 
-[node name="Boxe" type="Sprite2D" unique_id=1007668515 node_paths=PackedStringArray("node", "hitEffect", "timer")]
+[node name="Boxe" type="Sprite2D" unique_id=1007668515 node_paths=PackedStringArray("node", "BoxeArea", "hitEffect", "timer")]
 rotation = 3.1342537
 scale = Vector2(0.1754658, 0.18442623)
 texture = ExtResource("1_vj7ou")
 script = ExtResource("2_u2iyp")
 node = NodePath(".")
+BoxeArea = NodePath("Area2D")
 hitEffect = NodePath("BoxingEffect")
 timer = NodePath("TimerBoxe")
 
@@ -25,7 +26,7 @@ texture = ExtResource("3_ml1qf")
 [node name="Area2D" type="Area2D" parent="." unique_id=2058423572 node_paths=PackedStringArray("Weapon")]
 position = Vector2(0, 5.422222)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("4_yahxu")
 Weapon = NodePath("..")
 eAlgoSelectionDetection = 2
@@ -35,7 +36,7 @@ position = Vector2(-0.4182496, 48.798534)
 shape = SubResource("CircleShape2D_vj7ou")
 
 [node name="TimerBoxe" type="Timer" parent="." unique_id=1619001716]
-wait_time = 5.0
+wait_time = 3.0
 autostart = true
 
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]

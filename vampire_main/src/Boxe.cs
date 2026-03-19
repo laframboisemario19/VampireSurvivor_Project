@@ -12,6 +12,9 @@ public partial class Boxe : BaseWeapon, ICollide
     private Sprite2D node;
 
     [Export]
+    private Area2D BoxeArea;
+
+    [Export]
     private Sprite2D hitEffect;
 
     [Export]
@@ -39,6 +42,7 @@ public partial class Boxe : BaseWeapon, ICollide
             return;
 
         Visible = true;
+        BoxeArea.SetCollisionMaskValue(2, true);
 
         tween?.Kill();
 
@@ -64,6 +68,7 @@ public partial class Boxe : BaseWeapon, ICollide
         }
 
         // tween.Finished += FinAttaque;
+        BoxeArea.SetCollisionMaskValue(2, false);
     }
 
     private void CreatePunch(Vector2 dir)
