@@ -29,6 +29,7 @@ public partial class MedAttack : Node2D, ICollide
         eMapOnPlayer,
         eTreasureOnPlayer,
         eTreasureOnAuraPlayer,
+        eTrapOnCharacter,
     }
 
     private ArrayList weaponList = new ArrayList() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -122,6 +123,14 @@ public partial class MedAttack : Node2D, ICollide
                         _ActivateWeapon();
                     }
                     ;
+                }
+                break;
+            case EAlgoSelectionDetection.eTrapOnCharacter:
+                {
+                    Trap trap = (Trap)InEntering;
+                    ITakeDamage character = (ITakeDamage)InEntered;
+                    character.TakeDamage(1);
+                    trap.TakeDamage(1);
                 }
                 break;
         }

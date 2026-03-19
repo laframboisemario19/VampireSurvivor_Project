@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Utils;
 
-public partial class Player : Node2D, ICollide
+public partial class Player : Node2D, ICollide, ITakeDamage
 {
     [ExportGroup("External")]
     [Export]
@@ -124,23 +124,24 @@ public partial class Player : Node2D, ICollide
         XpBar.MaxValue = (int)(XpBar.MaxValue * 1.2);
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int InDamage)
     {
         if (_is_dead)
         {
-            return;
+            return true;
         }
         if (healthBar != null)
         {
-            healthBar.Value -= damage;
+            healthBar.Value -= InDamage;
             if (healthBar.Value <= 0)
             {
                 Die();
-                return;
+                return true;
             }
         }
         _is_taking_damage = true;
         animatedPlayer.Play($"dommage_{_currentDirection}");
+        return true;
     }
 
     public void Die()

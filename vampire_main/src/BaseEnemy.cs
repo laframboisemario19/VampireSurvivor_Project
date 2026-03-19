@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Utils;
 
-public partial class BaseEnemy : Node2D, ICiblable
+public partial class BaseEnemy : Node2D, ICiblable, ITakeDamage
 {
     [ExportGroup("External")]
     [Export]
@@ -24,7 +24,7 @@ public partial class BaseEnemy : Node2D, ICiblable
     public bool isDying = false;
     private int hp = 5;
 
-    public virtual bool TakeDamage(int damage)
+    public virtual bool TakeDamage(int InDamage)
     {
         if (isDying)
             return false;
@@ -49,7 +49,7 @@ public partial class BaseEnemy : Node2D, ICiblable
             .SetEase(Tween.EaseType.OutIn);
         tween.Chain().TweenProperty(this, "modulate:a", 1.0, 0.1f);
 
-        hp -= damage;
+        hp -= InDamage;
         GD.Print($"Enemy {GetHashCode()} hit! HP: {hp}");
 
         if (hp <= 0)

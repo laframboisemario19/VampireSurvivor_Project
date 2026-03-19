@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bxgs2xya20p6f"]
 
 [ext_resource type="Texture2D" uid="uid://b17kx6g30opa5" path="res://res/Spike_B.png" id="1_jmtv5"]
-[ext_resource type="Script" path="res://src/Trap.cs" id="1_qx3ty"]
+[ext_resource type="Script" uid="uid://c3lvk5slkd8kc" path="res://src/Trap.cs" id="1_qx3ty"]
+[ext_resource type="Script" uid="uid://800nsp2l2h07" path="res://src/AreaTrappe.cs" id="3_a0q2j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qx3ty"]
 atlas = ExtResource("1_jmtv5")
@@ -75,9 +76,36 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0qvwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbyjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bslcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj15q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rq855")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4krb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io8g4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptubh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0q2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qx3ty")
 }],
-"loop": true,
-"name": &"default",
+"loop": false,
+"name": &"activate",
 "speed": 5.0
 }]
 
@@ -89,9 +117,18 @@ script = ExtResource("1_qx3ty")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1425088982]
 sprite_frames = SubResource("SpriteFrames_opspn")
-frame_progress = 0.3038919
+animation = &"activate"
+frame = 18
+frame_progress = 1.0
 
-[node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=96216079]
+[node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=96216079 node_paths=PackedStringArray("InSprite", "Trappe")]
+collision_layer = 0
+collision_mask = 4098
+script = ExtResource("3_a0q2j")
+InSprite = NodePath("..")
+Trappe = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D" unique_id=1006839848]
 shape = SubResource("RectangleShape2D_t8u7s")
+
+[connection signal="area_entered" from="AnimatedSprite2D/Area2D" to="AnimatedSprite2D/Area2D" method="_on_area_entered"]
