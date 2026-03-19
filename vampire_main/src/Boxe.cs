@@ -67,8 +67,8 @@ public partial class Boxe : BaseWeapon, ICollide
             _directionIndex = 0;
         }
 
-        // tween.Finished += FinAttaque;
-        BoxeArea.SetCollisionMaskValue(2, false);
+        tween.Finished += FinAttaque;
+        
     }
 
     private void CreatePunch(Vector2 dir)
@@ -94,11 +94,10 @@ public partial class Boxe : BaseWeapon, ICollide
         tween.TweenInterval(0.05f);
     }
 
-    // private void FinAttaque()
-    // {
-    //     _directionIndex = 0;
-    //     // Visible = false;
-    // }
+    private void FinAttaque()
+    {
+        BoxeArea.SetCollisionMaskValue(2, false);
+    }
 
     public void Collide(
         EAlgoSelectionDetection InAlgoSelectionDetection,
