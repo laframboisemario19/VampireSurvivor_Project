@@ -62,7 +62,6 @@ public partial class MedAttack : Node2D, ICollide
     {
         switch (InAlgoSelectionDetection)
         {
-            default:
             case EAlgoSelectionDetection.eProjectileOnEnemy:
                 {
                     Projectile projectile = (Projectile)InEntering;
@@ -132,6 +131,8 @@ public partial class MedAttack : Node2D, ICollide
                     character.TakeDamage(1);
                     trap.TakeDamage(1);
                 }
+                break;
+            default:
                 break;
         }
     }
