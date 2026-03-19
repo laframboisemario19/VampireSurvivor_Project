@@ -214,13 +214,12 @@ script = ExtResource("1_wgy2h")
 Area = NodePath("Area2D")
 Poursuite = NodePath("DPM_Poursuite")
 AnimatedSprite = NodePath("AnimatedSprite2D")
+hp = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=303377857]
 sprite_frames = SubResource("SpriteFrames_cfo1s")
-animation = &"explode"
+animation = &"marche_bas"
 autoplay = "marche_bas"
-frame = 6
-frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=256323183]
 collision_layer = 2

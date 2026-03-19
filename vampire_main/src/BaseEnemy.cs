@@ -22,6 +22,8 @@ public partial class BaseEnemy : Node2D, ICiblable, ITakeDamage
     [Export]
     protected AnimatedSprite2D AnimatedSprite;
     public bool isDying = false;
+
+    [Export(PropertyHint.Range, "0,50,1")]
     private int hp = 5;
 
     public virtual bool TakeDamage(int InDamage)

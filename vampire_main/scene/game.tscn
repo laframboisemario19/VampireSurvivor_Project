@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bxgs2xya20p6f" path="res://scene/trap.tscn" id="16_0lu6w"]
 [ext_resource type="PackedScene" uid="uid://c8jfbxuo1x17o" path="res://scene/zombie_base.tscn" id="16_1it6f"]
 [ext_resource type="PackedScene" uid="uid://lmoe3354vkkp" path="res://scene/gem.tscn" id="16_i6gbm"]
+[ext_resource type="PackedScene" uid="uid://c0kupi3xrgaky" path="res://scene/zombie_gene.tscn" id="17_ww6yf"]
 
 [node name="Game" type="Node2D" unique_id=1438342078]
 
@@ -47,9 +48,8 @@ texture_progress = ExtResource("5_ve786")
 tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0.36078432, 1, 1)
 
-[node name="MED_Attack" type="Node2D" parent="." unique_id=1828661138 node_paths=PackedStringArray("Game", "timer", "DcmProjectile", "DcmObject", "Player")]
+[node name="MED_Attack" type="Node2D" parent="." unique_id=1828661138 node_paths=PackedStringArray("timer", "DcmProjectile", "DcmObject", "Player")]
 script = ExtResource("2_33cqm")
-Game = NodePath("..")
 timer = NodePath("DPM_Timer")
 DcmProjectile = NodePath("../MED_Cible/DCM_Projectile")
 DcmObject = NodePath("../MED_Cible/DCM_Object")
@@ -112,7 +112,7 @@ SpawneeScene = ExtResource("13_81276")
 ZombieBase = ExtResource("16_1it6f")
 ZombieRapide = ExtResource("15_1it6f")
 ZombieTank = ExtResource("15_ww6yf")
-ZombieGene = ExtResource("16_1it6f")
+ZombieGene = ExtResource("17_ww6yf")
 MediateurCible = NodePath("..")
 AlgoSelectionCible = 1
 timer1 = NodePath("DPM_Timer2")

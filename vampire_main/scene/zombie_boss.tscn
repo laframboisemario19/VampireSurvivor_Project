@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dcgvkjkorb3uw"]
+[gd_scene format=3 uid="uid://bmv5qyk1jt22y"]
 
 [ext_resource type="Script" uid="uid://d1qfbx3n7c4kn" path="res://src/BaseEnemy.cs" id="1_kpym2"]
 [ext_resource type="Texture2D" uid="uid://md7hxwtvxh2l" path="res://res/gfx-sheet16.png" id="1_lrywj"]
@@ -250,12 +250,12 @@ animations = [{
 radius = 15.0
 height = 56.0
 
-[node name="ZombiePresse" type="Node2D" unique_id=473365435 node_paths=PackedStringArray("Area", "Poursuite", "AnimatedSprite")]
+[node name="ZombieBoss" type="Node2D" unique_id=473365435 node_paths=PackedStringArray("Area", "Poursuite", "AnimatedSprite")]
 script = ExtResource("1_kpym2")
 Area = NodePath("Area2D")
 Poursuite = NodePath("DPM_Poursuite")
 AnimatedSprite = NodePath("AnimatedSprite2D")
-hp = 10
+hp = 50
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1790034751]
 sprite_frames = SubResource("SpriteFrames_ei37u")

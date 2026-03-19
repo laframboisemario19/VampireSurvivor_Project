@@ -228,6 +228,7 @@ script = ExtResource("1_ymi5s")
 Area = NodePath("Area2D")
 Poursuite = NodePath("DPM_Poursuite")
 AnimatedSprite = NodePath("AnimatedSprite2D")
+hp = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1339741889]
 sprite_frames = SubResource("SpriteFrames_r26mb")
