@@ -52,13 +52,14 @@ texture_progress = ExtResource("5_ve786")
 tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0.36078432, 1, 1)
 
-[node name="MED_Attack" type="Node2D" parent="." unique_id=1828661138 node_paths=PackedStringArray("Game", "timer", "DcmProjectile", "DcmObject", "Player")]
+[node name="MED_Attack" type="Node2D" parent="." unique_id=1828661138 node_paths=PackedStringArray("Game", "timer", "DcmProjectile", "DcmObject", "Player", "DcmEnemi")]
 script = ExtResource("2_33cqm")
 Game = NodePath("..")
 timer = NodePath("DPM_Timer")
 DcmProjectile = NodePath("../MED_Cible/DCM_Projectile")
 DcmObject = NodePath("../MED_Cible/DCM_Object")
 Player = NodePath("../MED_Cible/Player")
+DcmEnemi = NodePath("../MED_Cible/DCM_Spawner")
 
 [node name="DPM_Timer" type="Timer" parent="MED_Attack" unique_id=1387762677]
 wait_time = 5.0
@@ -81,34 +82,34 @@ ProjectileLinear = ExtResource("8_17rxn")
 ProjectileCircle = ExtResource("9_yq8tf")
 MediateurCible = NodePath("..")
 MediateurAttack = NodePath("../../MED_Attack")
-timer1 = NodePath("DPM_Timer")
-timer2 = NodePath("DPM_Timer2")
-timer3 = NodePath("DPM_Timer3")
-timer4 = NodePath("DPM_Timer4")
-timer5 = NodePath("DPM_Timer5")
-timer6 = NodePath("DPM_Timer6")
+timer1 = NodePath("LinearTargetTimer")
+timer2 = NodePath("CircleTargetTimer")
+timer3 = NodePath("LinearSpiralTimer")
+timer4 = NodePath("CircleSpiralTimer")
+timer5 = NodePath("LinearExplosionTimer")
+timer6 = NodePath("CircleExplosionTimer")
 
-[node name="DPM_Timer" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1803089471]
+[node name="LinearTargetTimer" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1803089471]
 wait_time = 2.0
 autostart = true
 
-[node name="DPM_Timer2" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1430361812]
+[node name="CircleTargetTimer" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1430361812]
 wait_time = 2.0
 autostart = true
 
-[node name="DPM_Timer3" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1462136540]
+[node name="LinearSpiralTimer" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1462136540]
 wait_time = 0.5
 autostart = true
 
-[node name="DPM_Timer4" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1239431613]
+[node name="CircleSpiralTimer" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1239431613]
 wait_time = 0.5
 autostart = true
 
-[node name="DPM_Timer5" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=294430853]
+[node name="LinearExplosionTimer" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=294430853]
 wait_time = 2.0
 autostart = true
 
-[node name="DPM_Timer6" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1094314292]
+[node name="CircleExplosionTimer" type="Timer" parent="MED_Cible/DCM_Projectile" unique_id=1094314292]
 wait_time = 2.0
 autostart = true
 
@@ -121,23 +122,23 @@ ZombieGene = ExtResource("17_ww6yf")
 ZombieBoss = ExtResource("18_pp3pk")
 MediateurCible = NodePath("..")
 AlgoSelectionCible = 1
-timer1 = NodePath("DPM_Timer2")
-timer2 = NodePath("DPM_Timer3")
-timer3 = NodePath("DPM_Timer4")
-timer4 = NodePath("DPM_Timer5")
+timer1 = NodePath("BaseTimer")
+timer2 = NodePath("RapideTimer")
+timer3 = NodePath("TankTimer")
+timer4 = NodePath("ShyTimer")
 
-[node name="DPM_Timer2" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=835770349]
+[node name="BaseTimer" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=835770349]
 autostart = true
 
-[node name="DPM_Timer3" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=958502534]
-wait_time = 10.0
+[node name="RapideTimer" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=958502534]
+wait_time = 3.0
 autostart = true
 
-[node name="DPM_Timer4" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=1563278495]
+[node name="TankTimer" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=1563278495]
 wait_time = 7.0
 autostart = true
 
-[node name="DPM_Timer5" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=662672533]
+[node name="ShyTimer" type="Timer" parent="MED_Cible/DCM_Spawner" unique_id=662672533]
 wait_time = 4.0
 autostart = true
 
@@ -148,13 +149,13 @@ GemScene = ExtResource("16_i6gbm")
 TrapScene = ExtResource("16_0lu6w")
 MediateurAttack = NodePath("../../MED_Attack")
 MediateurCible = NodePath("..")
-timer1 = NodePath("Timer")
-timer2 = NodePath("Timer2")
+timer1 = NodePath("TreasureTimer")
+timer2 = NodePath("TrapTimer")
 
-[node name="Timer" type="Timer" parent="MED_Cible/DCM_Object" unique_id=796488326]
+[node name="TreasureTimer" type="Timer" parent="MED_Cible/DCM_Object" unique_id=796488326]
 wait_time = 2.0
 autostart = true
 
-[node name="Timer2" type="Timer" parent="MED_Cible/DCM_Object" unique_id=1844914015]
-wait_time = 2.0
+[node name="TrapTimer" type="Timer" parent="MED_Cible/DCM_Object" unique_id=1844914015]
+wait_time = 10.0
 autostart = true

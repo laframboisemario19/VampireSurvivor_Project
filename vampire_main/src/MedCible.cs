@@ -30,7 +30,6 @@ public partial class MedCible : Node2D
             default:
             case EAlgoSelectionCible.ePlayer:
                 {
-                    // à coder
                     ret = Player.EnsureValid();
                 }
                 break;
@@ -41,15 +40,15 @@ public partial class MedCible : Node2D
                         .GatherChildren()
                         .OfType<BaseEnemy>();
                     ret = allEnemies.First();
-                    float currentength = (InPosition - ret.GlobalPosition).Length();
+                    float currentLength = (InPosition - ret.GlobalPosition).Length();
                     foreach (BaseEnemy enemy in allEnemies)
                     {
                         float length = (InPosition - enemy.GlobalPosition).Length();
 
-                        if (length < currentength)
+                        if (length < currentLength)
                         {
                             ret = enemy;
-                            currentength = length;
+                            currentLength = length;
                         }
                     }
                 }

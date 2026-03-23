@@ -247,3 +247,4 @@ shape = SubResource("CapsuleShape2D_40jid")
 [node name="DPM_Poursuite" type="Node2D" parent="." unique_id=1513095183 node_paths=PackedStringArray("Poursuivant")]
 script = ExtResource("5_6hm1a")
 Poursuivant = NodePath("..")
+velocity = 90.0

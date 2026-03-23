@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Utils;
@@ -22,6 +23,11 @@ public partial class MedAttack : Node2D, ICollide
 
     [Export]
     private Player Player;
+
+    [Export]
+    private DcmEnemi DcmEnemi;
+
+    private bool GameStarted;
     int i = 0;
 
     private bool _gameOver = false;
@@ -39,26 +45,28 @@ public partial class MedAttack : Node2D, ICollide
 
     private ArrayList weaponList = new ArrayList() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
-    // private ArrayList weaponList = new ArrayList() { 8 };
-
     public override void _Ready()
     {
         base._Ready();
 
-        // À remplacer par une fonction permettant le choix d'arme et utiliser pour les spawns de monstres
-        // timer.EnsureValid().Timeout += () =>
-        // {
-        //     if (i < 6)
-        //     {
-        //         DcmProjectile.ActivateProjectile((EProjectileType)i);
-        //         i++;
-        //     }
-        // };
         object[] list = weaponList.ToArray();
         Random.Shared.Shuffle(list);
         weaponList.Clear();
         weaponList.AddRange(list);
-        CallDeferred(MethodName._ActivateWeapon);
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        if (GameStarted)
+            return;
+        if (Input.IsActionPressed("ui_select"))
+        {
+            DcmEnemi.StartGame();
+            Player.IsGameStarted = true;
+            CallDeferred(MethodName._ActivateWeapon);
+            GameStarted = true;
+        }
     }
 
     public void Collide(
@@ -75,7 +83,6 @@ public partial class MedAttack : Node2D, ICollide
                     projectile.Die();
                     BaseEnemy enemy = (BaseEnemy)InEntered;
 
-                    // À remplacer Die pour TakeDamage + Spawn seulement si TakeDamage return True
                     bool spawnGem = enemy.TakeDamage(1);
                     if (spawnGem)
                     {
@@ -84,6 +91,8 @@ public partial class MedAttack : Node2D, ICollide
                             Tween tw = CreateTween();
                             tw.TweenProperty(Game, "modulate", Colors.Green, 2.0f);
                             Player.win();
+
+                            _GameOver();
                         }
                         else if (spawnGem)
                         {
@@ -94,7 +103,6 @@ public partial class MedAttack : Node2D, ICollide
                 break;
             case EAlgoSelectionDetection.eEnemyOnPlayer:
                 {
-                    // à coder
                     int damage = 0;
                     if (InEntered is Player player)
                     {
@@ -106,6 +114,7 @@ public partial class MedAttack : Node2D, ICollide
                         {
                             Tween tw = CreateTween();
                             tw.TweenProperty(Game, "modulate", Colors.Red, 2.0f);
+                            _GameOver();
                         }
                     }
                 }
@@ -113,7 +122,6 @@ public partial class MedAttack : Node2D, ICollide
             case EAlgoSelectionDetection.eMeleeOnEnemy:
                 {
                     BaseEnemy enemy = (BaseEnemy)InEntering;
-                    // À remplacer Die pour TakeDamage + Spawn seulement si TakeDamage return True
                     bool spawnGem = enemy.TakeDamage(1);
                     if (enemy is ZombieBoss)
                     {
@@ -132,6 +140,7 @@ public partial class MedAttack : Node2D, ICollide
                     player.Die();
                     Tween tw = CreateTween();
                     tw.TweenProperty(Game, "modulate", Colors.Red, 2.0f);
+                    _GameOver();
                 }
                 break;
 
@@ -147,7 +156,6 @@ public partial class MedAttack : Node2D, ICollide
                     BaseObject baseObject = (BaseObject)InEntering;
                     Player player = (Player)InEntered;
                     baseObject.Die();
-                    // à coder le return de AddXp pour le choix d'arme
                     if (player.AddXp(baseObject.XpValue))
                     {
                         _ActivateWeapon();
@@ -166,6 +174,15 @@ public partial class MedAttack : Node2D, ICollide
                         {
                             Tween tw = CreateTween();
                             tw.TweenProperty(Game, "modulate", Colors.Red, 2.0f);
+                            _GameOver();
+                        }
+                        else if (character is ZombieBoss)
+                        {
+                            Tween tw = CreateTween();
+                            tw.TweenProperty(Game, "modulate", Colors.Green, 2.0f);
+                            Player.win();
+
+                            _GameOver();
                         }
                         else if (character is BaseEnemy)
                         {
@@ -199,5 +216,18 @@ public partial class MedAttack : Node2D, ICollide
         }
     }
 
-    private void on_arrete_tout() { }
+    private void _GameOver()
+    {
+        IEnumerable<BaseEnemy> allEnemies = DcmEnemi
+            .EnsureValid()
+            .GatherChildren()
+            .OfType<BaseEnemy>();
+        foreach (BaseEnemy e in allEnemies)
+        {
+            e.Die();
+        }
+        DcmProjectile.GameOver();
+        DcmEnemi.GameOver();
+        Player.DcmAttack.GameOver();
+    }
 }

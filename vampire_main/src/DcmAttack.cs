@@ -36,4 +36,11 @@ public partial class DcmAttack : Node2D
     {
         IsAttacking = false;
     }
+
+    public void GameOver()
+    {
+        ((Sword)sword).GameOver();
+        ((Axe)axe).GameOver();
+        ((Boxe)boxe).GameOver();
+    }
 }

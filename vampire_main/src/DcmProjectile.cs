@@ -103,7 +103,7 @@ public partial class DcmProjectile : Node2D, ISpawn
             ((ISpawn)this).Spawn((PackedScene)sceneList[(int)InProjectileType % 2]);
         Node2D cible = MediateurCible
             .EnsureValid()
-            .ChoisirCible(InAlgoSelectionCible, GlobalPosition);
+            .ChoisirCible(InAlgoSelectionCible, MediateurCible.GetPlayerPosition());
         if (spawn is ICiblable)
         {
             spawn.SetCible(cible);
@@ -149,6 +149,14 @@ public partial class DcmProjectile : Node2D, ISpawn
         if ((int)InProjectileType % 2 == 1)
         {
             spawn.InfiniteTurn();
+        }
+    }
+
+    public void GameOver()
+    {
+        foreach (Timer timer in timerList)
+        {
+            timer.Stop();
         }
     }
 }

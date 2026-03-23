@@ -252,7 +252,7 @@ height = 56.0
 
 [node name="ZombieBoss" type="Node2D" unique_id=473365435 node_paths=PackedStringArray("timer", "Area", "Poursuite", "AnimatedSprite")]
 script = ExtResource("1_o3i23")
-timer = NodePath("Timer")
+timer = NodePath("SpawnTimer")
 Area = NodePath("Area2D")
 Poursuite = NodePath("DPM_Poursuite")
 AnimatedSprite = NodePath("AnimatedSprite2D")
@@ -275,6 +275,6 @@ script = ExtResource("4_2s7qe")
 Poursuivant = NodePath("..")
 velocity = 30.0
 
-[node name="Timer" type="Timer" parent="." unique_id=1038450436]
-wait_time = 0.5
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1038450436]
+wait_time = 2.0
 autostart = true

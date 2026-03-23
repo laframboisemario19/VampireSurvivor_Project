@@ -42,9 +42,10 @@ public partial class Poursuite : Node2D
                     <= 150.0f
             )
             || (
-                Math.Abs(Poursuivant.GlobalPosition.X - Cible.GlobalPosition.X)
+                Poursuivant is BaseEnemy
+                && Math.Abs(Poursuivant.GlobalPosition.X - Cible.GlobalPosition.X)
                     + Math.Abs(Poursuivant.GlobalPosition.Y - Cible.GlobalPosition.Y)
-                <= 4.0f
+                    <= 4.0f
             )
         )
         {

@@ -21,8 +21,6 @@ public partial class Axe : BaseWeapon, ICollide
     [Export]
     private Timer timer;
 
-
-
     private Tween tween;
     private Vector2 newScale = new Vector2();
 
@@ -72,5 +70,10 @@ public partial class Axe : BaseWeapon, ICollide
     )
     {
         ((ICollide)(Player.EnsureValid())).Collide(InAlgoSelectionDetection, InEntering, InEntered);
+    }
+
+    public void GameOver()
+    {
+        timer.Stop();
     }
 }

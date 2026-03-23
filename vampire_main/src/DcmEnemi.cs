@@ -60,23 +60,20 @@ public partial class DcmEnemi : Node2D, ISpawn
         timerList.AddRange(new[] { timer1, timer2, timer3, timer4 });
         sceneList.AddRange(new[] { ZombieBase, ZombieRapide, ZombieTank, ZombieGene, ZombieBoss });
 
-        _SpawnWithTarget((ETypeEnemi)4);
-        // ActivateWave((ETypeEnemi)0);
-
-        // timer.EnsureValid().Timeout += () =>
-        // {
-        //     if (i < 4)
-        //     {
-        //         ActivateWave((ETypeEnemi)i);
-        //         i++;
-        //         GD.Print(i);
-        //     }
-        //     else if (i == 4)
-        //     {
-        //         _SpawnWithTarget(ETypeEnemi.eZombieBoss);
-        //         i++;
-        //     }
-        // };
+        timer.EnsureValid().Timeout += () =>
+        {
+            if (i < 4)
+            {
+                ActivateWave((ETypeEnemi)i);
+                i++;
+                GD.Print(i);
+            }
+            else if (i == 4)
+            {
+                _SpawnWithTarget(ETypeEnemi.eZombieBoss);
+                i++;
+            }
+        };
     }
 
     public void ActivateWave(ETypeEnemi InEnemiType)
@@ -216,5 +213,20 @@ public partial class DcmEnemi : Node2D, ISpawn
             ciblable.SetCible(cible);
         }
         AddChild(spawn);
+    }
+
+    public void StartGame()
+    {
+        ActivateWave((ETypeEnemi)0);
+        timer.Start();
+    }
+
+    public void GameOver()
+    {
+        foreach (Timer t in timerList)
+        {
+            t.Stop();
+        }
+        timer.Stop();
     }
 }

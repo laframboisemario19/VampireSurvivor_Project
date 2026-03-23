@@ -12,6 +12,9 @@ public partial class MouvementPlayer : Node2D
     private bool _isActive = true;
 
     [Export]
+    public Player Player;
+
+    [Export]
     public bool IsActive
     {
         get => _isActive;
@@ -32,6 +35,8 @@ public partial class MouvementPlayer : Node2D
     public override void _Process(double InDelta)
     {
         base._Process(InDelta);
+        if (!Player.IsGameStarted || Player.PlayerWon)
+            return;
         _inputVector = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         if (_inputVector.Length() < 1.0f)
         {

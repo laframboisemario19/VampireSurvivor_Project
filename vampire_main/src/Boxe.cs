@@ -68,7 +68,6 @@ public partial class Boxe : BaseWeapon, ICollide
         }
 
         tween.Finished += FinAttaque;
-        
     }
 
     private void CreatePunch(Vector2 dir)
@@ -106,5 +105,10 @@ public partial class Boxe : BaseWeapon, ICollide
     )
     {
         ((ICollide)(Player.EnsureValid())).Collide(InAlgoSelectionDetection, InEntering, InEntered);
+    }
+
+    public void GameOver()
+    {
+        timer.Stop();
     }
 }

@@ -56,7 +56,6 @@ public partial class Sword : BaseWeapon, ICollide
 
         float left = Mathf.Pi;
         float right = 0.0f;
-        
 
         if (_usePatternA)
         {
@@ -119,5 +118,10 @@ public partial class Sword : BaseWeapon, ICollide
     )
     {
         ((ICollide)(Player.EnsureValid())).Collide(InAlgoSelectionDetection, InEntering, InEntered);
+    }
+
+    public void GameOver()
+    {
+        timer.Stop();
     }
 }

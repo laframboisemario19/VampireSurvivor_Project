@@ -24,6 +24,7 @@ public partial class Player : Node2D, ICollide, ITakeDamage
     private bool _is_taking_damage = false;
     private bool _is_dead = false;
     private bool _player_won = false;
+    private bool _is_game_started = false;
     public bool PlayerWon
     {
         get { return _player_won; }
@@ -35,6 +36,11 @@ public partial class Player : Node2D, ICollide, ITakeDamage
         get { return _is_dead; }
         private set { _is_dead = value; }
     }
+    public bool IsGameStarted
+    {
+        get { return _is_game_started; }
+        set { _is_game_started = value; }
+    }
     private string _currentDirection = "bas";
 
     public override void _Ready()
@@ -44,7 +50,7 @@ public partial class Player : Node2D, ICollide, ITakeDamage
 
     public override void _Process(double delta)
     {
-        if (_is_dead || _is_taking_damage)
+        if (_is_dead || _is_taking_damage || !_is_game_started)
             return;
         if (_player_won)
         {
@@ -59,6 +65,9 @@ public partial class Player : Node2D, ICollide, ITakeDamage
 
     private void HandleMouvementAnimation()
     {
+        if (_is_dead || _player_won)
+            return;
+
         string newAnim = "";
 
         if (Input.IsActionPressed("ui_right"))
@@ -111,6 +120,9 @@ public partial class Player : Node2D, ICollide, ITakeDamage
     {
         XpBar.Value = 0;
         XpBar.MaxValue = (int)(XpBar.MaxValue * 1.2);
+
+        Tween tween = CreateTween();
+        tween.TweenProperty(this, "rotation", Rotation + Math.PI * 2.0f, 2.0);
     }
 
     public bool TakeDamage(int InDamage)
@@ -155,7 +167,6 @@ public partial class Player : Node2D, ICollide, ITakeDamage
         }
         else if (((string)animatedPlayer.Animation).StartsWith("mort"))
         {
-            // QueueFree();
             GetTree().Quit();
         }
     }
