@@ -13,12 +13,12 @@ public partial class PlayerArea : Area2D
         EAlgoSelectionDetection algo;
         switch (InArea.CollisionLayer)
         {
-            case 2: // layer 2 = Enemy
+            case 2:
                 {
                     algo = EAlgoSelectionDetection.eEnemyOnPlayer;
                 }
                 break;
-            case 4: // layer 4 = Map
+            case 4:
                 {
                     algo = EAlgoSelectionDetection.eMapOnPlayer;
                 }

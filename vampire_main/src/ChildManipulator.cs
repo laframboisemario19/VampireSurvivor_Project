@@ -15,7 +15,6 @@ public class ChildManipulator
         InPackedSceneToFilter.EnsureValid();
         InDCMFilter.EnsureValid();
         SceneState state = InPackedSceneToFilter.GetState();
-        // index = 0 noeud racine de la scène
         StringName nodeType = state.GetNodeType(0);
         Array<Node> ret = InDCMFilter.FindChildren("*", nodeType, false, false);
         return ret.OfType<Node2D>();

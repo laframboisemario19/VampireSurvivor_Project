@@ -12,8 +12,7 @@ public partial class DcmEnemi : Node2D, ISpawn
 {
     [ExportGroup("External")]
     [Export]
-    private PackedScene SpawneeScene,
-        ZombieBase,
+    private PackedScene ZombieBase,
         ZombieRapide,
         ZombieTank,
         ZombieGene,
@@ -66,7 +65,6 @@ public partial class DcmEnemi : Node2D, ISpawn
             {
                 ActivateWave((ETypeEnemi)i);
                 i++;
-                GD.Print(i);
             }
             else if (i == 4)
             {
@@ -166,7 +164,7 @@ public partial class DcmEnemi : Node2D, ISpawn
 
     public IEnumerable<Node2D> GatherChildren()
     {
-        return ChildManipulator.GatherChildren(SpawneeScene, this);
+        return ChildManipulator.GatherChildren(ZombieBase, this);
     }
 
     public void SpawnRandomEnemy()
@@ -200,10 +198,7 @@ public partial class DcmEnemi : Node2D, ISpawn
             posY = (float)GD.RandRange(minOffset, _cameraH / 2) * multY;
         }
 
-        //GD.Print($"E: {posX}, {posY}");
-        GD.Print($"Player: {playerPos.X}, {playerPos.Y}");
         spawn.GlobalPosition = playerPos + new Vector2(posX, posY);
-        GD.Print($"E: {spawn.GlobalPosition.X}, {spawn.GlobalPosition.Y}");
 
         Node2D cible = MediateurCible
             .EnsureValid()

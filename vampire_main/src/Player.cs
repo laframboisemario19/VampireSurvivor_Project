@@ -155,12 +155,10 @@ public partial class Player : Node2D, ICollide, ITakeDamage
     {
         _player_won = true;
         animatedPlayer.Play("animation_victoire");
-        GD.Print("tu as gagné");
     }
 
     private void OnAnimationFinished()
     {
-        GD.Print("Animation terminée : " + animatedPlayer.Animation);
         if (((string)animatedPlayer.Animation).StartsWith("dommage"))
         {
             _is_taking_damage = false;

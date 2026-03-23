@@ -21,7 +21,7 @@ public partial class MouvementPlayer : Node2D
         set
         {
             _isActive = value;
-            //Alternative aux if dans les fonctions process et physics process
+
             SetProcess(value);
             SetPhysicsProcess(value);
         }
@@ -29,9 +29,6 @@ public partial class MouvementPlayer : Node2D
 
     Vector2 _inputVector = new(0.0f, 0.0f);
 
-    public override void _Ready() { }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double InDelta)
     {
         base._Process(InDelta);

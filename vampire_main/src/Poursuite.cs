@@ -98,13 +98,6 @@ public partial class Poursuite : Node2D
                         anim.Play("marche_haut");
                     }
                 }
-
-                // float scaleX =
-                //     deplacement.X > 0.0f
-                //         ? Math.Abs(Poursuivant.Scale.X)
-                //         : -Math.Abs(Poursuivant.Scale.X);
-                // Vector2 newScale = new Vector2(scaleX, Poursuivant.Scale.Y);
-                // Poursuivant.Scale = newScale;
             }
         }
     }

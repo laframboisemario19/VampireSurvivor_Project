@@ -48,9 +48,6 @@ public partial class BaseEnemy : Node2D, ICiblable, ITakeDamage
         Vector2 offset = posSelf + ((posSelf - posPlayer).Normalized() * 10.0f);
         Color baseMod = Modulate;
 
-        // GD.Print($"Enemi old position : {posSelf}");
-        // GD.Print($"Enemi new position : {offset}");
-
         Tween tween = CreateTween();
         tween
             .TweenProperty(this, "position", offset, 0.5f)
@@ -64,7 +61,6 @@ public partial class BaseEnemy : Node2D, ICiblable, ITakeDamage
         tween.Chain().TweenProperty(this, "modulate:a", 1.0, 0.1f);
 
         hp -= InDamage;
-        // GD.Print($"Enemy {GetHashCode()} hit! HP: {hp}");
 
         if (hp <= 0)
         {

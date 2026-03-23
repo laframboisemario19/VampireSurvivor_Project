@@ -51,7 +51,7 @@ rotation = 3.9400377
 shape = SubResource("CapsuleShape2D_b0qhw")
 
 [node name="TimerSword" type="Timer" parent="." unique_id=1870546733]
-wait_time = 3.0
+wait_time = 2.0
 autostart = true
 
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
