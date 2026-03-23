@@ -1,9 +1,0 @@
-{
-    "editor.formatOnSave": true,
-    "[csharp]": {
-        "editor.defaultFormatter": "csharpier.csharpier-vscode"
-    },
-    "[xml]": {
-        "editor.defaultFormatter": "csharpier.csharpier-vscode"
-    }
-}
