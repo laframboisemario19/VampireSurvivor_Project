@@ -1,15 +1,35 @@
-# vampire_survivor_project
+# Vampire Survivor Project
 
-## Collaborateurs :
-- Eduardo Torres - Teduardo94 - 16 commits
-- Guillaume Foisy - GuillaumeF21 - 16 commits
-- Jonathan Barahona Gonzalez - jobsthan - 15 commits
-- Mario Laframboise - laframboisemario19 - 32 commits
-- Ahmed Gacem - DemaG123 - 7 commits
+Un clone de [Vampire Survivors](https://store.steampowered.com/app/1794680/Vampire_Survivors/) fait en Godot 4 avec C#. Le joueur survit le plus longtemps possible contre des vagues de zombies, accumule de l'XP et déverrouille des armes au fil des niveaux — jusqu'à affronter le boss final.
 
-** Note: Les décomptes de commits qui ne correspondent pas à la capture d'écran sont justifiés en commentaires des commits, car on a fait
-du pair-programming sur plusieurs tâches.
+## Jouer
 
-## Particularités
-Quand le joueur gagne, la fenêtre au complet devient verte et le personnage saute dans les airs.
-Quand il perd, la fenêtre devient rouge et le personnage disparaît. Puis, la fenêtre de jeu se ferme.
+1. Ouvrir le projet dans **Godot 4** (avec support .NET).
+2. Lancer la scène principale `vampire_main/scene/game.tscn`.
+3. Appuyer sur **Espace** pour démarrer la partie.
+4. Se déplacer avec les **flèches directionnelles**.
+5. Les armes s'activent automatiquement.
+
+## Mécaniques
+
+- **XP & niveaux** : ramasser les gemmes laissées par les ennemis tués remplit la barre d'XP. Chaque montée de niveau déverrouille une nouvelle arme (dans un ordre aléatoire à chaque partie).
+- **Armes** : épée, hache, gants de boxe, projectiles linéaires, projectiles circulaires, pièges — toutes s'activent automatiquement et s'empilent au fil de la progression.
+- **Ennemis** : zombies normaux, zombies rapides, zombies tanks, et un boss qui invoque des renforts à intervalles réguliers.
+- **Condition de victoire** : tuer le boss — l'écran devient vert et le personnage fait une animation de victoire.
+- **Condition de défaite** : mourir — l'écran devient rouge et la fenêtre se ferme.
+
+## Stack technique
+
+- **Moteur** : Godot 4
+- **Langage** : C# (.NET / Mono)
+- **Patterns** : interfaces (`ICollide`, `ITakeDamage`, `ICiblable`, …), médiateur (`MedAttack`), DCM pour les entités
+
+## Équipe
+
+| Membre | GitHub |
+|---|---|
+| Eduardo Torres | [@Teduardo94](https://github.com/Teduardo94) |
+| Guillaume Foisy | [@GuillaumeF21](https://github.com/GuillaumeF21) |
+| Jonathan Barahona Gonzalez | [@jobsthan](https://github.com/jobsthan) |
+| Mario Laframboise | [@laframboisemario19](https://github.com/laframboisemario19) |
+| Ahmed Gacem | [@DemaG123](https://github.com/DemaG123) |
