@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using Godot;
 
 public partial class DcmAttack : Node2D
@@ -17,7 +17,7 @@ public partial class DcmAttack : Node2D
         eBoxe = 8,
     }
 
-    ArrayList attackList = [];
+    List<BaseWeapon> attackList = [];
 
     public override void _Ready()
     {
@@ -27,15 +27,10 @@ public partial class DcmAttack : Node2D
 
     public void ActivateAttack(eWeaponType WeaponType)
     {
-        ((BaseWeapon)attackList[(int)WeaponType - 6]).ActivateAttack();
+        attackList[(int)WeaponType - 6].ActivateAttack();
     }
 
-    private bool IsAttacking = false;
-
-    public void EndAttacking()
-    {
-        IsAttacking = false;
-    }
+    public void EndAttacking() { }
 
     public void GameOver()
     {

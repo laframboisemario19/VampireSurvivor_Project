@@ -122,7 +122,7 @@ public partial class Player : Node2D, ICollide, ITakeDamage
         XpBar.MaxValue = (int)(XpBar.MaxValue * 1.2);
 
         Tween tween = CreateTween();
-        tween.TweenProperty(this, "rotation", Rotation + Math.PI * 2.0f, 2.0);
+        tween.TweenProperty(this, "rotation", Rotation + Mathf.Pi * 2.0f, 2.0);
     }
 
     public bool TakeDamage(int InDamage)

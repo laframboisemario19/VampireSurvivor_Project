@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -28,7 +27,6 @@ public partial class MedAttack : Node2D, ICollide
     private DcmEnemi DcmEnemi;
 
     private bool GameStarted;
-    int i = 0;
 
     private bool _gameOver = false;
 
@@ -43,13 +41,13 @@ public partial class MedAttack : Node2D, ICollide
         eTrapOnCharacter,
     }
 
-    private ArrayList weaponList = new ArrayList() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+    private List<int> weaponList = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
     public override void _Ready()
     {
         base._Ready();
 
-        object[] list = weaponList.ToArray();
+        int[] list = weaponList.ToArray();
         Random.Shared.Shuffle(list);
         weaponList.Clear();
         weaponList.AddRange(list);
@@ -160,7 +158,6 @@ public partial class MedAttack : Node2D, ICollide
                     {
                         _ActivateWeapon();
                     }
-                    ;
                 }
                 break;
             case EAlgoSelectionDetection.eTrapOnCharacter:
@@ -202,7 +199,7 @@ public partial class MedAttack : Node2D, ICollide
     {
         if (weaponList.Count > 0)
         {
-            int index = (int)weaponList[0];
+            int index = weaponList[0];
             weaponList.RemoveAt(0);
 
             if (index < 6)

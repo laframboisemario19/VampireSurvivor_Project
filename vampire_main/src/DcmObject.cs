@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using Godot;
 using Utils;
 using static MedAttack;
@@ -23,8 +23,8 @@ public partial class DcmObject : Node2D, ISpawn, ICollide
     private Timer timer1,
         timer2;
 
-    private ArrayList TimerList = [];
-    private ArrayList SceneList = [];
+    private List<Timer> TimerList = [];
+    private List<PackedScene> SceneList = [];
 
     public void Collide(
         EAlgoSelectionDetection InAlgoSelectionDetection,
@@ -50,7 +50,7 @@ public partial class DcmObject : Node2D, ISpawn, ICollide
             timer.EnsureValid().Timeout += () =>
             {
                 int index = TimerList.IndexOf(timer);
-                BaseObject spawn = (BaseObject)((ISpawn)this).Spawn((PackedScene)SceneList[index]);
+                BaseObject spawn = (BaseObject)((ISpawn)this).Spawn(SceneList[index]);
                 spawn.GlobalPosition += _DefinePosition();
                 AddChild(spawn);
             };

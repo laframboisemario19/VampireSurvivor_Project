@@ -39,7 +39,9 @@ public partial class MedCible : Node2D
                         .EnsureValid()
                         .GatherChildren()
                         .OfType<BaseEnemy>();
-                    ret = allEnemies.First();
+                    ret = allEnemies.FirstOrDefault();
+                    if (ret == null)
+                        break;
                     float currentLength = (InPosition - ret.GlobalPosition).Length();
                     foreach (BaseEnemy enemy in allEnemies)
                     {

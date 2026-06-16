@@ -29,8 +29,6 @@ public partial class Boxe : BaseWeapon, ICollide
 
     private Vector2[] directions = { Vector2.Right, Vector2.Down, Vector2.Left, Vector2.Up };
 
-    int cpt = 0;
-
     public override void ActivateAttack()
     {
         timer.Timeout += Hit;

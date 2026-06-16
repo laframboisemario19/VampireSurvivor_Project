@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public partial class gemDetection : Area2D
+public partial class GemDetection : Area2D
 {
     private void OnAreaEntered(Area2D InArea)
     {

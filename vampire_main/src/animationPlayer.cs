@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public partial class animationPlayer : Node2D
+public partial class AnimationPlayer : Node2D
 {
     [Export]
     AnimatedSprite2D animatedPlayer;

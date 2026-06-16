@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using Godot;
 using Godot.Collections;
 using Utils;
-using Vector2 = Godot.Vector2;
 
 public partial class DcmEnemi : Node2D, ISpawn
 {
@@ -37,8 +34,8 @@ public partial class DcmEnemi : Node2D, ISpawn
 
     int i = 1;
 
-    private ArrayList timerList = [];
-    private ArrayList sceneList = [];
+    private List<Timer> timerList = [];
+    private List<PackedScene> sceneList = [];
 
     public enum ETypeEnemi
     {
@@ -76,7 +73,7 @@ public partial class DcmEnemi : Node2D, ISpawn
 
     public void ActivateWave(ETypeEnemi InEnemiType)
     {
-        Timer timer = (Timer)timerList[(int)InEnemiType];
+        Timer timer = timerList[(int)InEnemiType];
         timer.EnsureValid().Timeout += () =>
         {
             _SpawnWithTarget(InEnemiType);
@@ -87,7 +84,7 @@ public partial class DcmEnemi : Node2D, ISpawn
     {
         Camera2D _camera2D = MediateurCible.GetParent().GetNode<Camera2D>("Camera2D");
 
-        var spawn = (Node2D)((ISpawn)this).Spawn((PackedScene)sceneList[(int)InEnemiType]);
+        var spawn = (Node2D)((ISpawn)this).Spawn(sceneList[(int)InEnemiType]);
 
         Vector2 playerPos = MediateurCible.GetPlayerPosition();
 
@@ -149,7 +146,6 @@ public partial class DcmEnemi : Node2D, ISpawn
                 goto case 1;
         }
 
-        //spawn.GlobalPosition = MediateurCible.GetPlayerPosition() + v;
         spawn.GlobalPosition += v;
 
         Node2D cible = MediateurCible
@@ -174,8 +170,8 @@ public partial class DcmEnemi : Node2D, ISpawn
         float _cameraH = cameraSize.Y;
         float _cameraW = cameraSize.X;
 
-        int index = (int)Random.Shared.NextInt64(0, 4);
-        var spawn = (Node2D)((ISpawn)this).Spawn((PackedScene)sceneList[index]);
+        int index = Random.Shared.Next(0, 4);
+        var spawn = (Node2D)((ISpawn)this).Spawn(sceneList[index]);
         Vector2 playerPos = MediateurCible.GetPlayerPosition();
 
         float posX = 0;

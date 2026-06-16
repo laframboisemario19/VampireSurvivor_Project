@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Godot;
 using Utils;
 
@@ -22,11 +21,6 @@ public partial class Poursuite : Node2D
                 this.velocity = value;
             }
         }
-    }
-
-    public override void _Ready()
-    {
-        base._Ready();
     }
 
     public override void _PhysicsProcess(double InDelta)

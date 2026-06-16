@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using Godot;
 using Utils;
 using static MedAttack;
@@ -35,8 +34,8 @@ public partial class DcmProjectile : Node2D, ISpawn
         timer5,
         timer6;
 
-    private ArrayList timerList = [];
-    private ArrayList sceneList = [];
+    private List<Timer> timerList = [];
+    private List<PackedScene> sceneList = [];
 
     private float spiralAngle;
 
@@ -64,7 +63,7 @@ public partial class DcmProjectile : Node2D, ISpawn
 
     public void ActivateProjectile(EProjectileType InProjectileType)
     {
-        Timer timer = (Timer)timerList[(int)InProjectileType];
+        Timer timer = timerList[(int)InProjectileType];
         timer.EnsureValid().Timeout += () =>
         {
             if (
@@ -100,7 +99,7 @@ public partial class DcmProjectile : Node2D, ISpawn
     private void _SpawnWithTarget(EProjectileType InProjectileType)
     {
         Projectile spawn = (Projectile)
-            ((ISpawn)this).Spawn((PackedScene)sceneList[(int)InProjectileType % 2]);
+            ((ISpawn)this).Spawn(sceneList[(int)InProjectileType % 2]);
         Node2D cible = MediateurCible
             .EnsureValid()
             .ChoisirCible(InAlgoSelectionCible, MediateurCible.GetPlayerPosition());
@@ -126,7 +125,7 @@ public partial class DcmProjectile : Node2D, ISpawn
     )
     {
         Projectile spawn = (Projectile)
-            ((ISpawn)this).Spawn((PackedScene)sceneList[(int)InProjectileType % 2]);
+            ((ISpawn)this).Spawn(sceneList[(int)InProjectileType % 2]);
 
         spawn.GlobalPosition = MediateurCible.GetPlayerPosition();
         AddChild(spawn);

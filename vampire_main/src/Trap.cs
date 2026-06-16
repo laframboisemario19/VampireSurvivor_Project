@@ -33,6 +33,6 @@ public partial class Trap : BaseObject, ICollide, ITakeDamage
             QueueFree();
             return true;
         }
-        return true;
+        return false;
     }
 }
